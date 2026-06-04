@@ -333,6 +333,86 @@ h2.section-title::before {
   font-size: 0.95rem;
 }
 
+/* ===== Featured Podcast ===== */
+.podcast-feature {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.podcast-feature:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.podcast-feature::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #a78bfa, #ec4899);
+  opacity: 0.85;
+}
+@media (min-width: 720px) {
+  .podcast-feature { grid-template-columns: auto 1fr; gap: 28px; }
+}
+.podcast-cover {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 55%),
+    linear-gradient(135deg, #6d28d9 0%, #ec4899 100%);
+  display: grid; place-items: center;
+  color: white;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  position: relative; overflow: hidden;
+}
+.podcast-cover::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+.podcast-cover svg {
+  width: 64px; height: 64px;
+  opacity: 0.96;
+  margin-top: -18px;
+}
+.podcast-cover-name {
+  position: absolute; bottom: 16px; left: 0; right: 0;
+  text-align: center;
+  font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+}
+.podcast-meta .podcast-pub {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #c084fc;
+  margin: 0 0 8px;
+}
+.podcast-meta h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.podcast-meta .podcast-details {
+  color: var(--muted-2); font-size: 0.85rem;
+  margin: 0 0 14px;
+}
+.podcast-meta p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.podcast-listen {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
 /* ===== Press / Featured In ===== */
 .press-stack { display: grid; gap: 14px; }
 .press-group {
