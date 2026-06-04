@@ -223,14 +223,46 @@
     }
 
     /* ===== Business cards ===== */
-    .bcards { display: grid; gap: 14px; }
-    @media (min-width: 720px) { .bcards { grid-template-columns: repeat(3, 1fr); } }
+    /* Mobile: horizontal scroll-snap row that bleeds to the screen edge */
+    .bcards {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Bleed to the viewport edge so the next card peeks past the gutter */
+      margin: 0 -24px;
+      padding: 4px 24px 12px;
+      scroll-padding-left: 24px;
+    }
+    .bcards::-webkit-scrollbar { display: none; }
+    /* Desktop: switch back to a clean 3-column grid */
+    @media (min-width: 720px) {
+      .bcards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+      }
+    }
     .bcard {
       display: flex; flex-direction: column;
       border: 1px solid var(--border); background: var(--card);
       border-radius: 14px; padding: 22px;
       position: relative; overflow: hidden;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.08s ease;
+      /* Mobile horizontal-scroll sizing */
+      flex: 0 0 80%;
+      max-width: 320px;
+      scroll-snap-align: start;
+      min-width: 0;
+    }
+    @media (min-width: 720px) {
+      .bcard { flex: initial; max-width: none; }
     }
     .bcard:hover { border-color: var(--border-strong); background: var(--card-hover); transform: translateY(-2px); }
     .bcard::before {
