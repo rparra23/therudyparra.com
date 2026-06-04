@@ -8,5 +8,14 @@
     "connection": "How they know Rudy (short phrase, ALL CAPS look applied via CSS)",
     "review": "The review text — newlines preserved"
   },
-  "reviews": []
+  "reviews": [
+    {
+      "anonymous": false,
+      "name": "Hannah Cruz",
+      "title": "Photobooth Vendor",
+      "company": "Modern Prints Studio",
+      "connection": "Client",
+      "review": "Rudy was exceptional to work with for an event. His organization and passion for making events happen is truly remarkable. Can’t wait to work with him again!"
+    }
+  ]
 }
