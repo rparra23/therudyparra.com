@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume — Rudy Parra</title>
+  <meta name="description" content="Rudy Parra — full resume. Electrical lab tech, embedded systems developer, and former solar/glass physics researcher." />
+  <meta name="theme-color" content="#0b0b10" />
+  <meta property="og:title" content="Rudy Parra — Resume" />
+  <meta property="og:description" content="About, work experience, research, publications, skills, education, and leadership." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://therudyparra.com/resume" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== NAV ===== -->
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <nav class="links">
+        <a href="/">Home</a>
+        <a href="#about" class="active">About</a>
+        <a href="#work">Work</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#skills">Skills</a>
+      </nav>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+      <a class="back-link" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to home
+      </a>
+      <h1>Resume</h1>
+      <p class="lead">
+        The long version — work, research, publications, and how I got here.
+      </p>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <h2 id="about" class="section-title">About</h2>
+    <div class="card">
+      <p style="margin:0;color:var(--muted)">
+        Hands-on electrical lab technician and embedded systems developer with 3+ years of
+        R&amp;D experience spanning clean energy, defense, and spectroscopic materials science.
+        First-author on a NASA/NSF-funded solar spectroscopy research poster and NSF-funded
+        co-author on two more in glass physics, X-ray absorption spectroscopy, and plasma science.
+        I work across high-spectral-resolution optical instruments, advanced lab
+        instrumentation, Python automation, and safe operation of hazardous materials.
+        Former researcher at the National Solar Observatory and Lockheed Martin. U.S. citizen,
+        eligible for security clearance. Passionate about building the next generation of
+        energy infrastructure.
+      </p>
+    </div>
+
+    <!-- ===== WORK EXPERIENCE ===== -->
+    <h2 id="work" class="section-title">Work Experience</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Senior Electrical Lab Technician · <span class="item-org">GridFlow</span></h3>
+          <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
+        </div>
+        <p class="item-context">Clean energy startup. Led R&amp;D across lithium-sulfur hybrid flow batteries; now expanding into vanadium redox flow battery (VRFB) systems.</p>
+        <ul>
+          <li>Spearhead end-to-end R&amp;D lab operations — prototype build, electrical assembly, structured test execution, and real-time diagnostics.</li>
+          <li>Fabricate and test battery system prototypes including peristaltic pump systems, custom PCBs, wiring harnesses, and IoT safety monitoring devices.</li>
+          <li>Driving 0-to-1 development of VRFB systems — coordinating cross-disciplinary teams of mechanical and chemical engineers from concept to working prototype.</li>
+          <li>Authored production SOPs covering hardware assembly (enclosures, manifolds, cell stacks) and electrolyte preparation — establishing repeatable, audit-ready processes for a first-of-kind system.</li>
+          <li>Integrate sensors (current, voltage, temperature, GPS) with ESP32 and Particle Photon over BLE/Wi-Fi; develop firmware in C++ and Arduino IDE.</li>
+          <li>Operate DAQ systems; write Python for automated data logging, anomaly detection, and charge/discharge cycle analysis.</li>
+          <li>Manage all lab safety protocols for hazardous materials (argon, nitrogen, lithium, vanadium electrolyte) — glovebox (VAC) operations, LOTO, ESD compliance.</li>
+          <li>Built public demo units including an Earth Day Conference exhibit with laser-cut acrylic fabrication and full system integration.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Lead Software Developer · <span class="item-org">Pii Energy</span></h3>
+          <span class="item-meta">Jan 2025 – Present · Albuquerque, NM</span>
+        </div>
+        <p class="item-context">GridFlow's residential plug-in home energy product line. Edge 2000 launched Pi Day 2025 — featured in PV Magazine.</p>
+        <ul>
+          <li>Architect and develop a full-stack energy management system tracking solar, battery, and grid power with real-time monitoring, room-based outlet control, and overcurrent detection.</li>
+          <li>Investigated and integrated the EcoFlow BKW API for output power control; built a Cloudflare-based backend (D1 SQL, R2 storage).</li>
+          <li>Produce a technical LinkedIn video series communicating energy system design to professional and consumer audiences.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">IoT &amp; Software Developer · <span class="item-org">Telemetry Insight</span></h3>
+          <span class="item-meta">Apr 2024 – Sept 2024 · Albuquerque, NM</span>
+        </div>
+        <ul>
+          <li>Developed and maintained Well Watcher telemetry code for real-time monitoring of industrial well controllers.</li>
+          <li>Built AI-driven anomaly detection and predictive maintenance systems; optimized energy consumption algorithms for field hardware.</li>
+          <li>Implemented BLE features (Tx Power monitoring, battery life analysis); led software testing for new controller features.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Image Creation Developer — DevOps · <span class="item-org">Lockheed Martin</span></h3>
+          <span class="item-meta">Jan 2023 – May 2023 · Remote</span>
+        </div>
+        <ul>
+          <li>Participated in OS image development and troubleshooting for cloud and on-prem Windows/Linux environments in a defense contractor setting.</li>
+          <li>Gained experience with scripting, TCP/IP networks, virtualization, and purpose-built OS configurations.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ===== RESEARCH ===== -->
+    <h2 id="research" class="section-title">Research Experience</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Solar Physics Researcher — First Author · <span class="item-org">National Solar Observatory / CU Boulder</span></h3>
+          <span class="item-meta">May – Aug 2020 · Remote</span>
+        </div>
+        <p class="item-context">Funded by NASA contract NAS5-97045 (SORCE), NSF, NSO, and AURA. Mentor: Serena Criscuoli, NSO.</p>
+        <ul>
+          <li>Led sole-first-author research investigating temporal variability of the Hα 656.3nm spectral line in sun-as-a-star observations using the Integrated Sunlight Spectrometer (ISS).</li>
+          <li>Analyzed disk-integrated Hα core-to-wing ratio data from SOLIS instruments (NISP/NSO/AURA/NSF) over the 27-day solar rotational timescale, alongside faculae, sunspot, and filament datasets.</li>
+          <li>Found that sunspot area is the dominant modulator of Hα line shape; faculae and filaments showed negligible effect — contributing new understanding of chromospheric variability in solar-like stars relevant to exoplanet habitability research.</li>
+          <li>Presented findings as sole first author at a poster session; research published under NASA/NSF/AURA sponsorship.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Glass Physics Researcher &amp; Team Leader · <span class="item-org">Coe College — Dr. Steve Feller Lab</span></h3>
+          <span class="item-meta">May – Aug 2023 · Cedar Rapids, IA</span>
+        </div>
+        <p class="item-context">NSF-funded REU (Grant #1950330) &amp; RUI (Grant #2203142). Multi-institution: Coe College, Georgia Tech, NM Tech, Seton Hall.</p>
+        <ul>
+          <li>Led a team across four complex NSF-funded projects investigating glass composition, atomic structure, and dielectric properties.</li>
+          <li>Synthesized sodium borate and sodium silicate glasses at 1100°C–1300°C; performed stoichiometric weighing, controlled heating, roller quenching, and annealing.</li>
+          <li>Operated EasyXAFS 300+ for XANES/EXAFS, Raman spectrometers, DSC (STA449), and high-temperature electric furnaces.</li>
+          <li>Applied Hanning window and Fourier transform processing to convert energy-based XAS plots to wavenumber-based analysis; performed XRD interpretation.</li>
+          <li>Investigated glass as a dielectric component in Dielectric Barrier Discharge (DBD) plasma generation — directly relevant to high-voltage and photonic applications.</li>
+          <li>Co-authored two published conference posters; presented at the Iowa Glass Conference; implemented new lab procedures improving stoichiometric accuracy across departments.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <h2 id="publications" class="section-title">Publications &amp; Posters</h2>
+    <div class="stack">
+
+      <div class="card pub">
+        <span class="tag">First Author</span>
+        <p class="title">Variability of H-alpha Line Observed at High Spectral Resolution in the Solar Atmosphere</p>
+        <p class="authors">Rudy Parra</p>
+        <p class="venue">National Solar Observatory / University of Colorado Boulder · 2020 · Instruments: ISS, SOLIS · Funding: NASA NAS5-97045 (SORCE), NSF, NSO, AURA</p>
+      </div>
+
+      <div class="card pub">
+        <span class="tag coauthor">Co-Author</span>
+        <p class="title">Probing the Local Atomic Structure of Lead Borate Glasses with X-ray Absorption Spectroscopy</p>
+        <p class="authors">Z. Cazares, R. Parra, R. Hao, K. Ameku, I. Slagle, Y. Wei, S. Feller, F. Alamgir</p>
+        <p class="venue">Coe College · Georgia Tech · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
+      </div>
+
+      <div class="card pub">
+        <span class="tag coauthor">Co-Author</span>
+        <p class="title">Using Sodium Borate Glass for a Dielectric Barrier Discharge (DBD)</p>
+        <p class="authors">R.G. Parra, Z.E. Cazares, R. Hao, J.L. López, S.A. Feller</p>
+        <p class="venue">Coe College · Seton Hall · CNM · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
+      </div>
+
+    </div>
+
+    <!-- ===== SKILLS ===== -->
+    <h2 id="skills" class="section-title">Technical Skills</h2>
+    <div class="card">
+      <div class="skill-group">
+        <h4>Lab Instrumentation</h4>
+        <div class="chip-row">
+          <span class="chip">Oscilloscopes</span><span class="chip">DMMs</span><span class="chip">Power supplies</span>
+          <span class="chip">Function generators</span><span class="chip">Spectrum analyzers</span><span class="chip">DAQ systems</span>
+          <span class="chip">EasyXAFS 300+</span><span class="chip">Raman spectrometers</span><span class="chip">DSC (STA449)</span>
+          <span class="chip">High-temp furnaces (1100–1300°C)</span><span class="chip">Integrated Sunlight Spectrometer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Electrical Assembly</h4>
+        <div class="chip-row">
+          <span class="chip">PCB rework (SMT/through-hole)</span><span class="chip">Wiring harnesses</span><span class="chip">Crimping</span>
+          <span class="chip">Cable routing</span><span class="chip">Strain-relief</span><span class="chip">ESD handling</span>
+          <span class="chip">MOSFETs</span><span class="chip">SSRs</span><span class="chip">BMS systems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Embedded &amp; Firmware</h4>
+        <div class="chip-row">
+          <span class="chip">C++</span><span class="chip">Arduino IDE</span><span class="chip">ESP32</span>
+          <span class="chip">Particle Photon</span><span class="chip">BLE / Wi-Fi</span><span class="chip">PID loops</span>
+          <span class="chip">Relay &amp; pump control</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Automation &amp; Scripting</h4>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">Linux</span>
+          <span class="chip">Data logging</span><span class="chip">Anomaly detection</span><span class="chip">Telemetry analysis</span>
+          <span class="chip">AI/ML implementation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Spectroscopy &amp; Optics</h4>
+        <div class="chip-row">
+          <span class="chip">XAS (XANES/EXAFS)</span><span class="chip">Raman</span><span class="chip">DSC</span>
+          <span class="chip">XRD</span><span class="chip">Hα 656.3nm analysis</span><span class="chip">SOLIS / ISS data</span>
+          <span class="chip">Fourier transform &amp; Hanning window</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Safety, Fabrication &amp; Other</h4>
+        <div class="chip-row">
+          <span class="chip">OSHA / LOTO</span><span class="chip">Argon / N₂ / Li handling</span><span class="chip">Glovebox (VAC)</span>
+          <span class="chip">High-voltage awareness</span><span class="chip">3D printing</span><span class="chip">Laser cutting</span>
+          <span class="chip">CNC machining</span><span class="chip">PCB design</span><span class="chip">Slurry casting</span>
+          <span class="chip">AutoCAD</span><span class="chip">Git / GitHub</span><span class="chip">Cisco routing &amp; switching</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EDUCATION ===== -->
+    <h2 id="education" class="section-title">Education &amp; Certifications</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">A.A.S. — Computer Information Systems, Network Administration</h3>
+          <span class="item-meta">Dec 2023 · 3.5 GPA</span>
+        </div>
+        <p class="item-context">Central New Mexico Community College</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Coursework: IT Essentials, IoT, Linux, Python, C++, AutoCAD, Semiconductor Apprentice,
+          Network Security, Calculus I.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Deep Dive IoT Bootcamp</h3>
+          <span class="item-meta">Oct – Dec 2023</span>
+        </div>
+        <p class="item-context">CNM Ingenuity STEMulus Center</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          400+ hours: smart device coding (C++), electronic circuits, soldering, clean room
+          operations, lab and factory automation.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Cisco Certifications</h3>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          CCNAv7 Introduction to Networks (Apr 2022) · CCNA Switching, Routing &amp; Wireless Essentials (Aug 2022)
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ===== LEADERSHIP ===== -->
+    <h2 id="leadership" class="section-title">Leadership &amp; Community</h2>
+    <div class="grid-2">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Chapter Director</h3>
+          <span class="item-meta">Feb 2025 – Present</span>
+        </div>
+        <p class="item-context">Techqueria New Mexico</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Leading chapter strategy, events, and partnerships for Latinx professionals in tech
+          across New Mexico.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Board Member</h3>
+          <span class="item-meta">May 2025 – Present</span>
+        </div>
+        <p class="item-context">New Mexico Tech Talks</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Strategic planning and community engagement for NM's premier tech organization;
+          co-organizer of Desert Dev Lab hackathon.
+        </p>
+      </div>
+
+      <div class="card item" style="grid-column: 1 / -1">
+        <div class="item-head">
+          <h3 class="item-title">Active Organizer</h3>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Q-STEM (LGBTQ+ STEM Community) · STEM Core Program · ALRISE Program —
+          advancing equity and inclusion in STEM across New Mexico.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ===== BOTTOM CTA ===== -->
+    <h2 class="section-title">Want to talk?</h2>
+    <div class="card">
+      <p style="margin:0 0 14px;color:var(--muted)">
+        Head back to the home page to grab the digital business card most relevant to you,
+        or email me directly.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="/">Back to home</a>
+        <a class="btn" href="mailto:parrarudy3@icloud.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
