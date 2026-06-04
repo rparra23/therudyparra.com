@@ -275,6 +275,71 @@ h2.section-title::before {
 .bcard .bcard-cta:hover { text-decoration: underline; }
 .bcard .bcard-cta svg { width: 14px; height: 14px; }
 
+/* ===== Press / Featured In ===== */
+.press-stack { display: grid; gap: 14px; }
+.press-group {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 20px 22px 6px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.press-group::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--press-accent, var(--accent));
+  opacity: 0.7;
+}
+.press-group:hover { border-color: var(--border-strong); }
+.press-group-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.press-group-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--press-accent, var(--accent));
+}
+.press-group-context {
+  font-size: 0.82rem; color: var(--muted-2);
+}
+.press-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s ease;
+}
+.press-item:hover { text-decoration: none; }
+.press-item:hover .press-title { color: var(--text); }
+.press-item:hover .press-arrow {
+  color: var(--press-accent, var(--accent-2));
+  transform: translate(2px, -2px);
+}
+.press-pub {
+  grid-column: 1; grid-row: 1;
+  font-size: 0.74rem; font-weight: 700;
+  color: var(--muted-2);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.press-title {
+  grid-column: 1; grid-row: 2;
+  color: var(--muted); font-size: 0.95rem; line-height: 1.4;
+  transition: color 0.15s ease;
+}
+.press-arrow {
+  grid-column: 2; grid-row: 1 / span 2;
+  align-self: center;
+  width: 16px; height: 16px;
+  color: var(--muted-2);
+  transition: transform 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
 /* ===== Contact ===== */
 .contact-row {
   display: flex; flex-wrap: wrap; gap: 10px;
