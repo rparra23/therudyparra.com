@@ -1,0 +1,59 @@
+{
+  "_comment": "Edit this list freely. Each entry needs `name`, `lat`, `lng` and `note`. Optional fields: `tag` (short categorization), `address`, `link`. Coordinates: open Google Maps, right-click the spot → click the lat/lng to copy.",
+  "spots": [
+    {
+      "name": "Frontier Restaurant",
+      "tag": "Iconic green chile",
+      "address": "2400 Central Ave SE, Albuquerque, NM",
+      "note": "Sweet rolls, huevos rancheros, and the same neon-lit booths since 1971. A rite of passage near UNM.",
+      "lat": 35.0807,
+      "lng": -106.6189,
+      "link": "https://maps.google.com/?q=Frontier+Restaurant+Albuquerque"
+    },
+    {
+      "name": "Mary & Tito's Café",
+      "tag": "James Beard Classic",
+      "address": "2711 4th St NW, Albuquerque, NM",
+      "note": "Carne adovada turnover that won the James Beard. Order it. Don't overthink it.",
+      "lat": 35.1148,
+      "lng": -106.6519,
+      "link": "https://maps.google.com/?q=Mary+and+Titos+Cafe"
+    },
+    {
+      "name": "El Pinto",
+      "tag": "NM weekend brunch",
+      "address": "10500 4th St NW, Albuquerque, NM",
+      "note": "Sprawling north-valley patio, salsa they bottle and ship, and a margarita worth lingering over.",
+      "lat": 35.2042,
+      "lng": -106.6438,
+      "link": "https://maps.google.com/?q=El+Pinto+Albuquerque"
+    },
+    {
+      "name": "Tia B's La Waffleria",
+      "tag": "Brunch · sweet+savory",
+      "address": "3710 Campus Blvd NE, Albuquerque, NM",
+      "note": "Waffles built like sandwiches. Get the breakfast burrito waffle and don't argue with the menu.",
+      "lat": 35.0843,
+      "lng": -106.6097,
+      "link": "https://maps.google.com/?q=Tia+B+La+Waffleria"
+    },
+    {
+      "name": "Sadie's of New Mexico",
+      "tag": "Margs + tortilla chips",
+      "address": "6230 4th St NW, Albuquerque, NM",
+      "note": "The hot salsa is famous for a reason. Carne adovada, sopaipillas, and a margarita you'll think about later.",
+      "lat": 35.1602,
+      "lng": -106.6475,
+      "link": "https://maps.google.com/?q=Sadies+of+New+Mexico"
+    },
+    {
+      "name": "Cocina Azul",
+      "tag": "Locals' lunch spot",
+      "address": "4243 Montgomery Blvd NE, Albuquerque, NM",
+      "note": "Solid blue corn enchiladas and a green chile that punches above its weight.",
+      "lat": 35.1395,
+      "lng": -106.5821,
+      "link": "https://maps.google.com/?q=Cocina+Azul+Albuquerque"
+    }
+  ]
+}

@@ -540,6 +540,56 @@ h2.section-title::before {
 }
 .contact-row .btn { flex: 1 1 200px; justify-content: center; }
 
+/* ===== GitHub Activity ===== */
+.gh-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.gh-card:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.gh-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #7c5cff);
+  opacity: 0.7;
+}
+.gh-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 8px; margin-bottom: 14px;
+}
+.gh-head .gh-title {
+  font-weight: 600; color: var(--text);
+}
+.gh-head .gh-link {
+  color: var(--accent-2); font-size: 0.9rem; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.gh-head .gh-link svg { width: 14px; height: 14px; }
+.gh-chart {
+  /* Horizontal scroll on narrow screens because the graph is wide */
+  width: 100%; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+.gh-chart img {
+  display: block;
+  min-width: 720px;     /* keeps the chart readable; user can scroll on small screens */
+  width: 100%;
+  height: auto;
+}
+.gh-foot {
+  margin-top: 10px;
+  color: var(--muted-2);
+  font-size: 0.78rem;
+}
+
 /* ===== Testimonials / Reviews ===== */
 .reviews-stack { display: grid; gap: 14px; }
 .review {
@@ -706,6 +756,154 @@ h2.section-title::before {
 }
 .back-link:hover { color: var(--text); text-decoration: none; }
 .back-link svg { width: 14px; height: 14px; }
+
+/* ===== Eats / Restaurants map ===== */
+.eats-intro {
+  color: var(--muted);
+  margin: 0 0 18px;
+  font-size: 0.98rem;
+  max-width: 64ch;
+}
+.eats-map-wrap {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+}
+.eats-map-wrap::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  z-index: 500;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.85;
+  pointer-events: none;
+}
+#eats-map {
+  width: 100%;
+  height: clamp(420px, 70vh, 700px);
+  background: #0b0b10;
+}
+/* Leaflet overrides for dark theme */
+.leaflet-container {
+  background: var(--bg) !important;
+  font-family: inherit !important;
+}
+.leaflet-control-attribution {
+  background: rgba(11, 11, 16, 0.7) !important;
+  color: var(--muted-2) !important;
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+}
+.leaflet-control-attribution a {
+  color: var(--accent-2) !important;
+}
+.leaflet-bar {
+  background: var(--card) !important;
+  border: 1px solid var(--border-strong) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+.leaflet-bar a {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+  transition: background 0.15s ease;
+}
+.leaflet-bar a:hover { background: var(--card-hover) !important; }
+/* Custom marker pin */
+.eats-pin {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 2px solid var(--bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.45), 0 0 0 6px rgba(124,92,255,0.18);
+  display: grid; place-items: center;
+  color: #0b0b10;
+  font-weight: 700; font-size: 0.78rem;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.eats-pin:hover { transform: scale(1.12); }
+/* Leaflet popup styled to match */
+.leaflet-popup-content-wrapper {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+}
+.leaflet-popup-content {
+  margin: 14px 16px !important;
+  min-width: 220px; max-width: 280px;
+  font-size: 0.9rem !important;
+  line-height: 1.45;
+}
+.leaflet-popup-tip {
+  background: var(--card) !important;
+  box-shadow: none !important;
+}
+.leaflet-popup-close-button {
+  color: var(--muted) !important;
+  padding: 6px 8px !important;
+}
+.leaflet-popup-close-button:hover { color: var(--text) !important; }
+.eats-popup-tag {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-2);
+  background: rgba(34,211,238,0.1);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-bottom: 8px;
+}
+.eats-popup-name {
+  font-weight: 700; font-size: 1rem;
+  color: var(--text); margin: 0 0 4px;
+}
+.eats-popup-addr {
+  color: var(--muted-2); font-size: 0.78rem;
+  margin: 0 0 8px;
+}
+.eats-popup-note {
+  color: var(--muted); font-size: 0.88rem;
+  margin: 0 0 10px;
+}
+.eats-popup-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: var(--accent-2);
+  font-size: 0.82rem; font-weight: 500;
+}
+.eats-popup-link svg { width: 12px; height: 12px; }
+
+/* List below the map */
+.eats-list {
+  display: grid; gap: 12px;
+  margin-top: 24px;
+}
+@media (min-width: 640px) { .eats-list { grid-template-columns: 1fr 1fr; } }
+.eats-list-item {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+  color: var(--text);
+}
+.eats-list-item:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  text-decoration: none;
+}
+.eats-list-tag {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 4px;
+}
+.eats-list-name { font-weight: 600; font-size: 1rem; margin: 0 0 4px; }
+.eats-list-note { color: var(--muted); font-size: 0.85rem; margin: 0; }
 
 /* ===== Footer ===== */
 footer {
