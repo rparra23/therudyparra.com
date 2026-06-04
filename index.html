@@ -68,6 +68,50 @@
     }
 
     /* ===== Hero ===== */
+    section.hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      section.hero {
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+      }
+      section.hero .hero-text { order: 1; }
+      section.hero .avatar-wrap { order: 2; }
+    }
+    .avatar-wrap {
+      position: relative;
+      width: clamp(160px, 28vw, 220px);
+      aspect-ratio: 1 / 1;
+      justify-self: center;
+    }
+    .avatar-wrap::before {
+      content: "";
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      filter: blur(18px); opacity: 0.45;
+      z-index: 0;
+    }
+    .avatar-wrap::after {
+      content: "";
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      z-index: 1;
+    }
+    .avatar {
+      position: relative;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      z-index: 2;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: block;
+    }
     section.hero h1 {
       font-size: clamp(2.2rem, 5.5vw, 3.6rem);
       line-height: 1.05; margin: 0 0 8px;
@@ -174,6 +218,38 @@
       color: var(--muted); background: rgba(255,255,255,0.02);
     }
 
+    /* ===== Business cards ===== */
+    .bcards { display: grid; gap: 14px; }
+    @media (min-width: 720px) { .bcards { grid-template-columns: repeat(3, 1fr); } }
+    .bcard {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--border); background: var(--card);
+      border-radius: 14px; padding: 22px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.08s ease;
+    }
+    .bcard:hover { border-color: var(--border-strong); background: var(--card-hover); transform: translateY(-2px); }
+    .bcard::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--bcard-accent, var(--accent));
+    }
+    .bcard .bcard-role {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--bcard-accent, var(--accent));
+      margin-bottom: 10px;
+    }
+    .bcard .bcard-org { font-weight: 600; font-size: 1.1rem; margin: 0 0 6px; color: var(--text); }
+    .bcard .bcard-desc { color: var(--muted); font-size: 0.92rem; margin: 0 0 18px; flex-grow: 1; }
+    .bcard .bcard-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--bcard-accent, var(--accent-2));
+      font-size: 0.92rem; font-weight: 500;
+      text-decoration: none; align-self: flex-start;
+    }
+    .bcard .bcard-cta:hover { text-decoration: underline; }
+    .bcard .bcard-cta svg { width: 14px; height: 14px; }
+
     /* ===== Contact ===== */
     .contact-row {
       display: flex; flex-wrap: wrap; gap: 10px;
@@ -202,12 +278,14 @@
         <a href="#about">About</a>
         <a href="#work">Work</a>
         <a href="#research">Research</a>
+        <a href="#cards">Cards</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <!-- ===== HERO ===== -->
     <section class="hero">
+      <div class="hero-text">
       <div class="eyebrow">Albuquerque, NM</div>
       <h1>Hi, I'm <span class="grad">Rudy</span> Parra.</h1>
       <p class="tagline">
@@ -234,6 +312,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
           Email
         </a>
+      </div>
+      </div>
+      <div class="avatar-wrap">
+        <img class="avatar" src="assets/profile.jpg" alt="Portrait of Rudy Parra" width="600" height="600" />
       </div>
     </section>
 
@@ -507,6 +589,51 @@
           advancing equity and inclusion in STEM across New Mexico.
         </p>
       </div>
+
+    </div>
+
+    <!-- ===== BUSINESS CARDS ===== -->
+    <h2 id="cards" class="section-title">Digital Business Cards</h2>
+    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
+      I wear a few hats. Pick the card most relevant to why you're here — they each save straight to your phone's contacts.
+    </p>
+    <div class="bcards">
+
+      <a class="bcard" href="https://blinq.me/cmhi1c0bh0i5ws60mm2iulr8b?bs=db" target="_blank" rel="noopener" style="--bcard-accent:#5eead4">
+        <span class="bcard-role">Clean Energy R&amp;D</span>
+        <h3 class="bcard-org">GridFlow</h3>
+        <p class="bcard-desc">
+          Senior Electrical Lab Technician — lithium-sulfur and vanadium redox flow battery systems, prototype hardware, embedded firmware.
+        </p>
+        <span class="bcard-cta">
+          Open card
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a class="bcard" href="https://blinq.me/cmmti93fj02b40ns6ffaijudq?bs=db" target="_blank" rel="noopener" style="--bcard-accent:#22d3ee">
+        <span class="bcard-role">Residential Solar &amp; Storage</span>
+        <h3 class="bcard-org">Pii Energy</h3>
+        <p class="bcard-desc">
+          Lead Software Developer — full-stack energy management for the Edge 2000. Cloudflare backend, room-level outlet control, real-time monitoring.
+        </p>
+        <span class="bcard-cta">
+          Open card
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a class="bcard" href="https://blinq.me/pLfg8dqOyqO8a7OPqj4J?bs=db" target="_blank" rel="noopener" style="--bcard-accent:#c084fc">
+        <span class="bcard-role">Community &amp; Events</span>
+        <h3 class="bcard-org">NM Tech Talks</h3>
+        <p class="bcard-desc">
+          Board Member — strategy and community engagement for New Mexico's premier tech organization; co-organizer of Desert Dev Lab hackathon.
+        </p>
+        <span class="bcard-cta">
+          Open card
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
 
     </div>
 
