@@ -281,7 +281,7 @@ h2.section-title::before {
   border: 1px solid var(--border);
   background: var(--card);
   border-radius: 14px;
-  padding: 20px 22px 6px;
+  padding: 18px 22px 14px;
   position: relative; overflow: hidden;
   transition: border-color 0.2s ease;
 }
@@ -294,7 +294,7 @@ h2.section-title::before {
 .press-group-head {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 12px; flex-wrap: wrap;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 .press-group-label {
   font-size: 0.72rem; font-weight: 700;
@@ -304,40 +304,74 @@ h2.section-title::before {
 .press-group-context {
   font-size: 0.82rem; color: var(--muted-2);
 }
-.press-item {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 14px;
-  padding: 14px 0;
-  border-top: 1px solid var(--border);
+
+/* Horizontal scrolling strip of logo tiles */
+.press-strip {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Bleed to the inner edges of the group card so the next tile peeks */
+  margin: 0 -22px;
+  padding: 2px 22px 6px;
+  scroll-padding-left: 22px;
+}
+.press-strip::-webkit-scrollbar { display: none; }
+
+.press-tile {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  border-radius: 12px;
+  padding: 14px;
   text-decoration: none;
   color: var(--text);
-  transition: background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  min-width: 0;
 }
-.press-item:hover { text-decoration: none; }
-.press-item:hover .press-title { color: var(--text); }
-.press-item:hover .press-arrow {
-  color: var(--press-accent, var(--accent-2));
-  transform: translate(2px, -2px);
+.press-tile:hover {
+  border-color: var(--press-accent, var(--accent));
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  text-decoration: none;
 }
-.press-pub {
-  grid-column: 1; grid-row: 1;
-  font-size: 0.74rem; font-weight: 700;
-  color: var(--muted-2);
-  text-transform: uppercase; letter-spacing: 0.08em;
-}
-.press-title {
-  grid-column: 1; grid-row: 2;
-  color: var(--muted); font-size: 0.95rem; line-height: 1.4;
-  transition: color 0.15s ease;
-}
-.press-arrow {
-  grid-column: 2; grid-row: 1 / span 2;
-  align-self: center;
-  width: 16px; height: 16px;
-  color: var(--muted-2);
-  transition: transform 0.15s ease, color 0.15s ease;
+.press-logo {
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  display: grid; place-items: center;
+  padding: 8px;
+  margin-bottom: 12px;
   flex-shrink: 0;
+}
+.press-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.press-tile-pub {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+.press-tile-title {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ===== Contact ===== */
