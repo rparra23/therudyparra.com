@@ -1,0 +1,7 @@
+name = "now-playing"
+main = "worker.js"
+compatibility_date = "2025-09-01"
+
+# Workers.dev URL is fine for personal use — it'll be
+# https://now-playing.<your-cf-username>.workers.dev
+workers_dev = true

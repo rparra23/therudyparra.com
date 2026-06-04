@@ -1,0 +1,4 @@
+{
+  "_comment": "Replace `workerUrl` with the URL of your deployed Cloudflare Worker (something like https://now-playing.your-name.workers.dev). While it contains the placeholder text 'YOUR-WORKER', the pill in the hero stays hidden — safe to leave as-is until you've deployed the Worker.",
+  "workerUrl": "https://now-playing.YOUR-WORKER.workers.dev"
+}

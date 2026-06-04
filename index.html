@@ -33,6 +33,16 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
       <div class="hero-text">
+      <a class="now-playing" id="now-playing" href="#" target="_blank" rel="noopener" aria-label="Currently playing on Spotify">
+        <img class="np-art" id="np-art" alt="" loading="lazy" />
+        <div class="np-text">
+          <span class="np-label">
+            <span class="np-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+            Now playing
+          </span>
+          <span class="np-song" id="np-song"></span>
+        </div>
+      </a>
       <div class="eyebrow">Albuquerque, NM</div>
       <h1>Hi, I'm <span class="grad">Rudy</span> Parra.</h1>
       <p class="tagline">
@@ -444,6 +454,53 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Spotify Now Playing pill =====
+       Polls a Cloudflare Worker every 30s. Hides the pill when nothing is playing
+       or when the Worker is unreachable. The Worker URL is loaded from
+       /assets/now-playing.json so it can be swapped without editing this page. */
+    (function () {
+      const pill = document.getElementById('now-playing');
+      const art = document.getElementById('np-art');
+      const song = document.getElementById('np-song');
+
+      function hide() { pill.classList.remove('visible'); }
+      function show(data) {
+        if (!data || !data.is_playing || !data.song) { hide(); return; }
+        song.innerHTML =
+          data.song.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])) +
+          (data.artist ? ' <span class="np-artist">— ' +
+            data.artist.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])) +
+          '</span>' : '');
+        if (data.album_art) { art.src = data.album_art; art.style.display = ''; }
+        else { art.style.display = 'none'; }
+        pill.href = data.song_url || 'https://open.spotify.com/user/rparra23';
+        pill.classList.add('visible');
+      }
+
+      let workerUrl = null;
+      async function poll() {
+        if (!workerUrl) return;
+        try {
+          const r = await fetch(workerUrl, { cache: 'no-cache' });
+          if (!r.ok) { hide(); return; }
+          show(await r.json());
+        } catch { hide(); }
+      }
+
+      // Read the Worker URL from a config JSON so the user can change it without
+      // touching this HTML. Until that file points at a real Worker, the pill
+      // simply stays hidden.
+      fetch('/assets/now-playing.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+          if (!cfg || !cfg.workerUrl || cfg.workerUrl.includes('YOUR-WORKER')) return;
+          workerUrl = cfg.workerUrl;
+          poll();
+          setInterval(poll, 30000);
+        })
+        .catch(() => {});
+    })();
 
     /* ===== Testimonials: render + form ===== */
     (function () {

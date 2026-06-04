@@ -56,6 +56,72 @@ nav.links a.active { color: var(--text); }
   nav.links a { margin-left: 12px; font-size: 0.88rem; }
 }
 
+/* ===== Now Playing pill ===== */
+.now-playing {
+  display: none;            /* shown by JS when playing */
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 6px 14px 6px 8px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.08s ease;
+  width: fit-content;
+}
+.now-playing:hover {
+  border-color: #1db954;
+  background: var(--card-hover);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.now-playing.visible { display: inline-flex; }
+.np-art {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-2);
+}
+.np-text {
+  display: flex; flex-direction: column;
+  gap: 0; min-width: 0; max-width: 280px;
+  line-height: 1.2;
+}
+.np-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #1db954;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.np-label .np-bars {
+  display: inline-flex; align-items: end; gap: 1.5px;
+  height: 9px;
+}
+.np-label .np-bars span {
+  display: block; width: 2px;
+  background: #1db954;
+  border-radius: 1px;
+  animation: npbar 1s ease-in-out infinite;
+}
+.np-label .np-bars span:nth-child(1) { height: 30%; animation-delay: 0s; }
+.np-label .np-bars span:nth-child(2) { height: 70%; animation-delay: 0.2s; }
+.np-label .np-bars span:nth-child(3) { height: 50%; animation-delay: 0.4s; }
+@keyframes npbar {
+  0%, 100% { transform: scaleY(0.55); }
+  50%      { transform: scaleY(1); }
+}
+.np-song {
+  font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 0.86rem;
+}
+.np-song .np-artist { color: var(--muted); font-weight: 400; }
+
 /* ===== Hero ===== */
 section.hero {
   display: grid;
