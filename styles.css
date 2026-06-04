@@ -540,6 +540,153 @@ h2.section-title::before {
 }
 .contact-row .btn { flex: 1 1 200px; justify-content: center; }
 
+/* ===== Testimonials / Reviews ===== */
+.reviews-stack { display: grid; gap: 14px; }
+.review {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 24px 22px 20px;
+  position: relative;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.review:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.review-quote {
+  position: absolute;
+  top: 10px; left: 18px;
+  font-size: 3rem; line-height: 1;
+  color: var(--accent);
+  opacity: 0.25;
+  font-family: Georgia, serif;
+}
+.review-body {
+  margin: 14px 0 16px;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.review-attr {
+  display: flex; flex-direction: column; gap: 3px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.review-name { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+.review-meta { color: var(--muted); font-size: 0.85rem; }
+.review-connection {
+  color: var(--accent-2); font-size: 0.78rem;
+  margin-top: 4px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+.reviews-empty {
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  padding: 26px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.review-form-wrap {
+  margin-top: 18px;
+}
+.review-form {
+  display: none;
+  margin-top: 14px;
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 22px;
+}
+.review-form.open { display: block; }
+.review-form .field {
+  margin-bottom: 14px;
+}
+.review-form label {
+  display: block; font-size: 0.85rem; font-weight: 600;
+  color: var(--text); margin-bottom: 6px;
+}
+.review-form input[type="text"],
+.review-form textarea {
+  width: 100%; padding: 10px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.review-form input[type="text"]:focus,
+.review-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg);
+}
+.review-form textarea { resize: vertical; min-height: 110px; }
+.review-form .help {
+  font-size: 0.78rem; color: var(--muted-2); margin: 4px 0 0;
+}
+.review-form .field-row { display: grid; gap: 12px; }
+@media (min-width: 560px) {
+  .review-form .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+}
+.review-form .radio-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px; padding: 4px;
+}
+.review-form .radio-row label {
+  flex: 1 1 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; cursor: pointer; font-weight: 500;
+  padding: 8px 12px; border-radius: 8px;
+  margin: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+  font-size: 0.9rem;
+}
+.review-form .radio-row label:has(input:checked) {
+  background: var(--accent);
+  color: white;
+}
+.review-form .radio-row input[type="radio"] {
+  position: absolute; opacity: 0; pointer-events: none;
+}
+.review-form .name-fields {
+  display: none;
+  border-top: 1px dashed var(--border);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+.review-form .name-fields.shown { display: block; }
+.review-form-actions {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  margin-top: 18px;
+}
+.review-form-note {
+  font-size: 0.8rem; color: var(--muted-2);
+  margin: 12px 0 0;
+}
+.review-form-note strong { color: var(--text); }
+.review-success {
+  display: none;
+  margin-top: 14px;
+  padding: 18px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 12px;
+  color: var(--accent-2);
+  font-size: 0.95rem;
+}
+.review-success.shown { display: block; }
+/* Honeypot — hidden from humans, bots fill it */
+.review-form .hp {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  opacity: 0; pointer-events: none;
+}
+
 /* ===== Page header (used on subpages like /resume) ===== */
 .page-header {
   margin: 0 0 12px;

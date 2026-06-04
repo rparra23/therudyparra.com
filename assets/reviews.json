@@ -1,0 +1,12 @@
+{
+  "_comment": "Approved reviews appear on the homepage in the Testimonials section. Newest first (top of array = top of page). When you receive a submission email and want to publish it, add a new object to the START of the `reviews` array, copy the fields from the email, and push.",
+  "_schema": {
+    "anonymous": "boolean — true to hide name/title/company",
+    "name": "Full name with optional title/suffix, e.g. 'Dr. Jane Smith, PhD'",
+    "title": "Job title, e.g. 'Senior Battery Engineer'",
+    "company": "Company / org / school",
+    "connection": "How they know Rudy (short phrase, ALL CAPS look applied via CSS)",
+    "review": "The review text — newlines preserved"
+  },
+  "reviews": []
+}

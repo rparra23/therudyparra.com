@@ -350,11 +350,226 @@
       </a>
     </div>
 
+    <!-- ===== TESTIMONIALS ===== -->
+    <h2 id="testimonials" class="section-title">Testimonials</h2>
+    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
+      Kind words from people I've built things with. Worked with me? Add yours below.
+    </p>
+    <div class="reviews-stack" id="reviews-list"></div>
+    <div class="reviews-empty" id="reviews-empty" style="display:none">
+      No reviews yet — be the first to write one below.
+    </div>
+
+    <div class="review-form-wrap">
+      <button class="btn primary" type="button" id="review-form-toggle">Write a review</button>
+      <form class="review-form" id="review-form" novalidate>
+        <input type="text" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="field">
+          <label>How would you like to appear?</label>
+          <div class="radio-row">
+            <label><input type="radio" name="who" value="anonymous" checked />Anonymous</label>
+            <label><input type="radio" name="who" value="name" />With my name</label>
+          </div>
+        </div>
+
+        <div class="name-fields" id="name-fields">
+          <div class="field">
+            <label for="rv-name">Full name</label>
+            <input type="text" id="rv-name" name="name" placeholder="Dr. Jane Smith, PhD" autocomplete="name" />
+            <p class="help">Include any prefix or suffix (Dr., PhD, Esq., etc.) exactly how you want it displayed.</p>
+          </div>
+          <div class="field-row cols-2">
+            <div class="field">
+              <label for="rv-title">Professional title</label>
+              <input type="text" id="rv-title" name="title" placeholder="Senior Battery Engineer" autocomplete="organization-title" />
+            </div>
+            <div class="field">
+              <label for="rv-company">Company or entity</label>
+              <input type="text" id="rv-company" name="company" placeholder="GridFlow, Sandia, CU Boulder…" autocomplete="organization" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rv-connection">How do you know Rudy?</label>
+          <input type="text" id="rv-connection" name="connection" placeholder="Coworker at GridFlow · Met at NM Tech Talks · Research collaborator…" required />
+        </div>
+
+        <div class="field">
+          <label for="rv-review">Your review</label>
+          <textarea id="rv-review" name="review" placeholder="What is it like to work with Rudy? Specifics are great." required></textarea>
+        </div>
+
+        <div class="review-form-actions">
+          <button class="btn primary" type="submit">Send for review</button>
+          <button class="btn" type="button" id="review-cancel">Cancel</button>
+        </div>
+        <p class="review-form-note">
+          <strong>Heads up:</strong> When you click <em>Send for review</em>, your default email app
+          will open with everything pre-filled — just hit Send. Rudy reviews submissions before
+          publishing them here.
+        </p>
+      </form>
+      <div class="review-success" id="review-success">
+        Thanks — your email app should have opened. If not, email
+        <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a> directly with your review.
+      </div>
+    </div>
+
     <footer>
       <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
       <span>U.S. Citizen · Eligible for Security Clearance</span>
     </footer>
   </div>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Testimonials: render + form ===== */
+    (function () {
+      const list = document.getElementById('reviews-list');
+      const empty = document.getElementById('reviews-empty');
+      const form = document.getElementById('review-form');
+      const toggleBtn = document.getElementById('review-form-toggle');
+      const cancelBtn = document.getElementById('review-cancel');
+      const success = document.getElementById('review-success');
+      const nameFields = document.getElementById('name-fields');
+      const nameInput = document.getElementById('rv-name');
+      const whoRadios = form.querySelectorAll('input[name="who"]');
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function renderReviews(reviews) {
+        list.innerHTML = '';
+        if (!reviews.length) {
+          empty.style.display = '';
+          return;
+        }
+        empty.style.display = 'none';
+        reviews.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'review';
+          const isAnon = !!r.anonymous;
+          const author = isAnon ? 'Anonymous' : (r.name || 'Unnamed');
+          const metaParts = [];
+          if (!isAnon) {
+            if (r.title) metaParts.push(r.title);
+            if (r.company) metaParts.push(r.company);
+          }
+          const meta = metaParts.join(' · ');
+          card.innerHTML =
+            '<span class="review-quote" aria-hidden="true">&ldquo;</span>' +
+            '<p class="review-body">' + esc(r.review) + '</p>' +
+            '<div class="review-attr">' +
+              '<span class="review-name">' + esc(author) + '</span>' +
+              (meta ? '<span class="review-meta">' + esc(meta) + '</span>' : '') +
+              (r.connection ? '<span class="review-connection">' + esc(r.connection) + '</span>' : '') +
+            '</div>';
+          list.appendChild(card);
+        });
+      }
+
+      // Load reviews
+      fetch('/assets/reviews.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : { reviews: [] })
+        .then(data => renderReviews(Array.isArray(data.reviews) ? data.reviews : []))
+        .catch(() => renderReviews([]));
+
+      // Toggle form
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = form.classList.toggle('open');
+        toggleBtn.textContent = isOpen ? 'Hide form' : 'Write a review';
+        if (isOpen) {
+          success.classList.remove('shown');
+          form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+      cancelBtn.addEventListener('click', () => {
+        form.classList.remove('open');
+        toggleBtn.textContent = 'Write a review';
+      });
+
+      // Show/hide name fields based on radio
+      function syncNameFields() {
+        const useName = form.querySelector('input[name="who"]:checked').value === 'name';
+        nameFields.classList.toggle('shown', useName);
+        nameInput.required = useName;
+        if (!useName) nameInput.value = '';
+      }
+      whoRadios.forEach(r => r.addEventListener('change', syncNameFields));
+      syncNameFields();
+
+      // Submit: build mailto + open
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Honeypot — silently drop if bot filled it
+        if (form.querySelector('input[name="website"]').value) return;
+
+        const fd = new FormData(form);
+        const isAnon = fd.get('who') === 'anonymous';
+        const name = isAnon ? 'Anonymous' : (fd.get('name') || '').toString().trim();
+        const title = (fd.get('title') || '').toString().trim();
+        const company = (fd.get('company') || '').toString().trim();
+        const connection = (fd.get('connection') || '').toString().trim();
+        const review = (fd.get('review') || '').toString().trim();
+
+        if (!connection || !review || (!isAnon && !name)) {
+          // Native required validation should catch this; defensive fallback.
+          form.reportValidity();
+          return;
+        }
+
+        const subject = '[therudyparra.com] New review from ' + (name || 'Anonymous');
+        const lines = [
+          'Name:        ' + (name || 'Anonymous'),
+        ];
+        if (!isAnon) {
+          if (title) lines.push('Title:       ' + title);
+          if (company) lines.push('Company:     ' + company);
+        }
+        lines.push('Connection:  ' + connection);
+        lines.push('');
+        lines.push('Review:');
+        lines.push('--------');
+        lines.push(review);
+        lines.push('');
+        lines.push('---');
+        lines.push('Submitted via therudyparra.com');
+        lines.push('');
+        lines.push('To publish, add to assets/reviews.json:');
+        lines.push(JSON.stringify({
+          anonymous: isAnon,
+          name: isAnon ? undefined : name,
+          title: isAnon ? undefined : (title || undefined),
+          company: isAnon ? undefined : (company || undefined),
+          connection: connection,
+          review: review
+        }, null, 2));
+
+        const mailto = 'mailto:parrarudy3@icloud.com'
+          + '?subject=' + encodeURIComponent(subject)
+          + '&body=' + encodeURIComponent(lines.join('\n'));
+
+        // Open the mail client
+        window.location.href = mailto;
+
+        // Show success state
+        form.classList.remove('open');
+        toggleBtn.textContent = 'Write a review';
+        success.classList.add('shown');
+        form.reset();
+        syncNameFields();
+        success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    })();
+  </script>
 </body>
 </html>
