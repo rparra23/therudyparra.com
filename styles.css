@@ -125,7 +125,29 @@ section.hero h1 {
 .hero .lead {
   color: var(--muted); font-size: 1rem; max-width: 64ch; margin: 0 0 28px;
 }
-.cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.social-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 14px;
+}
+.social-btn {
+  width: 40px; height: 40px;
+  display: inline-grid; place-items: center;
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  border-radius: 50%;
+  color: var(--muted);
+  transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+.social-btn:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  color: var(--text);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.social-btn svg { width: 18px; height: 18px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 16px; border-radius: 10px;
