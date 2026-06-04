@@ -71,14 +71,18 @@
     section.hero {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 28px;
+      gap: 24px;
       align-items: center;
     }
+    /* Mobile: avatar first (above), then text */
+    section.hero .avatar-wrap { order: 1; }
+    section.hero .hero-text { order: 2; }
     @media (min-width: 720px) {
       section.hero {
         grid-template-columns: 1fr auto;
         gap: 40px;
       }
+      /* Desktop: text on the left, avatar on the right */
       section.hero .hero-text { order: 1; }
       section.hero .avatar-wrap { order: 2; }
     }
