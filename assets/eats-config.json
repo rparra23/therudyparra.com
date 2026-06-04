@@ -1,0 +1,4 @@
+{
+  "_comment": "When `workerUrl` is the placeholder below, /eats reads from assets/restaurants.json (the local list). Once you deploy cloudflare-worker-mymap-eats and put the real workers.dev URL here, /eats automatically pulls live from your Google My Map.",
+  "workerUrl": "https://mymap-eats.YOUR-WORKER.workers.dev"
+}

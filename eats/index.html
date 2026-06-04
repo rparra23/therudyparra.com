@@ -125,8 +125,29 @@
           '</a>';
       }
 
-      fetch('/assets/restaurants.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : { spots: [] })
+      /**
+       * Data source resolution:
+       *   1) Read /assets/eats-config.json for a Worker URL
+       *   2) If it points at a real deployed worker (no "YOUR-WORKER" placeholder)
+       *      fetch from there — this is the live Google My Maps path.
+       *   3) Otherwise fall back to /assets/restaurants.json in the repo.
+       */
+      async function loadSpots() {
+        try {
+          const cfg = await fetch('/assets/eats-config.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null);
+          if (cfg && cfg.workerUrl && !cfg.workerUrl.includes('YOUR-WORKER')) {
+            const res = await fetch(cfg.workerUrl, { cache: 'no-cache' });
+            if (res.ok) {
+              const data = await res.json();
+              if (data && Array.isArray(data.spots) && data.spots.length) return data;
+            }
+          }
+        } catch {}
+        const local = await fetch('/assets/restaurants.json', { cache: 'no-cache' });
+        return local.ok ? local.json() : { spots: [] };
+      }
+
+      loadSpots()
         .then(data => {
           const spots = Array.isArray(data.spots) ? data.spots : [];
           if (!spots.length) {
