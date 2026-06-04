@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rudy Parra</title>
-  <meta name="description" content="Rudy Parra — personal site and portfolio." />
+  <title>Rudy Parra — Electrical Lab Technician & Embedded Systems Developer</title>
+  <meta name="description" content="Rodolfo (Rudy) González Parra — electrical lab technician and embedded systems developer building clean-energy hardware in Albuquerque. Former solar physics & glass physics researcher." />
   <meta name="theme-color" content="#0b0b10" />
+  <meta property="og:title" content="Rudy Parra" />
+  <meta property="og:description" content="Electrical lab technician & embedded systems developer. Clean energy, embedded firmware, and applied research." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://therudyparra.com" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
@@ -13,65 +17,85 @@
       --bg-2: #11121a;
       --text: #eef0f6;
       --muted: #9aa0b4;
+      --muted-2: #6b7088;
       --accent: #7c5cff;
       --accent-2: #22d3ee;
       --card: #14151f;
+      --card-hover: #181a26;
       --border: #1f2030;
+      --border-strong: #2a2c40;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, 0.20), transparent 60%),
-        radial-gradient(900px 500px at -10% 10%, rgba(34, 211, 238, 0.15), transparent 60%),
+        radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, 0.18), transparent 60%),
+        radial-gradient(900px 500px at -10% 10%, rgba(34, 211, 238, 0.13), transparent 60%),
         var(--bg);
+      background-attachment: fixed;
       line-height: 1.6;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 880px; margin: 0 auto; padding: 32px 24px 80px; }
+    a { color: var(--accent-2); text-decoration: none; transition: color 0.15s ease; }
+    a:hover { color: var(--text); text-decoration: underline; }
+    .container { max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; }
 
+    /* ===== Nav ===== */
     header.nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 0 56px;
+      padding: 8px 0 48px;
     }
     .brand {
       display: inline-flex; align-items: center; gap: 10px;
       font-weight: 700; letter-spacing: 0.2px;
     }
     .brand-mark {
-      width: 28px; height: 28px; border-radius: 8px;
+      width: 30px; height: 30px; border-radius: 8px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       display: grid; place-items: center; color: #0b0b10; font-weight: 800;
     }
     nav.links a {
       color: var(--muted); margin-left: 20px; font-size: 0.95rem;
+      text-decoration: none;
     }
-    nav.links a:hover { color: var(--text); text-decoration: none; }
+    nav.links a:hover { color: var(--text); }
+    @media (max-width: 560px) {
+      nav.links a { margin-left: 12px; font-size: 0.88rem; }
+    }
 
+    /* ===== Hero ===== */
     section.hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.1; margin: 0 0 12px;
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      line-height: 1.05; margin: 0 0 8px;
       letter-spacing: -0.02em;
     }
     .hero .grad {
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .hero p.lead {
-      color: var(--muted); font-size: 1.1rem; max-width: 60ch; margin: 0 0 28px;
+    .hero .eyebrow {
+      color: var(--accent-2); font-size: 0.95rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 14px;
+    }
+    .hero .tagline {
+      color: var(--text); font-size: 1.15rem; margin: 16px 0 10px; max-width: 60ch;
+      font-weight: 500;
+    }
+    .hero .lead {
+      color: var(--muted); font-size: 1rem; max-width: 64ch; margin: 0 0 28px;
     }
     .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 16px; border-radius: 10px;
-      border: 1px solid var(--border); background: var(--card);
+      border: 1px solid var(--border-strong); background: var(--card);
       color: var(--text); font-weight: 500; font-size: 0.95rem;
       transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease;
+      text-decoration: none;
     }
     .btn:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); }
     .btn.primary {
@@ -79,33 +103,96 @@
       border-color: transparent;
     }
     .btn.primary:hover { border-color: transparent; filter: brightness(1.08); }
+    .btn svg { width: 16px; height: 16px; }
 
+    /* ===== Section titles ===== */
     h2.section-title {
-      margin: 64px 0 16px; font-size: 1.25rem;
-      color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em;
+      margin: 72px 0 18px; font-size: 0.85rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em;
       font-weight: 600;
+      display: flex; align-items: center; gap: 12px;
+    }
+    h2.section-title::before {
+      content: ""; width: 24px; height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
+    /* ===== Cards ===== */
     .card {
       border: 1px solid var(--border); background: var(--card);
-      border-radius: 14px; padding: 20px;
+      border-radius: 14px; padding: 22px;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.08s ease;
     }
-    .grid { display: grid; gap: 14px; }
-    @media (min-width: 640px) { .grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+    .card:hover { border-color: var(--border-strong); background: var(--card-hover); }
+    .stack { display: grid; gap: 14px; }
+    .grid-2 { display: grid; gap: 14px; }
+    @media (min-width: 640px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
-    .project h3 { margin: 0 0 6px; font-size: 1.05rem; }
-    .project p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    /* ===== Experience / Research items ===== */
+    .item-head {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px;
+      align-items: baseline; margin-bottom: 4px;
+    }
+    .item-title { font-weight: 600; font-size: 1.05rem; color: var(--text); margin: 0; }
+    .item-org { color: var(--accent-2); font-weight: 500; }
+    .item-meta { color: var(--muted-2); font-size: 0.88rem; white-space: nowrap; }
+    .item-context {
+      color: var(--muted); font-size: 0.92rem; font-style: italic;
+      margin: 2px 0 12px;
+    }
+    .item ul {
+      margin: 0; padding-left: 18px;
+      color: var(--muted); font-size: 0.95rem;
+    }
+    .item ul li { margin-bottom: 6px; }
+    .item ul li::marker { color: var(--accent); }
 
+    /* ===== Publications ===== */
+    .pub { padding: 18px 22px; }
+    .pub .tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 3px 8px; border-radius: 6px;
+      background: rgba(124, 92, 255, 0.15); color: #b9a8ff;
+      margin-bottom: 8px;
+    }
+    .pub .tag.coauthor { background: rgba(34, 211, 238, 0.12); color: #8fe6f1; }
+    .pub .title { font-weight: 600; color: var(--text); margin: 0 0 6px; }
+    .pub .authors { color: var(--muted); font-size: 0.9rem; margin: 0 0 4px; }
+    .pub .venue { color: var(--muted-2); font-size: 0.85rem; margin: 0; }
+
+    /* ===== Skills ===== */
+    .skill-group { margin-bottom: 14px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group h4 {
+      margin: 0 0 8px; font-size: 0.8rem; font-weight: 600;
+      color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      display: inline-block; padding: 4px 10px; font-size: 0.85rem;
+      border: 1px solid var(--border-strong); border-radius: 999px;
+      color: var(--muted); background: rgba(255,255,255,0.02);
+    }
+
+    /* ===== Contact ===== */
+    .contact-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .contact-row .btn { flex: 1 1 200px; justify-content: center; }
+
+    /* ===== Footer ===== */
     footer {
-      margin-top: 64px; padding-top: 24px;
+      margin-top: 72px; padding-top: 24px;
       border-top: 1px solid var(--border);
-      color: var(--muted); font-size: 0.9rem;
+      color: var(--muted-2); font-size: 0.88rem;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- ===== NAV ===== -->
     <header class="nav">
       <span class="brand">
         <span class="brand-mark">R</span>
@@ -113,53 +200,342 @@
       </span>
       <nav class="links">
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#research">Research</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
+    <!-- ===== HERO ===== -->
     <section class="hero">
-      <h1>Hi, I'm <span class="grad">Rudy</span>.</h1>
+      <div class="eyebrow">Albuquerque, NM</div>
+      <h1>Hi, I'm <span class="grad">Rudy</span> Parra.</h1>
+      <p class="tagline">
+        Electrical lab technician &amp; embedded systems developer building
+        clean-energy hardware.
+      </p>
       <p class="lead">
-        Welcome to my corner of the internet. I build things, learn out loud, and use
-        this site as a home for my projects and writing.
+        I lead R&amp;D across lithium-sulfur and vanadium redox flow battery systems
+        at GridFlow, architect the full-stack energy platform behind Pii Energy's
+        Edge 2000, and have published research in solar physics and glass physics.
+        I like building things that bridge electrons, atoms, and code.
       </p>
       <div class="cta-row">
-        <a class="btn primary" href="#projects">See my work</a>
-        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="https://www.linkedin.com/in/rudyparra" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.34 17.34V10H6V17.34h2.34M7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72M18 17.34v-4.02c0-2.17-1.17-3.18-2.73-3.18a2.36 2.36 0 0 0-2.13 1.17V10h-2.34v7.34h2.34v-4.1c0-.92.17-1.81 1.31-1.81 1.13 0 1.14 1.06 1.14 1.87v4.04H18Z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn" href="https://github.com/rparra23" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.64.71 1.03 1.61 1.03 2.71 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="mailto:parrarudy3@icloud.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+          Email
+        </a>
       </div>
     </section>
 
+    <!-- ===== ABOUT ===== -->
     <h2 id="about" class="section-title">About</h2>
     <div class="card">
       <p style="margin:0;color:var(--muted)">
-        Short bio goes here. Who you are, what you're into, what you're working on right now.
-        Replace this paragraph with anything you want — it's just HTML.
+        Hands-on electrical lab technician and embedded systems developer with 3+ years of
+        R&amp;D experience spanning clean energy, defense, and spectroscopic materials science.
+        First-author on a NASA/NSF-funded solar spectroscopy research poster and NSF-funded
+        co-author on two more in glass physics, X-ray absorption spectroscopy, and plasma science.
+        I work across high-spectral-resolution optical instruments, advanced lab
+        instrumentation, Python automation, and safe operation of hazardous materials.
+        Former researcher at the National Solar Observatory and Lockheed Martin. U.S. citizen,
+        eligible for security clearance. Passionate about building the next generation of
+        energy infrastructure.
       </p>
     </div>
 
-    <h2 id="projects" class="section-title">Projects</h2>
-    <div class="grid cols-2">
-      <div class="card project">
-        <h3>Project one</h3>
-        <p>One-line description of what it does and why you built it.</p>
+    <!-- ===== WORK EXPERIENCE ===== -->
+    <h2 id="work" class="section-title">Work Experience</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Senior Electrical Lab Technician · <span class="item-org">GridFlow</span></h3>
+          <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
+        </div>
+        <p class="item-context">Clean energy startup. Led R&amp;D across lithium-sulfur hybrid flow batteries; now expanding into vanadium redox flow battery (VRFB) systems.</p>
+        <ul>
+          <li>Spearhead end-to-end R&amp;D lab operations — prototype build, electrical assembly, structured test execution, and real-time diagnostics.</li>
+          <li>Fabricate and test battery system prototypes including peristaltic pump systems, custom PCBs, wiring harnesses, and IoT safety monitoring devices.</li>
+          <li>Driving 0-to-1 development of VRFB systems — coordinating cross-disciplinary teams of mechanical and chemical engineers from concept to working prototype.</li>
+          <li>Authored production SOPs covering hardware assembly (enclosures, manifolds, cell stacks) and electrolyte preparation — establishing repeatable, audit-ready processes for a first-of-kind system.</li>
+          <li>Integrate sensors (current, voltage, temperature, GPS) with ESP32 and Particle Photon over BLE/Wi-Fi; develop firmware in C++ and Arduino IDE.</li>
+          <li>Operate DAQ systems; write Python for automated data logging, anomaly detection, and charge/discharge cycle analysis.</li>
+          <li>Manage all lab safety protocols for hazardous materials (argon, nitrogen, lithium, vanadium electrolyte) — glovebox (VAC) operations, LOTO, ESD compliance.</li>
+          <li>Built public demo units including an Earth Day Conference exhibit with laser-cut acrylic fabrication and full system integration.</li>
+        </ul>
       </div>
-      <div class="card project">
-        <h3>Project two</h3>
-        <p>Another short description. Link out, embed a screenshot, whatever you want.</p>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Lead Software Developer · <span class="item-org">Pii Energy</span></h3>
+          <span class="item-meta">Jan 2025 – Present · Albuquerque, NM</span>
+        </div>
+        <p class="item-context">GridFlow's residential plug-in home energy product line. Edge 2000 launched Pi Day 2025 — featured in PV Magazine.</p>
+        <ul>
+          <li>Architect and develop a full-stack energy management system tracking solar, battery, and grid power with real-time monitoring, room-based outlet control, and overcurrent detection.</li>
+          <li>Investigated and integrated the EcoFlow BKW API for output power control; built a Cloudflare-based backend (D1 SQL, R2 storage).</li>
+          <li>Produce a technical LinkedIn video series communicating energy system design to professional and consumer audiences.</li>
+        </ul>
       </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">IoT &amp; Software Developer · <span class="item-org">Telemetry Insight</span></h3>
+          <span class="item-meta">Apr 2024 – Sept 2024 · Albuquerque, NM</span>
+        </div>
+        <ul>
+          <li>Developed and maintained Well Watcher telemetry code for real-time monitoring of industrial well controllers.</li>
+          <li>Built AI-driven anomaly detection and predictive maintenance systems; optimized energy consumption algorithms for field hardware.</li>
+          <li>Implemented BLE features (Tx Power monitoring, battery life analysis); led software testing for new controller features.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Image Creation Developer — DevOps · <span class="item-org">Lockheed Martin</span></h3>
+          <span class="item-meta">Jan 2023 – May 2023 · Remote</span>
+        </div>
+        <ul>
+          <li>Participated in OS image development and troubleshooting for cloud and on-prem Windows/Linux environments in a defense contractor setting.</li>
+          <li>Gained experience with scripting, TCP/IP networks, virtualization, and purpose-built OS configurations.</li>
+        </ul>
+      </div>
+
     </div>
 
-    <h2 id="contact" class="section-title">Contact</h2>
+    <!-- ===== RESEARCH ===== -->
+    <h2 id="research" class="section-title">Research Experience</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Solar Physics Researcher — First Author · <span class="item-org">National Solar Observatory / CU Boulder</span></h3>
+          <span class="item-meta">May – Aug 2020 · Remote</span>
+        </div>
+        <p class="item-context">Funded by NASA contract NAS5-97045 (SORCE), NSF, NSO, and AURA. Mentor: Serena Criscuoli, NSO.</p>
+        <ul>
+          <li>Led sole-first-author research investigating temporal variability of the Hα 656.3nm spectral line in sun-as-a-star observations using the Integrated Sunlight Spectrometer (ISS).</li>
+          <li>Analyzed disk-integrated Hα core-to-wing ratio data from SOLIS instruments (NISP/NSO/AURA/NSF) over the 27-day solar rotational timescale, alongside faculae, sunspot, and filament datasets.</li>
+          <li>Found that sunspot area is the dominant modulator of Hα line shape; faculae and filaments showed negligible effect — contributing new understanding of chromospheric variability in solar-like stars relevant to exoplanet habitability research.</li>
+          <li>Presented findings as sole first author at a poster session; research published under NASA/NSF/AURA sponsorship.</li>
+        </ul>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Glass Physics Researcher &amp; Team Leader · <span class="item-org">Coe College — Dr. Steve Feller Lab</span></h3>
+          <span class="item-meta">May – Aug 2023 · Cedar Rapids, IA</span>
+        </div>
+        <p class="item-context">NSF-funded REU (Grant #1950330) &amp; RUI (Grant #2203142). Multi-institution: Coe College, Georgia Tech, NM Tech, Seton Hall.</p>
+        <ul>
+          <li>Led a team across four complex NSF-funded projects investigating glass composition, atomic structure, and dielectric properties.</li>
+          <li>Synthesized sodium borate and sodium silicate glasses at 1100°C–1300°C; performed stoichiometric weighing, controlled heating, roller quenching, and annealing.</li>
+          <li>Operated EasyXAFS 300+ for XANES/EXAFS, Raman spectrometers, DSC (STA449), and high-temperature electric furnaces.</li>
+          <li>Applied Hanning window and Fourier transform processing to convert energy-based XAS plots to wavenumber-based analysis; performed XRD interpretation.</li>
+          <li>Investigated glass as a dielectric component in Dielectric Barrier Discharge (DBD) plasma generation — directly relevant to high-voltage and photonic applications.</li>
+          <li>Co-authored two published conference posters; presented at the Iowa Glass Conference; implemented new lab procedures improving stoichiometric accuracy across departments.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <h2 id="publications" class="section-title">Publications &amp; Posters</h2>
+    <div class="stack">
+
+      <div class="card pub">
+        <span class="tag">First Author</span>
+        <p class="title">Variability of H-alpha Line Observed at High Spectral Resolution in the Solar Atmosphere</p>
+        <p class="authors">Rudy Parra</p>
+        <p class="venue">National Solar Observatory / University of Colorado Boulder · 2020 · Instruments: ISS, SOLIS · Funding: NASA NAS5-97045 (SORCE), NSF, NSO, AURA</p>
+      </div>
+
+      <div class="card pub">
+        <span class="tag coauthor">Co-Author</span>
+        <p class="title">Probing the Local Atomic Structure of Lead Borate Glasses with X-ray Absorption Spectroscopy</p>
+        <p class="authors">Z. Cazares, R. Parra, R. Hao, K. Ameku, I. Slagle, Y. Wei, S. Feller, F. Alamgir</p>
+        <p class="venue">Coe College · Georgia Tech · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
+      </div>
+
+      <div class="card pub">
+        <span class="tag coauthor">Co-Author</span>
+        <p class="title">Using Sodium Borate Glass for a Dielectric Barrier Discharge (DBD)</p>
+        <p class="authors">R.G. Parra, Z.E. Cazares, R. Hao, J.L. López, S.A. Feller</p>
+        <p class="venue">Coe College · Seton Hall · CNM · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
+      </div>
+
+    </div>
+
+    <!-- ===== SKILLS ===== -->
+    <h2 id="skills" class="section-title">Technical Skills</h2>
     <div class="card">
-      <p style="margin:0">
-        Email: <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
+      <div class="skill-group">
+        <h4>Lab Instrumentation</h4>
+        <div class="chip-row">
+          <span class="chip">Oscilloscopes</span><span class="chip">DMMs</span><span class="chip">Power supplies</span>
+          <span class="chip">Function generators</span><span class="chip">Spectrum analyzers</span><span class="chip">DAQ systems</span>
+          <span class="chip">EasyXAFS 300+</span><span class="chip">Raman spectrometers</span><span class="chip">DSC (STA449)</span>
+          <span class="chip">High-temp furnaces (1100–1300°C)</span><span class="chip">Integrated Sunlight Spectrometer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Electrical Assembly</h4>
+        <div class="chip-row">
+          <span class="chip">PCB rework (SMT/through-hole)</span><span class="chip">Wiring harnesses</span><span class="chip">Crimping</span>
+          <span class="chip">Cable routing</span><span class="chip">Strain-relief</span><span class="chip">ESD handling</span>
+          <span class="chip">MOSFETs</span><span class="chip">SSRs</span><span class="chip">BMS systems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Embedded &amp; Firmware</h4>
+        <div class="chip-row">
+          <span class="chip">C++</span><span class="chip">Arduino IDE</span><span class="chip">ESP32</span>
+          <span class="chip">Particle Photon</span><span class="chip">BLE / Wi-Fi</span><span class="chip">PID loops</span>
+          <span class="chip">Relay &amp; pump control</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Automation &amp; Scripting</h4>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">Linux</span>
+          <span class="chip">Data logging</span><span class="chip">Anomaly detection</span><span class="chip">Telemetry analysis</span>
+          <span class="chip">AI/ML implementation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Spectroscopy &amp; Optics</h4>
+        <div class="chip-row">
+          <span class="chip">XAS (XANES/EXAFS)</span><span class="chip">Raman</span><span class="chip">DSC</span>
+          <span class="chip">XRD</span><span class="chip">Hα 656.3nm analysis</span><span class="chip">SOLIS / ISS data</span>
+          <span class="chip">Fourier transform &amp; Hanning window</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Safety, Fabrication &amp; Other</h4>
+        <div class="chip-row">
+          <span class="chip">OSHA / LOTO</span><span class="chip">Argon / N₂ / Li handling</span><span class="chip">Glovebox (VAC)</span>
+          <span class="chip">High-voltage awareness</span><span class="chip">3D printing</span><span class="chip">Laser cutting</span>
+          <span class="chip">CNC machining</span><span class="chip">PCB design</span><span class="chip">Slurry casting</span>
+          <span class="chip">AutoCAD</span><span class="chip">Git / GitHub</span><span class="chip">Cisco routing &amp; switching</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EDUCATION ===== -->
+    <h2 id="education" class="section-title">Education &amp; Certifications</h2>
+    <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">A.A.S. — Computer Information Systems, Network Administration</h3>
+          <span class="item-meta">Dec 2023 · 3.5 GPA</span>
+        </div>
+        <p class="item-context">Central New Mexico Community College</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Coursework: IT Essentials, IoT, Linux, Python, C++, AutoCAD, Semiconductor Apprentice,
+          Network Security, Calculus I.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Deep Dive IoT Bootcamp</h3>
+          <span class="item-meta">Oct – Dec 2023</span>
+        </div>
+        <p class="item-context">CNM Ingenuity STEMulus Center</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          400+ hours: smart device coding (C++), electronic circuits, soldering, clean room
+          operations, lab and factory automation.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Cisco Certifications</h3>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          CCNAv7 Introduction to Networks (Apr 2022) · CCNA Switching, Routing &amp; Wireless Essentials (Aug 2022)
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ===== LEADERSHIP ===== -->
+    <h2 id="leadership" class="section-title">Leadership &amp; Community</h2>
+    <div class="grid-2">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Chapter Director</h3>
+          <span class="item-meta">Feb 2025 – Present</span>
+        </div>
+        <p class="item-context">Techqueria New Mexico</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Leading chapter strategy, events, and partnerships for Latinx professionals in tech
+          across New Mexico.
+        </p>
+      </div>
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Board Member</h3>
+          <span class="item-meta">May 2025 – Present</span>
+        </div>
+        <p class="item-context">New Mexico Tech Talks</p>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Strategic planning and community engagement for NM's premier tech organization;
+          co-organizer of Desert Dev Lab hackathon.
+        </p>
+      </div>
+
+      <div class="card item" style="grid-column: 1 / -1">
+        <div class="item-head">
+          <h3 class="item-title">Active Organizer</h3>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:0.92rem">
+          Q-STEM (LGBTQ+ STEM Community) · STEM Core Program · ALRISE Program —
+          advancing equity and inclusion in STEM across New Mexico.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ===== CONTACT ===== -->
+    <h2 id="contact" class="section-title">Get in touch</h2>
+    <div class="card">
+      <p style="margin:0 0 16px;color:var(--muted)">
+        I'm always up for a conversation about clean energy, embedded systems, spectroscopy,
+        or community-building in New Mexico tech. The fastest way to reach me is email.
       </p>
+      <div class="contact-row">
+        <a class="btn primary" href="mailto:parrarudy3@icloud.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+          parrarudy3@icloud.com
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/rudyparra" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.34 17.34V10H6V17.34h2.34M7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72M18 17.34v-4.02c0-2.17-1.17-3.18-2.73-3.18a2.36 2.36 0 0 0-2.13 1.17V10h-2.34v7.34h2.34v-4.1c0-.92.17-1.81 1.31-1.81 1.13 0 1.14 1.06 1.14 1.87v4.04H18Z"/></svg>
+          linkedin.com/in/rudyparra
+        </a>
+        <a class="btn" href="https://github.com/rparra23" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.64.71 1.03 1.61 1.03 2.71 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          github.com/rparra23
+        </a>
+      </div>
     </div>
 
     <footer>
-      <span>© <span id="year"></span> Rudy Parra</span>
-      <span>Built with HTML, CSS, and stubbornness.</span>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
     </footer>
   </div>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
