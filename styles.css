@@ -498,6 +498,64 @@ details.item > ul {
   color: var(--muted); background: rgba(255,255,255,0.02);
 }
 
+/* ===== Wallet buttons (Apple Wallet + Google Wallet) ===== */
+.wallet-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+.wallet-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+  border: 1px solid transparent;
+}
+.wallet-btn:hover { transform: translateY(-1px); text-decoration: none; }
+.wallet-btn:active { transform: translateY(0); }
+.wallet-btn.apple {
+  background: #000;
+  color: #fff;
+  border-color: #2a2c40;
+}
+.wallet-btn.apple:hover { background: #1a1a1a; }
+.wallet-btn.google {
+  background: #fff;
+  color: #1f1f1f;
+  border-color: #dadce0;
+}
+.wallet-btn.google:hover { background: #f8f9fa; }
+.wallet-btn svg {
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+}
+.wallet-btn .wallet-label {
+  display: inline-flex; flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+.wallet-btn .wallet-label small {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+  margin-bottom: 1px;
+}
+.wallet-btn .wallet-label strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.wallet-fallback-note {
+  color: var(--muted-2);
+  font-size: 0.78rem;
+  margin: 4px 0 0;
+}
+
 /* ===== Business cards ===== */
 /* Mobile: horizontal scroll-snap row that bleeds to the screen edge */
 .bcards {

@@ -1,0 +1,5 @@
+{
+  "_comment": "Wallet pass URLs. While either is 'TO_BE_CONFIGURED', that button falls back to downloading a vCard (which iOS/Android prompt to add to Contacts). Once you've completed the setup (see wallet-build/README.md and cloudflare-worker-google-wallet/README.md), replace the placeholders below.",
+  "applePkpassUrl": "TO_BE_CONFIGURED",
+  "googleWalletJwtUrl": "TO_BE_CONFIGURED"
+}

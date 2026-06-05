@@ -1,0 +1,85 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.therudyparra.contact",
+  "teamIdentifier": "TO_BE_REPLACED_WITH_YOUR_APPLE_TEAM_ID",
+  "organizationName": "Rudy Parra",
+  "description": "Rudy Parra — contact",
+  "serialNumber": "rudyparra-contact-v1",
+  "logoText": "Rudy Parra",
+  "foregroundColor": "rgb(238, 240, 246)",
+  "backgroundColor": "rgb(11, 11, 16)",
+  "labelColor": "rgb(154, 160, 180)",
+  "generic": {
+    "primaryFields": [
+      {
+        "key": "name",
+        "label": "NAME",
+        "value": "Rudy Parra"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "title",
+        "label": "TITLE",
+        "value": "Electrical Lab Tech & Embedded Dev"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "phone",
+        "label": "PHONE",
+        "value": "+1 575-725-1290"
+      },
+      {
+        "key": "email",
+        "label": "EMAIL",
+        "value": "parrarudy3@icloud.com"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "website",
+        "label": "WEBSITE",
+        "value": "https://therudyparra.com",
+        "attributedValue": "<a href='https://therudyparra.com'>therudyparra.com</a>"
+      },
+      {
+        "key": "linkedin",
+        "label": "LINKEDIN",
+        "value": "linkedin.com/in/rudy-parra-329a2318a",
+        "attributedValue": "<a href='https://www.linkedin.com/in/rudy-parra-329a2318a/'>linkedin.com/in/rudy-parra-329a2318a</a>"
+      },
+      {
+        "key": "github",
+        "label": "GITHUB",
+        "value": "github.com/rparra23",
+        "attributedValue": "<a href='https://github.com/rparra23'>github.com/rparra23</a>"
+      },
+      {
+        "key": "instagram",
+        "label": "INSTAGRAM",
+        "value": "@therudyparra",
+        "attributedValue": "<a href='https://www.instagram.com/therudyparra/'>@therudyparra</a>"
+      },
+      {
+        "key": "location",
+        "label": "LOCATION",
+        "value": "Albuquerque, NM"
+      },
+      {
+        "key": "about",
+        "label": "ABOUT",
+        "value": "Senior Electrical Lab Technician at GridFlow. Lead Software Developer at Pii Energy. Former solar physics & glass physics researcher."
+      }
+    ]
+  },
+  "barcodes": [
+    {
+      "format": "PKBarcodeFormatQR",
+      "message": "https://therudyparra.com",
+      "messageEncoding": "iso-8859-1",
+      "altText": "therudyparra.com"
+    }
+  ],
+  "webServiceURL": null
+}

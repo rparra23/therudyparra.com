@@ -1,0 +1,5 @@
+# Never commit signing material — leaks here = anyone can issue passes as you
+cert.p12
+wwdr.pem
+*.certSigningRequest
+*.cer

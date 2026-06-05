@@ -1,0 +1,3 @@
+# Never commit the service-account key
+*.json
+!package.json
