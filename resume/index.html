@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resume — Rudy Parra</title>
-  <meta name="description" content="Rudy Parra — full resume. Electrical lab tech, embedded systems developer, and former solar/glass physics researcher." />
+  <title>My Work — Rudy Parra</title>
+  <meta name="description" content="Rudy Parra — full work history, research, publications, and press." />
   <meta name="theme-color" content="#0b0b10" />
-  <meta property="og:title" content="Rudy Parra — Resume" />
-  <meta property="og:description" content="About, work experience, research, publications, skills, education, and leadership." />
+  <meta property="og:title" content="Rudy Parra — My Work" />
+  <meta property="og:description" content="About, work experience, research, publications, skills, education, leadership, and press." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://therudyparra.com/resume" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
@@ -22,11 +22,13 @@
         <span class="brand-mark">R</span>
         <span>Rudy Parra</span>
       </a>
-      <nav class="links">
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
         <a href="/">Home</a>
-        <a href="#about" class="active">About</a>
-        <a href="#work">Work</a>
-        <a href="#research">Research</a>
+        <a href="/resume" class="active">My work</a>
         <a href="/eats">Eats</a>
       </nav>
     </header>
@@ -37,37 +39,38 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         Back to home
       </a>
-      <h1>Resume</h1>
+      <h1>My work</h1>
       <p class="lead">
-        The long version — work, research, publications, and how I got here.
+        Work, research, publications, and press — the longer story.
       </p>
     </div>
 
-    <!-- ===== ABOUT ===== -->
+    <!-- ===== ABOUT (centered, no box) ===== -->
     <h2 id="about" class="section-title">About</h2>
-    <div class="card">
-      <p style="margin:0;color:var(--muted)">
-        Hands-on electrical lab technician and embedded systems developer with 3+ years of
-        R&amp;D experience spanning clean energy, defense, and spectroscopic materials science.
-        First-author on a NASA/NSF-funded solar spectroscopy research poster and NSF-funded
-        co-author on two more in glass physics, X-ray absorption spectroscopy, and plasma science.
-        I work across high-spectral-resolution optical instruments, advanced lab
-        instrumentation, Python automation, and safe operation of hazardous materials.
-        Former researcher at the National Solar Observatory and Lockheed Martin. U.S. citizen,
-        eligible for security clearance. Passionate about building the next generation of
-        energy infrastructure.
-      </p>
-    </div>
+    <p class="about-centered">
+      Hands-on electrical lab technician and embedded systems developer with 3+ years of
+      R&amp;D experience spanning clean energy, defense, and spectroscopic materials science.
+      First-author on a NASA/NSF-funded solar spectroscopy research poster and NSF-funded
+      co-author on two more in glass physics, X-ray absorption spectroscopy, and plasma science.
+      I work across high-spectral-resolution optical instruments, advanced lab
+      instrumentation, Python automation, and safe operation of hazardous materials.
+      Former researcher at the National Solar Observatory and Lockheed Martin. U.S. citizen,
+      eligible for security clearance. Passionate about building the next generation of
+      energy infrastructure.
+    </p>
 
     <!-- ===== WORK EXPERIENCE ===== -->
     <h2 id="work" class="section-title">Work Experience</h2>
-    <div class="stack">
+    <button type="button" class="expand-all" data-targets=".work-stack details.item">Expand all</button>
+    <div class="stack work-stack">
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">Senior Electrical Lab Technician · <span class="item-org">GridFlow</span></h3>
-          <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">Senior Electrical Lab Technician · <a class="item-org" href="https://gridflow.tech" target="_blank" rel="noopener">GridFlow</a></h3>
+            <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
+          </div>
+        </summary>
         <p class="item-context">Clean energy startup. Led R&amp;D across lithium-sulfur hybrid flow batteries; now expanding into vanadium redox flow battery (VRFB) systems.</p>
         <ul>
           <li>Spearhead end-to-end R&amp;D lab operations — prototype build, electrical assembly, structured test execution, and real-time diagnostics.</li>
@@ -79,55 +82,64 @@
           <li>Manage all lab safety protocols for hazardous materials (argon, nitrogen, lithium, vanadium electrolyte) — glovebox (VAC) operations, LOTO, ESD compliance.</li>
           <li>Built public demo units including an Earth Day Conference exhibit with laser-cut acrylic fabrication and full system integration.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">Lead Software Developer · <span class="item-org">Pii Energy</span></h3>
-          <span class="item-meta">Jan 2025 – Present · Albuquerque, NM</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">Lead Software Developer · <a class="item-org" href="https://pii-energy.vercel.app" target="_blank" rel="noopener">Pii Energy</a></h3>
+            <span class="item-meta">Jan 2025 – Present · Albuquerque, NM</span>
+          </div>
+        </summary>
         <p class="item-context">GridFlow's residential plug-in home energy product line. Edge 2000 launched Pi Day 2025 — featured in PV Magazine.</p>
         <ul>
           <li>Architect and develop a full-stack energy management system tracking solar, battery, and grid power with real-time monitoring, room-based outlet control, and overcurrent detection.</li>
           <li>Investigated and integrated the EcoFlow BKW API for output power control; built a Cloudflare-based backend (D1 SQL, R2 storage).</li>
           <li>Produce a technical LinkedIn video series communicating energy system design to professional and consumer audiences.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">IoT &amp; Software Developer · <span class="item-org">Telemetry Insight</span></h3>
-          <span class="item-meta">Apr 2024 – Sept 2024 · Albuquerque, NM</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">IoT &amp; Software Developer · <span class="item-org">Telemetry Insight</span></h3>
+            <span class="item-meta">Apr 2024 – Sept 2024 · Albuquerque, NM</span>
+          </div>
+        </summary>
         <ul>
           <li>Developed and maintained Well Watcher telemetry code for real-time monitoring of industrial well controllers.</li>
           <li>Built AI-driven anomaly detection and predictive maintenance systems; optimized energy consumption algorithms for field hardware.</li>
           <li>Implemented BLE features (Tx Power monitoring, battery life analysis); led software testing for new controller features.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">Image Creation Developer — DevOps · <span class="item-org">Lockheed Martin</span></h3>
-          <span class="item-meta">Jan 2023 – May 2023 · Remote</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">Image Creation Developer — DevOps · <a class="item-org" href="https://www.lockheedmartin.com" target="_blank" rel="noopener">Lockheed Martin</a></h3>
+            <span class="item-meta">Jan 2023 – May 2023 · Remote</span>
+          </div>
+        </summary>
         <ul>
           <li>Participated in OS image development and troubleshooting for cloud and on-prem Windows/Linux environments in a defense contractor setting.</li>
           <li>Gained experience with scripting, TCP/IP networks, virtualization, and purpose-built OS configurations.</li>
         </ul>
-      </div>
+      </details>
 
     </div>
 
     <!-- ===== RESEARCH ===== -->
     <h2 id="research" class="section-title">Research Experience</h2>
-    <div class="stack">
+    <button type="button" class="expand-all" data-targets=".research-stack details.item">Expand all</button>
+    <div class="stack research-stack">
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">Solar Physics Researcher — First Author · <span class="item-org">National Solar Observatory / CU Boulder</span></h3>
-          <span class="item-meta">May – Aug 2020 · Remote</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">Solar Physics Researcher — First Author · <a class="item-org" href="https://nso.edu" target="_blank" rel="noopener">National Solar Observatory</a> / <a class="item-org" href="https://www.colorado.edu" target="_blank" rel="noopener">CU Boulder</a></h3>
+            <span class="item-meta">May – Aug 2020 · Remote</span>
+          </div>
+        </summary>
         <p class="item-context">Funded by NASA contract NAS5-97045 (SORCE), NSF, NSO, and AURA. Mentor: Serena Criscuoli, NSO.</p>
         <ul>
           <li>Led sole-first-author research investigating temporal variability of the Hα 656.3nm spectral line in sun-as-a-star observations using the Integrated Sunlight Spectrometer (ISS).</li>
@@ -135,13 +147,15 @@
           <li>Found that sunspot area is the dominant modulator of Hα line shape; faculae and filaments showed negligible effect — contributing new understanding of chromospheric variability in solar-like stars relevant to exoplanet habitability research.</li>
           <li>Presented findings as sole first author at a poster session; research published under NASA/NSF/AURA sponsorship.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="card item">
-        <div class="item-head">
-          <h3 class="item-title">Glass Physics Researcher &amp; Team Leader · <span class="item-org">Coe College — Dr. Steve Feller Lab</span></h3>
-          <span class="item-meta">May – Aug 2023 · Cedar Rapids, IA</span>
-        </div>
+      <details class="card item">
+        <summary>
+          <div class="item-head">
+            <h3 class="item-title">Glass Physics Researcher &amp; Team Leader · <a class="item-org" href="https://www.coe.edu" target="_blank" rel="noopener">Coe College — Dr. Steve Feller Lab</a></h3>
+            <span class="item-meta">May – Aug 2023 · Cedar Rapids, IA</span>
+          </div>
+        </summary>
         <p class="item-context">NSF-funded REU (Grant #1950330) &amp; RUI (Grant #2203142). Multi-institution: Coe College, Georgia Tech, NM Tech, Seton Hall.</p>
         <ul>
           <li>Led a team across four complex NSF-funded projects investigating glass composition, atomic structure, and dielectric properties.</li>
@@ -151,36 +165,213 @@
           <li>Investigated glass as a dielectric component in Dielectric Barrier Discharge (DBD) plasma generation — directly relevant to high-voltage and photonic applications.</li>
           <li>Co-authored two published conference posters; presented at the Iowa Glass Conference; implemented new lab procedures improving stoichiometric accuracy across departments.</li>
         </ul>
+      </details>
+
+    </div>
+
+    <!-- ===== GALLERY ===== -->
+    <h2 id="gallery" class="section-title">Gallery</h2>
+    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
+      Lab prototypes, demo days, conference posters, and the occasional silly desk photo. Swipe to scroll.
+    </p>
+    <div class="gallery" id="gallery">
+      <!-- Placeholder tiles — replace each with <img src="/assets/gallery/your-image.jpg" alt="..."> -->
+      <div class="gallery-item" aria-label="Placeholder for a gallery image">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-6 4 4 3-3 4 5"/></svg>
+          Add image to<br/>assets/gallery/
+        </div>
+      </div>
+      <div class="gallery-item" aria-label="Placeholder for a gallery image">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-6 4 4 3-3 4 5"/></svg>
+          Add image to<br/>assets/gallery/
+        </div>
+      </div>
+      <div class="gallery-item" aria-label="Placeholder for a gallery image">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-6 4 4 3-3 4 5"/></svg>
+          Add image to<br/>assets/gallery/
+        </div>
+      </div>
+      <div class="gallery-item" aria-label="Placeholder for a gallery image">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-6 4 4 3-3 4 5"/></svg>
+          Add image to<br/>assets/gallery/
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FEATURED IN ===== -->
+    <h2 id="press" class="section-title">Featured In</h2>
+    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
+      Press coverage of work and events I've been part of. Tap a logo to read the article.
+    </p>
+    <div class="press-stack">
+
+      <div class="press-group" style="--press-accent:#5eead4">
+        <div class="press-group-head">
+          <span class="press-group-label">GridFlow · Flow Battery R&amp;D</span>
+          <span class="press-group-context">7 articles</span>
+        </div>
+        <div class="press-strip">
+          <a class="press-tile" href="https://newsreleases.sandia.gov/boosting_batteries/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=sandia.gov&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Sandia National Labs</p>
+            <p class="press-tile-title">Boosting Battery Research</p>
+          </a>
+          <a class="press-tile" href="https://www.sandia.gov/ess/2024/06/25/sandia-partnership-speeds-up-development-of-flow-batteries-for-green-grid-water" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=sandia.gov&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Sandia National Labs</p>
+            <p class="press-tile-title">Sandia partnership speeds up development of flow batteries for green grid</p>
+          </a>
+          <a class="press-tile" href="https://www.bizjournals.com/albuquerque/inno/stories/profiles/2025/01/24/the-startup-changing-energy-storage.html" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bizjournals.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">NM Inno · ABQ Business Journal</p>
+            <p class="press-tile-title">Meet GridFlow, the startup changing home and commercial energy storage</p>
+          </a>
+          <a class="press-tile" href="https://www.bizjournals.com/albuquerque/inno/stories/news/2024/09/09/new-mexico-startup-world-cup-competition.html" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bizjournals.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">NM Inno · ABQ Business Journal</p>
+            <p class="press-tile-title">NM battery startup chosen for global competition, chance at $1M prize</p>
+          </a>
+          <a class="press-tile" href="https://www.abqjournal.com/business/article_0e1fc42e-7051-11ef-b469-0f91051c71f9.html" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=abqjournal.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Albuquerque Journal</p>
+            <p class="press-tile-title">NM tech startup GridFlow wins regional pitch competition</p>
+          </a>
+          <a class="press-tile" href="https://www.aol.com/nm-tech-startup-gridflow-wins-030200295.html" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=aol.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">AOL</p>
+            <p class="press-tile-title">NM tech startup GridFlow wins regional pitch competition</p>
+          </a>
+          <a class="press-tile" href="https://nmangels.com/nm-inno-meet-gridflow-the-startup-changing-home-and-commercial-energy-storage/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=nmangels.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">New Mexico Angels</p>
+            <p class="press-tile-title">Meet GridFlow, the startup changing home and commercial energy storage</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="press-group" style="--press-accent:#22d3ee">
+        <div class="press-group-head">
+          <span class="press-group-label">Pii Energy · Edge 2000</span>
+          <span class="press-group-context">5 articles</span>
+        </div>
+        <div class="press-strip">
+          <a class="press-tile" href="https://www.pv-magazine.com/2026/03/16/pii-energy-unveils-plug-in-1-2-kw-solar-2-kwh-home-system/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=pv-magazine.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">PV Magazine</p>
+            <p class="press-tile-title">Pii Energy unveils plug-in 1.2 kW solar, 2 kWh home system</p>
+          </a>
+          <a class="press-tile" href="https://pv-magazine-usa.com/2026/03/27/the-theory-and-practice-of-plug-in-solar/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=pv-magazine-usa.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">PV Magazine USA</p>
+            <p class="press-tile-title">The theory and practice of plug-in solar</p>
+          </a>
+          <a class="press-tile" href="https://www.ess-news.com/2026/03/16/plug-in-power-in-the-us-pii-energy-unveils-1-2-kw-2-kwh-solar-plus-storage-home-system/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=ess-news.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">ESS News</p>
+            <p class="press-tile-title">Plug-in power in the US: Pii Energy unveils 1.2 kW / 2 kWh solar plus storage home system</p>
+          </a>
+          <a class="press-tile" href="https://www.kob.com/news/top-news/albuquerque-company-develops-portable-panels-to-make-solar-energy-more-accessible/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=kob.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">KOB 4</p>
+            <p class="press-tile-title">Albuquerque company develops portable panels to make solar energy more accessible</p>
+          </a>
+          <a class="press-tile" href="https://www.pressreader.com/article/281608131931041" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=abqjournal.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Albuquerque Journal</p>
+            <p class="press-tile-title">Heinrich tours trio of energy startups — Pii Energy plug-in solar system gets a close look</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="press-group" style="--press-accent:#c084fc">
+        <div class="press-group-head">
+          <span class="press-group-label">NM Tech Talks · Desert Dev Lab 2026</span>
+          <span class="press-group-context">7 articles</span>
+        </div>
+        <div class="press-strip">
+          <a class="press-tile" href="https://www.kob.com/news/top-news/inaugural-new-mexico-tech-talks-begin-thursday/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=kob.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">KOB 4</p>
+            <p class="press-tile-title">Inaugural New Mexico Tech Talks Begin Thursday</p>
+          </a>
+          <a class="press-tile" href="https://apnews.com/press-release/getnews/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon-15c65c20aec6a84426fb9d8fa26dc547" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=apnews.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">AP News</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+          <a class="press-tile" href="https://www.usatoday.com/press-release/story/23781/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=usatoday.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">USA TODAY</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+          <a class="press-tile" href="https://markets.financialcontent.com/bostonherald/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bostonherald.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Boston Herald</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+          <a class="press-tile" href="https://www.barchart.com/story/news/37155752/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=barchart.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Barchart</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+          <a class="press-tile" href="https://thesunchronicle.marketminute.com/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=thesunchronicle.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">Sun Chronicle</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+          <a class="press-tile" href="https://markets.financialcontent.com/wss/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=financialcontent.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">WallStreet Select</p>
+            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="press-group" style="--press-accent:#fbbf24">
+        <div class="press-group-head">
+          <span class="press-group-label">New Mexico Tech Week</span>
+          <span class="press-group-context">Press release · syndicated to Yahoo Finance &amp; Business Insider</span>
+        </div>
+        <div class="press-strip">
+          <a class="press-tile" href="https://www.globenewswire.com/news-release/2026/06/02/3305513/0/en/New-Mexico-Launches-Inaugural-New-Mexico-Tech-Week-to-Spotlight-State-as-a-Rising-Hub-for-Investment.html" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=globenewswire.com&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">GlobeNewswire</p>
+            <p class="press-tile-title">New Mexico Launches Inaugural "New Mexico Tech Week" to Spotlight State as a Rising Hub for Investment</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="press-group" style="--press-accent:#f97316">
+        <div class="press-group-head">
+          <span class="press-group-label">CNM · Hackerspace &amp; Robotics</span>
+          <span class="press-group-context">1 article</span>
+        </div>
+        <div class="press-strip">
+          <a class="press-tile" href="https://www.cnm.edu/news/cnm-hackerspace-club-wins-prestigious-spot-as-only-american-team-to-compete-in-upcoming-international-robotics-competition" target="_blank" rel="noopener">
+            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=cnm.edu&sz=128" alt="" loading="lazy" /></div>
+            <p class="press-tile-pub">CNM</p>
+            <p class="press-tile-title">CNM Hackerspace Club wins prestigious spot as only American team to compete in international robotics competition</p>
+          </a>
+        </div>
       </div>
 
     </div>
 
-    <!-- ===== PUBLICATIONS ===== -->
+    <!-- ===== PUBLICATIONS CTA ===== -->
     <h2 id="publications" class="section-title">Publications &amp; Posters</h2>
-    <div class="stack">
-
-      <div class="card pub">
-        <span class="tag">First Author</span>
-        <p class="title">Variability of H-alpha Line Observed at High Spectral Resolution in the Solar Atmosphere</p>
-        <p class="authors">Rudy Parra</p>
-        <p class="venue">National Solar Observatory / University of Colorado Boulder · 2020 · Instruments: ISS, SOLIS · Funding: NASA NAS5-97045 (SORCE), NSF, NSO, AURA</p>
+    <a class="pub-cta" href="/publications">
+      <div class="pub-cta-text">
+        <span class="pub-cta-title">View publications &amp; posters</span>
+        <span class="pub-cta-sub">3 papers · Solar physics, X-ray absorption spectroscopy, plasma science</span>
       </div>
-
-      <div class="card pub">
-        <span class="tag coauthor">Co-Author</span>
-        <p class="title">Probing the Local Atomic Structure of Lead Borate Glasses with X-ray Absorption Spectroscopy</p>
-        <p class="authors">Z. Cazares, R. Parra, R. Hao, K. Ameku, I. Slagle, Y. Wei, S. Feller, F. Alamgir</p>
-        <p class="venue">Coe College · Georgia Tech · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
-      </div>
-
-      <div class="card pub">
-        <span class="tag coauthor">Co-Author</span>
-        <p class="title">Using Sodium Borate Glass for a Dielectric Barrier Discharge (DBD)</p>
-        <p class="authors">R.G. Parra, Z.E. Cazares, R. Hao, J.L. López, S.A. Feller</p>
-        <p class="venue">Coe College · Seton Hall · CNM · NM Tech · Iowa Glass Conference 2023 · Funding: NSF REU #1950330 &amp; RUI #2203142</p>
-      </div>
-
-    </div>
+      <span class="pub-cta-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    </a>
 
     <!-- ===== SKILLS ===== -->
     <h2 id="skills" class="section-title">Technical Skills</h2>
@@ -246,7 +437,7 @@
           <h3 class="item-title">A.A.S. — Computer Information Systems, Network Administration</h3>
           <span class="item-meta">Dec 2023 · 3.5 GPA</span>
         </div>
-        <p class="item-context">Central New Mexico Community College</p>
+        <p class="item-context"><a class="item-org" href="https://www.cnm.edu" target="_blank" rel="noopener">Central New Mexico Community College</a></p>
         <p style="margin:0;color:var(--muted);font-size:0.92rem">
           Coursework: IT Essentials, IoT, Linux, Python, C++, AutoCAD, Semiconductor Apprentice,
           Network Security, Calculus I.
@@ -258,7 +449,7 @@
           <h3 class="item-title">Deep Dive IoT Bootcamp</h3>
           <span class="item-meta">Oct – Dec 2023</span>
         </div>
-        <p class="item-context">CNM Ingenuity STEMulus Center</p>
+        <p class="item-context"><a class="item-org" href="https://cnmingenuity.org" target="_blank" rel="noopener">CNM Ingenuity STEMulus Center</a></p>
         <p style="margin:0;color:var(--muted);font-size:0.92rem">
           400+ hours: smart device coding (C++), electronic circuits, soldering, clean room
           operations, lab and factory automation.
@@ -285,7 +476,7 @@
           <h3 class="item-title">Chapter Director</h3>
           <span class="item-meta">Feb 2025 – Present</span>
         </div>
-        <p class="item-context">Techqueria New Mexico</p>
+        <p class="item-context"><a class="item-org" href="https://techqueria.org" target="_blank" rel="noopener">Techqueria New Mexico</a></p>
         <p style="margin:0;color:var(--muted);font-size:0.92rem">
           Leading chapter strategy, events, and partnerships for Latinx professionals in tech
           across New Mexico.
@@ -297,7 +488,7 @@
           <h3 class="item-title">Board Member</h3>
           <span class="item-meta">May 2025 – Present</span>
         </div>
-        <p class="item-context">New Mexico Tech Talks</p>
+        <p class="item-context"><a class="item-org" href="https://www.nmtechtalks.com" target="_blank" rel="noopener">New Mexico Tech Talks</a></p>
         <p style="margin:0;color:var(--muted);font-size:0.92rem">
           Strategic planning and community engagement for NM's premier tech organization;
           co-organizer of Desert Dev Lab hackathon.
@@ -337,6 +528,48 @@
       <span>U.S. Citizen · Eligible for Security Clearance</span>
     </footer>
   </div>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle (hamburger) ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        panel.classList.toggle('open', open);
+      }
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        setOpen(!panel.classList.contains('open'));
+      });
+      document.addEventListener('click', e => {
+        if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+
+    /* ===== Expand-all toggle for collapsible items ===== */
+    document.querySelectorAll('.expand-all').forEach(btn => {
+      const sel = btn.getAttribute('data-targets');
+      function syncLabel() {
+        const items = document.querySelectorAll(sel);
+        const allOpen = items.length > 0 && Array.from(items).every(d => d.open);
+        btn.textContent = allOpen ? 'Collapse all' : 'Expand all';
+      }
+      btn.addEventListener('click', () => {
+        const items = document.querySelectorAll(sel);
+        const allOpen = items.length > 0 && Array.from(items).every(d => d.open);
+        items.forEach(d => { d.open = !allOpen; });
+        syncLabel();
+      });
+      document.querySelectorAll(sel).forEach(d => d.addEventListener('toggle', syncLabel));
+      syncLabel();
+    });
+  </script>
 </body>
 </html>

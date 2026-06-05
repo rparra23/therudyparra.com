@@ -22,11 +22,14 @@
         <span class="brand-mark">R</span>
         <span>Rudy Parra</span>
       </a>
-      <nav class="links">
-        <a href="#cards">Cards</a>
-        <a href="#press">Press</a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
         <a href="/eats">Eats</a>
-        <a href="/resume">Resume</a>
       </nav>
     </header>
 
@@ -189,196 +192,6 @@
       </div>
     </div>
 
-    <!-- ===== FEATURED IN ===== -->
-    <h2 id="press" class="section-title">Featured In</h2>
-    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
-      Press coverage of work and events I've been part of. Tap a logo to read the article.
-    </p>
-    <div class="press-stack">
-
-      <div class="press-group" style="--press-accent:#5eead4">
-        <div class="press-group-head">
-          <span class="press-group-label">GridFlow · Flow Battery R&amp;D</span>
-          <span class="press-group-context">7 articles</span>
-        </div>
-        <div class="press-strip">
-          <a class="press-tile" href="https://newsreleases.sandia.gov/boosting_batteries/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=sandia.gov&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Sandia National Labs</p>
-            <p class="press-tile-title">Boosting Battery Research</p>
-          </a>
-          <a class="press-tile" href="https://www.sandia.gov/ess/2024/06/25/sandia-partnership-speeds-up-development-of-flow-batteries-for-green-grid-water" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=sandia.gov&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Sandia National Labs</p>
-            <p class="press-tile-title">Sandia partnership speeds up development of flow batteries for green grid</p>
-          </a>
-          <a class="press-tile" href="https://www.bizjournals.com/albuquerque/inno/stories/profiles/2025/01/24/the-startup-changing-energy-storage.html" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bizjournals.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">NM Inno · ABQ Business Journal</p>
-            <p class="press-tile-title">Meet GridFlow, the startup changing home and commercial energy storage</p>
-          </a>
-          <a class="press-tile" href="https://www.bizjournals.com/albuquerque/inno/stories/news/2024/09/09/new-mexico-startup-world-cup-competition.html" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bizjournals.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">NM Inno · ABQ Business Journal</p>
-            <p class="press-tile-title">NM battery startup chosen for global competition, chance at $1M prize</p>
-          </a>
-          <a class="press-tile" href="https://www.abqjournal.com/business/article_0e1fc42e-7051-11ef-b469-0f91051c71f9.html" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=abqjournal.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Albuquerque Journal</p>
-            <p class="press-tile-title">NM tech startup GridFlow wins regional pitch competition</p>
-          </a>
-          <a class="press-tile" href="https://www.aol.com/nm-tech-startup-gridflow-wins-030200295.html" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=aol.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">AOL</p>
-            <p class="press-tile-title">NM tech startup GridFlow wins regional pitch competition</p>
-          </a>
-          <a class="press-tile" href="https://nmangels.com/nm-inno-meet-gridflow-the-startup-changing-home-and-commercial-energy-storage/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=nmangels.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">New Mexico Angels</p>
-            <p class="press-tile-title">Meet GridFlow, the startup changing home and commercial energy storage</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="press-group" style="--press-accent:#22d3ee">
-        <div class="press-group-head">
-          <span class="press-group-label">Pii Energy · Edge 2000</span>
-          <span class="press-group-context">5 articles</span>
-        </div>
-        <div class="press-strip">
-          <a class="press-tile" href="https://www.pv-magazine.com/2026/03/16/pii-energy-unveils-plug-in-1-2-kw-solar-2-kwh-home-system/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=pv-magazine.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">PV Magazine</p>
-            <p class="press-tile-title">Pii Energy unveils plug-in 1.2 kW solar, 2 kWh home system</p>
-          </a>
-          <a class="press-tile" href="https://pv-magazine-usa.com/2026/03/27/the-theory-and-practice-of-plug-in-solar/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=pv-magazine-usa.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">PV Magazine USA</p>
-            <p class="press-tile-title">The theory and practice of plug-in solar</p>
-          </a>
-          <a class="press-tile" href="https://www.ess-news.com/2026/03/16/plug-in-power-in-the-us-pii-energy-unveils-1-2-kw-2-kwh-solar-plus-storage-home-system/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=ess-news.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">ESS News</p>
-            <p class="press-tile-title">Plug-in power in the US: Pii Energy unveils 1.2 kW / 2 kWh solar plus storage home system</p>
-          </a>
-          <a class="press-tile" href="https://www.kob.com/news/top-news/albuquerque-company-develops-portable-panels-to-make-solar-energy-more-accessible/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=kob.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">KOB 4</p>
-            <p class="press-tile-title">Albuquerque company develops portable panels to make solar energy more accessible</p>
-          </a>
-          <a class="press-tile" href="https://www.pressreader.com/article/281608131931041" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=abqjournal.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Albuquerque Journal</p>
-            <p class="press-tile-title">Heinrich tours trio of energy startups — Pii Energy plug-in solar system gets a close look</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="press-group" style="--press-accent:#c084fc">
-        <div class="press-group-head">
-          <span class="press-group-label">NM Tech Talks · Desert Dev Lab 2026</span>
-          <span class="press-group-context">7 articles</span>
-        </div>
-        <div class="press-strip">
-          <a class="press-tile" href="https://www.kob.com/news/top-news/inaugural-new-mexico-tech-talks-begin-thursday/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=kob.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">KOB 4</p>
-            <p class="press-tile-title">Inaugural New Mexico Tech Talks Begin Thursday</p>
-          </a>
-          <a class="press-tile" href="https://apnews.com/press-release/getnews/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon-15c65c20aec6a84426fb9d8fa26dc547" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=apnews.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">AP News</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-          <a class="press-tile" href="https://www.usatoday.com/press-release/story/23781/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=usatoday.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">USA TODAY</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-          <a class="press-tile" href="https://markets.financialcontent.com/bostonherald/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=bostonherald.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Boston Herald</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-          <a class="press-tile" href="https://www.barchart.com/story/news/37155752/nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=barchart.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Barchart</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-          <a class="press-tile" href="https://thesunchronicle.marketminute.com/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=thesunchronicle.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">Sun Chronicle</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-          <a class="press-tile" href="https://markets.financialcontent.com/wss/article/abnewswire-2026-1-21-nm-tech-talks-partners-with-wesst-for-2026-desert-dev-lab-hackathon/" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=financialcontent.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">WallStreet Select</p>
-            <p class="press-tile-title">NM Tech Talks partners with WESST for 2026 Desert Dev Lab Hackathon</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="press-group" style="--press-accent:#fbbf24">
-        <div class="press-group-head">
-          <span class="press-group-label">New Mexico Tech Week</span>
-          <span class="press-group-context">Press release · syndicated to Yahoo Finance &amp; Business Insider</span>
-        </div>
-        <div class="press-strip">
-          <a class="press-tile" href="https://www.globenewswire.com/news-release/2026/06/02/3305513/0/en/New-Mexico-Launches-Inaugural-New-Mexico-Tech-Week-to-Spotlight-State-as-a-Rising-Hub-for-Investment.html" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=globenewswire.com&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">GlobeNewswire</p>
-            <p class="press-tile-title">New Mexico Launches Inaugural "New Mexico Tech Week" to Spotlight State as a Rising Hub for Investment</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="press-group" style="--press-accent:#f97316">
-        <div class="press-group-head">
-          <span class="press-group-label">CNM · Hackerspace &amp; Robotics</span>
-          <span class="press-group-context">1 article</span>
-        </div>
-        <div class="press-strip">
-          <a class="press-tile" href="https://www.cnm.edu/news/cnm-hackerspace-club-wins-prestigious-spot-as-only-american-team-to-compete-in-upcoming-international-robotics-competition" target="_blank" rel="noopener">
-            <div class="press-logo"><img src="https://www.google.com/s2/favicons?domain=cnm.edu&sz=128" alt="" loading="lazy" /></div>
-            <p class="press-tile-pub">CNM</p>
-            <p class="press-tile-title">CNM Hackerspace Club wins prestigious spot as only American team to compete in international robotics competition</p>
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ===== RESUME CTA ===== -->
-    <h2 id="more" class="section-title">More about me</h2>
-    <div class="card">
-      <p style="margin:0 0 14px;color:var(--muted)">
-        Looking for the longer story — work history, research, publications, skills, education,
-        and community involvement?
-      </p>
-      <a class="btn primary" href="/resume">
-        Read my full resume
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <!-- ===== GITHUB ACTIVITY ===== -->
-    <h2 id="code" class="section-title">Building in public</h2>
-    <div class="gh-card">
-      <div class="gh-head">
-        <span class="gh-title">@rparra23 · GitHub contributions, last 12 months</span>
-        <a class="gh-link" href="https://github.com/rparra23" target="_blank" rel="noopener">
-          View profile
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </a>
-      </div>
-      <div class="gh-chart">
-        <img src="https://ghchart.rshah.org/22d3ee/rparra23"
-             alt="GitHub contribution graph for @rparra23"
-             loading="lazy" />
-      </div>
-      <p class="gh-foot">Each square is a day. Cyan intensity = number of commits, PRs, and issues that day.</p>
-    </div>
-
     <!-- ===== TESTIMONIALS ===== -->
     <h2 id="testimonials" class="section-title">Testimonials</h2>
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
@@ -454,6 +267,27 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle (hamburger) ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        panel.classList.toggle('open', open);
+      }
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        setOpen(!panel.classList.contains('open'));
+      });
+      document.addEventListener('click', e => {
+        if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
 
     /* ===== Spotify Now Playing pill =====
        Polls a Cloudflare Worker every 30s. Hides the pill when nothing is playing

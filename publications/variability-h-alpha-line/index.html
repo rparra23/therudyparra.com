@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Variability of H-alpha Line — Rudy Parra</title>
+  <meta name="description" content="First-author NASA/NSF-funded research on temporal variability of the H-alpha 656.3nm spectral line in sun-as-a-star observations." />
+  <meta name="theme-color" content="#0b0b10" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/eats">Eats</a>
+      </nav>
+    </header>
+
+    <a class="back-link" href="/publications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to publications
+    </a>
+
+    <div class="pub-detail-head">
+      <span class="tag">First Author</span>
+      <h1>Variability of H-alpha Line Observed at High Spectral Resolution in the Solar Atmosphere</h1>
+      <p class="authors">Rudy Parra</p>
+      <p class="venue">National Solar Observatory / University of Colorado Boulder · 2020 · Instruments: ISS, SOLIS · Funding: NASA NAS5-97045 (SORCE), NSF, NSO, AURA · Mentor: Serena Criscuoli (NSO)</p>
+    </div>
+
+    <div class="pub-poster">
+      <!-- To add: drop your poster image at assets/publications/variability-h-alpha-line.jpg
+           and replace the placeholder below with: <img src="/assets/publications/variability-h-alpha-line.jpg" alt="Research poster"> -->
+      <div class="poster-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-6 4 4 3-3 4 5"/></svg>
+        Poster image goes here.<br/>
+        Drop the file at <code>assets/publications/variability-h-alpha-line.jpg</code> and replace this block with an <code>&lt;img&gt;</code>.
+      </div>
+    </div>
+
+    <div class="pub-abstract">
+      <h2>Abstract</h2>
+      <div class="pub-abstract-placeholder">
+        Abstract text not added yet. Paste the abstract below this comment in
+        <code>publications/variability-h-alpha-line/index.html</code>, replacing this placeholder.
+      </div>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
+</body>
+</html>

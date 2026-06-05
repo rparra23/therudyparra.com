@@ -25,9 +25,13 @@
         <span class="brand-mark">R</span>
         <span>Rudy Parra</span>
       </a>
-      <nav class="links">
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
         <a href="/">Home</a>
-        <a href="/resume">Resume</a>
+        <a href="/resume">My work</a>
         <a href="/eats" class="active">Eats</a>
       </nav>
     </header>
@@ -64,6 +68,27 @@
           crossorigin=""></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle (hamburger) ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        panel.classList.toggle('open', open);
+      }
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        setOpen(!panel.classList.contains('open'));
+      });
+      document.addEventListener('click', e => {
+        if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
 
     (function () {
       const mapEl = document.getElementById('eats-map');
