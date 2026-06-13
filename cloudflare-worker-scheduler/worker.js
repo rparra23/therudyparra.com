@@ -44,10 +44,15 @@ const EVENTS_URL = (cal) =>
 function cfg(env) {
   return {
     tz: env.TIMEZONE || 'America/Denver',
-    dayStartH: parseInt(env.DAILY_START_HOUR || '7', 10),
-    dayEndH:   parseInt(env.DAILY_END_HOUR   || '22', 10),
-    slotMin:   parseInt(env.SLOT_MINUTES     || '30', 10),
-    bufferMin: parseInt(env.BUFFER_MINUTES   || '15', 10),
+    dayStartH: parseInt(env.DAILY_START_HOUR || '9', 10),
+    dayEndH:   parseInt(env.DAILY_END_HOUR   || '17', 10),
+    // Default slot length when client doesn't specify
+    defaultSlotMin: parseInt(env.SLOT_MINUTES || '30', 10),
+    // Allowed slot lengths the client can request
+    allowedSlotMins: (env.ALLOWED_SLOT_MINUTES || '30,60').split(',').map(n => parseInt(n.trim(), 10)).filter(n => n > 0),
+    // Step granularity for slot start times
+    granularityMin: parseInt(env.GRANULARITY_MINUTES || '30', 10),
+    bufferMin: parseInt(env.BUFFER_MINUTES || '15', 10),
     minNoticeMs: parseInt(env.MIN_NOTICE_HOURS || '2', 10) * 3600 * 1000,
     calendarIds: (env.CALENDAR_IDS || 'primary').split(',').map(s => s.trim()).filter(Boolean),
     ownerEmail: env.OWNER_EMAIL,
@@ -159,7 +164,7 @@ function slotIsFree(start, end, busy, bufferMs) {
   return true;
 }
 
-async function computeAvailability(env, days) {
+async function computeAvailability(env, days, slotMin) {
   const conf = cfg(env);
   const now = new Date();
   const earliest = now.getTime() + conf.minNoticeMs;
@@ -174,12 +179,13 @@ async function computeAvailability(env, days) {
 
   const slots = [];
   const bufferMs = conf.bufferMin * 60 * 1000;
-  const slotMs = conf.slotMin * 60 * 1000;
+  const slotMs = slotMin * 60 * 1000;
+  const stepMs = conf.granularityMin * 60 * 1000;
 
   for (let i = 0; i < days; i++) {
     const dayStart = dateInTZ(ty, tm, td + i, conf.dayStartH, 0, conf.tz);
     const dayEnd =   dateInTZ(ty, tm, td + i, conf.dayEndH,   0, conf.tz);
-    for (let t = dayStart.getTime(); t + slotMs <= dayEnd.getTime(); t += slotMs) {
+    for (let t = dayStart.getTime(); t + slotMs <= dayEnd.getTime(); t += stepMs) {
       if (t < earliest) continue;
       const s = t, e = t + slotMs;
       if (slotIsFree(s, e, busy, bufferMs)) {
@@ -257,7 +263,8 @@ function validateBooking(payload, env) {
   const s = new Date(payload.start).getTime();
   const e = new Date(payload.end).getTime();
   if (Number.isNaN(s) || Number.isNaN(e)) return ['bad timestamps'];
-  if (e - s !== conf.slotMin * 60 * 1000) return ['unexpected slot length'];
+  const lenMin = Math.round((e - s) / 60000);
+  if (!conf.allowedSlotMins.includes(lenMin)) return ['unexpected slot length'];
   if (s < Date.now() + conf.minNoticeMs - 60 * 1000) return ['slot too soon'];
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return ['bad email'];
   if (payload.name.length > 120 || payload.email.length > 200) return ['too long'];
@@ -276,13 +283,16 @@ export default {
     const url = new URL(request.url);
     try {
       if (request.method === 'GET' && url.pathname.endsWith('/availability')) {
-        const days = Math.min(parseInt(url.searchParams.get('days') || '14', 10) || 14, 30);
-        const slots = await computeAvailability(env, days);
         const conf = cfg(env);
+        const days = Math.min(parseInt(url.searchParams.get('days') || '14', 10) || 14, 30);
+        const requestedMin = parseInt(url.searchParams.get('minutes') || '', 10);
+        const slotMin = conf.allowedSlotMins.includes(requestedMin) ? requestedMin : conf.defaultSlotMin;
+        const slots = await computeAvailability(env, days, slotMin);
         return new Response(JSON.stringify({
           slots,
           tz: conf.tz,
-          slotMinutes: conf.slotMin,
+          slotMinutes: slotMin,
+          allowedSlotMinutes: conf.allowedSlotMins,
         }), { headers: { 'Content-Type': 'application/json', ...corsHeaders(env) } });
       }
       if (request.method === 'POST' && url.pathname.endsWith('/book')) {

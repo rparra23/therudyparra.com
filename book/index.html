@@ -60,6 +60,12 @@
     </div>
 
     <div id="sched-ui" style="display:none">
+      <h2 class="section-title">How long?</h2>
+      <div class="duration-toggle" id="duration-toggle" role="tablist" aria-label="Meeting length">
+        <button type="button" data-min="30" class="active" role="tab" aria-selected="true">30 min</button>
+        <button type="button" data-min="60" role="tab" aria-selected="false">1 hour</button>
+      </div>
+
       <h2 class="section-title">Pick a day</h2>
       <div class="day-strip" id="day-strip" role="tablist" aria-label="Days with availability"></div>
 
@@ -160,6 +166,7 @@
       let byDay = new Map(); // 'YYYY-MM-DD' -> slots[]
       let activeDayKey = null;
       let pickedSlot = null;
+      let slotMinutes = 30; // current selection
 
       function show(el) { el.style.display = ''; }
       function hide(el) { el.style.display = 'none'; }
@@ -235,7 +242,8 @@
         for (const el of slotGrid.querySelectorAll('.slot-btn')) el.classList.remove('active');
         btn.classList.add('active');
         pickedSlot = slot;
-        summary.innerHTML = '<strong>' + longWhen(new Date(slot.start)) + '</strong> · 30 minutes (' + browserTz + ')';
+        const lenLabel = slotMinutes === 60 ? '1 hour' : slotMinutes + ' minutes';
+        summary.innerHTML = '<strong>' + longWhen(new Date(slot.start)) + '</strong> · ' + lenLabel + ' (' + browserTz + ')';
         show(form);
         hide(msgEl);
         nameI.focus();
@@ -287,27 +295,19 @@
         }
       });
 
-      // Load config + slots
-      fetch('/assets/scheduler-config.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : null)
-        .then(cfg => {
-          if (!cfg || !cfg.workerUrl || cfg.workerUrl === 'TO_BE_CONFIGURED') {
-            hide(loadingEl); show(pendingEl);
-            return null;
-          }
-          workerUrl = cfg.workerUrl.replace(/\/+$/, '');
-          return fetch(workerUrl + '/availability?days=14', { cache: 'no-cache' });
-        })
-        .then(r => r ? r.json() : null)
-        .then(data => {
-          if (!data) return;
+      async function loadAvailability() {
+        try {
+          show(loadingEl); hide(uiEl); hide(form); pickedSlot = null;
+          const r = await fetch(workerUrl + '/availability?days=14&minutes=' + slotMinutes, { cache: 'no-cache' });
+          if (!r.ok) throw new Error(r.status);
+          const data = await r.json();
           allSlots = data.slots || [];
           byDay = new Map();
           for (const s of allSlots) {
             const k = localDateKey(new Date(s.start));
             (byDay.get(k) || byDay.set(k, []).get(k)).push(s);
           }
-          // Also ensure 14 days appear even if some have zero slots
+          // Ensure 14 days appear even if some have zero slots
           const today = new Date();
           for (let i = 0; i < 14; i++) {
             const d = new Date(today.getTime() + i * 86400000);
@@ -316,6 +316,37 @@
           }
           hide(loadingEl); show(uiEl);
           renderDayStrip();
+        } catch {
+          hide(loadingEl); show(errorEl);
+        }
+      }
+
+      // Wire duration toggle
+      const durToggle = document.getElementById('duration-toggle');
+      durToggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-min]');
+        if (!btn) return;
+        const m = parseInt(btn.dataset.min, 10);
+        if (m === slotMinutes) return;
+        slotMinutes = m;
+        for (const b of durToggle.querySelectorAll('button')) {
+          const active = parseInt(b.dataset.min, 10) === slotMinutes;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', String(active));
+        }
+        if (workerUrl) loadAvailability();
+      });
+
+      // Load config, then availability
+      fetch('/assets/scheduler-config.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+          if (!cfg || !cfg.workerUrl || cfg.workerUrl === 'TO_BE_CONFIGURED') {
+            hide(loadingEl); show(pendingEl);
+            return;
+          }
+          workerUrl = cfg.workerUrl.replace(/\/+$/, '');
+          return loadAvailability();
         })
         .catch(() => { hide(loadingEl); show(errorEl); });
     })();

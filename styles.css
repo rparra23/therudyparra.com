@@ -1152,6 +1152,34 @@ details.item > ul {
   padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;
 }
 
+.duration-toggle {
+  display: inline-flex;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 22px;
+}
+.duration-toggle button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.duration-toggle button:hover { color: var(--text); }
+.duration-toggle button.active {
+  background: linear-gradient(135deg, var(--accent), #5a3df0);
+  color: #fff;
+}
+
 .day-strip {
   display: flex; flex-direction: row;
   gap: 10px;
