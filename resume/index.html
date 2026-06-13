@@ -177,13 +177,14 @@
       <div class="card item">
         <div class="item-head">
           <h3 class="item-title">Smart Plant — IoT plant care system</h3>
-          <span class="item-meta">Deep Dive IoT · Nov 2023</span>
+          <span class="item-meta">Weekly project · Deep Dive IoT · Nov 2023</span>
         </div>
-        <p class="item-context">An automated plant care station: sensors read the room and the soil, a web dashboard shows it all live, and the system waters the plant when it needs it.</p>
+        <p class="item-context">One of several weekly builds during the Deep Dive IoT bootcamp — sketch, breadboard, firmware, 3D-print enclosure, ship. Smart Plant is the one I keep proudest of: a plant care station that reads the room and soil, shows it live on a web dashboard, and waters the plant when it needs it.</p>
         <ul>
+          <li><strong>Rapid prototyping cycle:</strong> Fritzing diagram → breadboard wiring → firmware → CAD enclosure → 3D-printed on a Bambu Lab printer (planter embossed "PARR") — all in a single bootcamp week.</li>
           <li><strong>Sensors:</strong> capacitive soil moisture, temperature, humidity, air quality, dust, barometric pressure.</li>
           <li><strong>Actuator:</strong> 12V peristaltic pump driven by relay; waters automatically when soil moisture drops below threshold.</li>
-          <li><strong>Hardware:</strong> Particle Photon 2, OLED status display, custom 3D-printed planter (embossed "PARR") and matching enclosure.</li>
+          <li><strong>Hardware:</strong> Particle Photon 2, OLED status display, custom 3D-printed planter and matching electronics enclosure.</li>
           <li><strong>Dashboard:</strong> Adafruit IO web dashboard with live gauges and a manual "Water Plant" override button — usable from any browser.</li>
           <li><strong>Firmware:</strong> C++ on the Photon 2; published sensor telemetry over Wi-Fi; subscribed to dashboard commands for the manual override.</li>
         </ul>
