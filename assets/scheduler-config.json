@@ -1,4 +1,4 @@
 {
-  "_comment": "URL of your deployed scheduler Cloudflare Worker. While this is the placeholder 'TO_BE_CONFIGURED', the /book page shows a setup-pending message instead of a calendar. See cloudflare-worker-scheduler/README.md for setup.",
-  "workerUrl": "TO_BE_CONFIGURED"
+  "_comment": "URL of the deployed scheduler Cloudflare Worker. Deployed June 2026 to parrarudy3@icloud.com's CF account. See cloudflare-worker-scheduler/README.md for redeployment and tuning.",
+  "workerUrl": "https://scheduler.rparra.workers.dev"
 }
