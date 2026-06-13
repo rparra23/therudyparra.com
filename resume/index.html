@@ -173,6 +173,23 @@
       Things I've built end-to-end — hardware, firmware, and the software underneath.
     </p>
     <div class="stack">
+
+      <div class="card item">
+        <div class="item-head">
+          <h3 class="item-title">Smart Plant — IoT plant care system</h3>
+          <span class="item-meta">Deep Dive IoT · Nov 2023</span>
+        </div>
+        <p class="item-context">An automated plant care station: sensors read the room and the soil, a web dashboard shows it all live, and the system waters the plant when it needs it.</p>
+        <ul>
+          <li><strong>Sensors:</strong> capacitive soil moisture, temperature, humidity, air quality, dust, barometric pressure.</li>
+          <li><strong>Actuator:</strong> 12V peristaltic pump driven by relay; waters automatically when soil moisture drops below threshold.</li>
+          <li><strong>Hardware:</strong> Particle Photon 2, OLED status display, custom 3D-printed planter (embossed "PARR") and matching enclosure.</li>
+          <li><strong>Dashboard:</strong> Adafruit IO web dashboard with live gauges and a manual "Water Plant" override button — usable from any browser.</li>
+          <li><strong>Firmware:</strong> C++ on the Photon 2; published sensor telemetry over Wi-Fi; subscribed to dashboard commands for the manual override.</li>
+        </ul>
+        <!-- SMART_PLANT_GALLERY_PLACEHOLDER -->
+      </div>
+
       <div class="card item">
         <div class="item-head">
           <h3 class="item-title">Smart Bar — automated cocktail dispenser</h3>
