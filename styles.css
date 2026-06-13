@@ -420,13 +420,25 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  /* Slim styled scrollbar so it's discoverable on Chrome/Windows (where the
+     native bar would be huge) without being visually noisy on Mac. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.22) transparent;
+  /* Grid children default to min-width:auto. Force it to 0 so the gallery
+     respects the card's width and overflow-x actually engages. */
+  min-width: 0;
   /* Bleed to the inner edges of the .card padding so tiles touch them */
   margin: 20px -22px 0;
-  padding: 0 22px 4px;
+  padding: 0 22px 10px;
   scroll-padding-left: 22px;
 }
-.item-gallery::-webkit-scrollbar { display: none; }
+.item-gallery::-webkit-scrollbar { height: 8px; }
+.item-gallery::-webkit-scrollbar-track { background: transparent; }
+.item-gallery::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 4px;
+}
+.item-gallery::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
 .item-gallery .gallery-tile {
   position: relative;
   flex: 0 0 180px;
