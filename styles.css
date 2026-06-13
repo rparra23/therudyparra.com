@@ -1554,6 +1554,89 @@ details.item > ul {
 }
 .book-success .meet-link:hover { text-decoration: none; }
 
+/* ===== Recommendation letters ===== */
+.recs-intro {
+  color: var(--muted);
+  margin: 0 0 28px;
+  font-size: 1rem;
+  max-width: 62ch;
+  line-height: 1.7;
+}
+.recs-stack { display: grid; gap: 18px; }
+.rec {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 32px 28px 24px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.rec:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.rec::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.5;
+}
+.rec-quote-mark {
+  position: absolute;
+  top: 14px; left: 22px;
+  font-family: Georgia, serif;
+  font-size: 4.2rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.22;
+  pointer-events: none;
+}
+.rec-quote {
+  position: relative;
+  margin: 0 0 22px;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text);
+  padding-left: 8px;
+}
+.rec-attr {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  margin-bottom: 14px;
+}
+.rec-attr .rec-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin: 0 0 2px;
+}
+.rec-attr .rec-title {
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.rec-attr .rec-org {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.rec-context {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+.rec-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.rec-link:hover { color: var(--text); text-decoration: underline; }
+.rec-link svg { width: 14px; height: 14px; }
+
 /* ===== In Memoriam ===== */
 .memoriam-intro {
   color: var(--muted);
