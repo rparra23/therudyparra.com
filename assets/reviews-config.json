@@ -1,4 +1,4 @@
 {
   "_comment": "URL of the deployed reviews Cloudflare Worker. Once set, the homepage posts new reviews to {workerUrl}/review and reads the list from {workerUrl}/reviews. If unreachable, the page falls back to the static /assets/reviews.json. See cloudflare-worker-reviews/README.md.",
-  "workerUrl": "https://reviews.YOUR-WORKER.workers.dev"
+  "workerUrl": "https://reviews.rparra.workers.dev"
 }
