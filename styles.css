@@ -444,7 +444,8 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
   object-fit: cover;
   display: block;
 }
-.item-gallery .gallery-tile .gallery-caption {
+.item-gallery .gallery-tile .gallery-caption,
+.item-gallery .gallery-video .gallery-caption {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 20px 10px 8px;
   background: linear-gradient(to top, rgba(0,0,0,0.78), transparent);
@@ -452,9 +453,32 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.01em;
+  pointer-events: none;
 }
 @media (min-width: 720px) {
   .item-gallery .gallery-tile { flex: 0 0 220px; }
+}
+
+/* Vertical video tiles (9:16, taller than photo tiles) */
+.item-gallery .gallery-video {
+  position: relative;
+  flex: 0 0 130px;
+  aspect-ratio: 9 / 16;
+  scroll-snap-align: start;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border);
+  transition: border-color 0.15s ease;
+}
+.item-gallery .gallery-video:hover { border-color: var(--accent); }
+.item-gallery .gallery-video video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (min-width: 720px) {
+  .item-gallery .gallery-video { flex: 0 0 160px; }
 }
 
 /* Collapsible item via <details>/<summary> */
