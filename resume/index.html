@@ -73,16 +73,13 @@
 
     <!-- ===== WORK EXPERIENCE ===== -->
     <h2 id="work" class="section-title">Work Experience</h2>
-    <button type="button" class="expand-all" data-targets=".work-stack details.item">Expand all</button>
     <div class="stack work-stack">
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">Senior Electrical Lab Technician · <a class="item-org" href="https://gridflow.tech" target="_blank" rel="noopener">GridFlow</a></h3>
             <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
           </div>
-        </summary>
         <p class="item-context">Clean energy startup. Led R&amp;D across lithium-sulfur hybrid flow batteries; now expanding into vanadium redox flow battery (VRFB) systems.</p>
         <ul>
           <li>Spearhead end-to-end R&amp;D lab operations — prototype build, electrical assembly, structured test execution, and real-time diagnostics.</li>
@@ -120,15 +117,13 @@
             <span class="gallery-caption">Lithium handling</span>
           </a>
         </div>
-      </details>
+      </div>
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">Lead Software Developer · <a class="item-org" href="https://pii-energy.vercel.app" target="_blank" rel="noopener">Pii Energy</a></h3>
             <span class="item-meta">Jan 2025 – Present · Albuquerque, NM</span>
           </div>
-        </summary>
         <p class="item-context">GridFlow's residential plug-in home energy product line. Edge 2000 launched Pi Day 2025 — featured in PV Magazine.</p>
         <ul>
           <li>Architect and develop a full-stack energy management system tracking solar, battery, and grid power with real-time monitoring, room-based outlet control, and overcurrent detection.</li>
@@ -172,34 +167,30 @@
             <span class="gallery-caption">Edge 2000 · balcony install</span>
           </a>
         </div>
-      </details>
+      </div>
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">IoT &amp; Software Developer · <a class="item-org" href="https://www.telemetryinsight.com/what-we-do" target="_blank" rel="noopener">Telemetry Insight</a></h3>
             <span class="item-meta">Apr 2024 – Sept 2024 · Albuquerque, NM</span>
           </div>
-        </summary>
         <ul>
           <li>Developed and maintained Well Watcher telemetry code for real-time monitoring of industrial well controllers.</li>
           <li>Built AI-driven anomaly detection and predictive maintenance systems; optimized energy consumption algorithms for field hardware.</li>
           <li>Implemented BLE features (Tx Power monitoring, battery life analysis); led software testing for new controller features.</li>
         </ul>
-      </details>
+      </div>
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">Image Creation Developer — DevOps · <a class="item-org" href="https://www.lockheedmartin.com" target="_blank" rel="noopener">Lockheed Martin</a></h3>
             <span class="item-meta">Jan 2023 – May 2023 · Remote</span>
           </div>
-        </summary>
         <ul>
           <li>Participated in OS image development and troubleshooting for cloud and on-prem Windows/Linux environments in a defense contractor setting.</li>
           <li>Gained experience with scripting, TCP/IP networks, virtualization, and purpose-built OS configurations.</li>
         </ul>
-      </details>
+      </div>
 
     </div>
 
@@ -337,16 +328,13 @@
 
     <!-- ===== RESEARCH ===== -->
     <h2 id="research" class="section-title">Research Experience</h2>
-    <button type="button" class="expand-all" data-targets=".research-stack details.item">Expand all</button>
     <div class="stack research-stack">
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">Solar Physics Researcher — First Author · <a class="item-org" href="https://nso.edu" target="_blank" rel="noopener">National Solar Observatory</a> / <a class="item-org" href="https://www.colorado.edu" target="_blank" rel="noopener">CU Boulder</a></h3>
             <span class="item-meta">May – Aug 2020 · Remote</span>
           </div>
-        </summary>
         <p class="item-context">Funded by NASA contract NAS5-97045 (SORCE), NSF, NSO, and AURA. Mentor: Serena Criscuoli, NSO.</p>
         <ul>
           <li>Led sole-first-author research investigating temporal variability of the Hα 656.3nm spectral line in sun-as-a-star observations using the Integrated Sunlight Spectrometer (ISS).</li>
@@ -354,15 +342,13 @@
           <li>Found that sunspot area is the dominant modulator of Hα line shape; faculae and filaments showed negligible effect — contributing new understanding of chromospheric variability in solar-like stars relevant to exoplanet habitability research.</li>
           <li>Presented findings as sole first author at a poster session; research published under NASA/NSF/AURA sponsorship.</li>
         </ul>
-      </details>
+      </div>
 
-      <details class="card item">
-        <summary>
+      <div class="card item">
           <div class="item-head">
             <h3 class="item-title">Glass Physics Researcher &amp; Team Leader · Coe College — <a class="item-org" href="https://www.coe.edu/academics/majors-areas-study/physics/faculty" target="_blank" rel="noopener">Dr. Steve Feller Lab</a></h3>
             <span class="item-meta">May – Aug 2023 · Cedar Rapids, IA</span>
           </div>
-        </summary>
         <p class="item-context">NSF-funded REU (Grant #1950330) &amp; RUI (Grant #2203142). Multi-institution: Coe College, Georgia Tech, NM Tech, Seton Hall.</p>
         <ul>
           <li>Led a team across four complex NSF-funded projects investigating glass composition, atomic structure, and dielectric properties.</li>
@@ -574,7 +560,7 @@
             <span class="gallery-caption">Lab tech group · conference</span>
           </a>
         </div>
-      </details>
+      </div>
 
     </div>
 
@@ -973,24 +959,6 @@
         if (e.key === 'Escape') setOpen(false);
       });
     })();
-
-    /* ===== Expand-all toggle for collapsible items ===== */
-    document.querySelectorAll('.expand-all').forEach(btn => {
-      const sel = btn.getAttribute('data-targets');
-      function syncLabel() {
-        const items = document.querySelectorAll(sel);
-        const allOpen = items.length > 0 && Array.from(items).every(d => d.open);
-        btn.textContent = allOpen ? 'Collapse all' : 'Expand all';
-      }
-      btn.addEventListener('click', () => {
-        const items = document.querySelectorAll(sel);
-        const allOpen = items.length > 0 && Array.from(items).every(d => d.open);
-        items.forEach(d => { d.open = !allOpen; });
-        syncLabel();
-      });
-      document.querySelectorAll(sel).forEach(d => d.addEventListener('toggle', syncLabel));
-      syncLabel();
-    });
 
     /* ===== Gallery videos: autoplay-muted-on-scroll + tap-to-unmute ===== */
     (function () {
