@@ -995,8 +995,32 @@ details.item > ul {
   display: flex; flex-wrap: wrap; gap: 8px;
 }
 
-/* ===== Featured stack (Mayor + Video + Podcast) ===== */
-.featured-stack { display: grid; gap: 18px; }
+/* ===== Featured stack (Mayor + Video + Podcast) — horizontal scroll-snap carousel ===== */
+.featured-stack {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 0 10px;
+  scroll-padding-left: 4px;
+}
+.featured-stack::-webkit-scrollbar { display: none; }
+.featured-stack > * {
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+  /* Force every tile to use the single-column (stacked) layout regardless
+     of viewport width, since each tile is narrower than the 720px breakpoint
+     the cards use for their internal two-column variant. */
+  grid-template-columns: 1fr !important;
+  gap: 18px !important;
+}
+@media (min-width: 720px) {
+  .featured-stack > * { flex: 0 0 420px; }
+}
 
 /* ===== Featured: Mayor card ===== */
 .mayor-feature {
