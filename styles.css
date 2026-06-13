@@ -472,7 +472,54 @@ details.item > ul {
 }
 .expand-all:hover { color: var(--text); border-color: var(--accent); background: var(--card); }
 
-/* ===== About on resume (centered, no card) ===== */
+/* ===== About on resume (lead + body + fact chips) ===== */
+.about-block {
+  max-width: 64ch;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-lead {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+}
+.about-lead .grad {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.about-body {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin: 0 0 22px;
+}
+.about-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.about-facts li {
+  background: rgba(124, 92, 255, 0.10);
+  border: 1px solid rgba(124, 92, 255, 0.28);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+.about-facts li strong {
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Old centered class kept as a fallback alias */
 .about-centered {
   max-width: 64ch;
   margin: 0 auto;
