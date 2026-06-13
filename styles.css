@@ -328,6 +328,32 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
 .item ul li { margin-bottom: 6px; }
 .item ul li::marker { color: var(--accent); }
 
+/* Per-entry video embed — 16:9 responsive */
+.item-video {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border);
+  margin: 16px 0 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.item-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.item-video-caption {
+  font-size: 0.78rem;
+  color: var(--muted-2);
+  margin: 8px 0 0;
+  letter-spacing: 0.04em;
+}
+
 /* Per-entry photo gallery — horizontal scroll-snap row of photos */
 .item-gallery {
   display: flex;
