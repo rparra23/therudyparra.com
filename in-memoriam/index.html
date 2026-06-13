@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>In Memoriam — Rudy Parra</title>
+  <meta name="description" content="People who shaped Rudy Parra's path — remembered with gratitude." />
+  <meta name="theme-color" content="#0b0b10" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== NAV ===== -->
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/book">Book</a>
+        <a href="/eats">Eats</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <a class="back-link" href="/resume">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to my work
+      </a>
+      <h1>In Memoriam</h1>
+      <p class="memoriam-intro">
+        People who shaped my path in tech, in research, and in life.
+        I carry their lessons forward in every project I build and every
+        community I help grow. Wherever I go in this work, they're part
+        of it.
+      </p>
+    </div>
+
+    <div class="memoriam-stack">
+
+      <article class="memoriam">
+        <h2 class="memoriam-name">Dr. Steven A. Feller</h2>
+        <p class="memoriam-role">Mentor · Coe College, Physics</p>
+        <div class="memoriam-body">
+          <p>
+            Professor of Physics at Coe College for 39 years, Steve mentored
+            me through my NSF-funded REU summer of 2023 in glass physics —
+            the work that became my first two co-authored papers on lead
+            borate XAS and sodium borate dielectric barrier discharge
+            plasmas. Over his career he authored 150+ papers, secured $8M+
+            in research grants, and gave more than 200 conference
+            presentations.
+          </p>
+          <p>
+            He was the kind of mentor who made you believe you belonged in
+            the room — who put students at the heart of his lab and trusted
+            them with real research. That's the standard I try to hold for
+            anyone I get to mentor in turn.
+          </p>
+        </div>
+        <a class="memoriam-link" href="https://feldmanmortuary.com/tribute/details/5394/Steve-Feller/obituary.html" target="_blank" rel="noopener">
+          Read his obituary
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <article class="memoriam">
+        <h2 class="memoriam-name">Asher Garcia</h2>
+        <p class="memoriam-role">Friend</p>
+        <div class="memoriam-body">
+          <p>
+            A dear friend whose support, encouragement, and presence shaped
+            who I am today — both as a person and in this career. Asher made
+            the journey lighter, the wins louder, and the hard parts more
+            survivable.
+          </p>
+          <p>
+            Some people don't just witness your story, they help write it.
+            Asher was one of them.
+          </p>
+        </div>
+        <a class="memoriam-link" href="https://www.strongthorne.com/obituaries/asher-garcia" target="_blank" rel="noopener">
+          Read his obituary
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
+</body>
+</html>

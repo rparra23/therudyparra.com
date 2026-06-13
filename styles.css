@@ -1460,6 +1460,69 @@ details.item > ul {
 }
 .book-success .meet-link:hover { text-decoration: none; }
 
+/* ===== In Memoriam ===== */
+.memoriam-intro {
+  color: var(--muted);
+  margin: 0 0 28px;
+  font-size: 1rem;
+  max-width: 64ch;
+  line-height: 1.7;
+}
+.memoriam-stack { display: grid; gap: 18px; }
+.memoriam {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 26px 26px 22px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.memoriam:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.memoriam::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.45;
+}
+.memoriam-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.memoriam-role {
+  font-size: 0.88rem;
+  color: var(--accent-2);
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+.memoriam-dates {
+  font-size: 0.78rem;
+  color: var(--muted-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+.memoriam-body {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+.memoriam-body p { margin: 0 0 12px; }
+.memoriam-body p:last-child { margin-bottom: 0; }
+.memoriam-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.memoriam-link:hover { color: var(--text); text-decoration: underline; }
+.memoriam-link svg { width: 14px; height: 14px; }
+
 /* ===== Page header (used on subpages like /resume) ===== */
 .page-header {
   margin: 0 0 12px;
