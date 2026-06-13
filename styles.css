@@ -346,10 +346,10 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
 .item-gallery::-webkit-scrollbar { display: none; }
 .item-gallery .gallery-tile {
   position: relative;
-  flex: 0 0 240px;
-  aspect-ratio: 4 / 3;
+  flex: 0 0 180px;
+  aspect-ratio: 3 / 2;
   scroll-snap-align: start;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   background: var(--bg-2);
   border: 1px solid var(--border);
@@ -368,15 +368,15 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
 }
 .item-gallery .gallery-tile .gallery-caption {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 26px 12px 10px;
+  padding: 20px 10px 8px;
   background: linear-gradient(to top, rgba(0,0,0,0.78), transparent);
   color: var(--text);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.01em;
 }
 @media (min-width: 720px) {
-  .item-gallery .gallery-tile { flex: 0 0 280px; }
+  .item-gallery .gallery-tile { flex: 0 0 220px; }
 }
 
 /* Collapsible item via <details>/<summary> */
