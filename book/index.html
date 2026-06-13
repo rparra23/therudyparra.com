@@ -41,9 +41,10 @@
       </a>
       <h1>Book a meeting</h1>
       <p class="sched-intro">
-        Pick a 30-minute slot. A Google Meet link is generated automatically when
-        you confirm, and we'll both get a calendar invite. Times shown in
-        <strong id="sched-tz">your timezone</strong>.
+        Pick a slot and a Google Meet link will be generated automatically when
+        you confirm — we'll both get a calendar invite. All times below are in
+        <strong id="sched-tz">your local timezone</strong>, auto-detected from
+        your browser.
       </p>
     </div>
 
@@ -179,7 +180,19 @@
       const meetLink  = document.getElementById('meet-link');
 
       const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      tzLabel.textContent = browserTz;
+      function tzPretty(tz, style) {
+        try {
+          const part = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: style })
+            .formatToParts(new Date()).find(p => p.type === 'timeZoneName');
+          return part ? part.value : tz;
+        } catch { return tz; }
+      }
+      const tzLong = tzPretty(browserTz, 'long');
+      const tzShort = tzPretty(browserTz, 'short');
+      // e.g., "Mountain Daylight Time (MDT)"
+      tzLabel.textContent = (tzLong && tzShort && tzLong !== tzShort)
+        ? tzLong + ' (' + tzShort + ')'
+        : (tzLong || browserTz);
 
       let workerUrl = null;
       let allSlots = []; // [{start, end}]
@@ -263,7 +276,7 @@
         btn.classList.add('active');
         pickedSlot = slot;
         const lenLabel = slotMinutes === 60 ? '1 hour' : slotMinutes + ' minutes';
-        summary.innerHTML = '<strong>' + longWhen(new Date(slot.start)) + '</strong> · ' + lenLabel + ' (' + browserTz + ')';
+        summary.innerHTML = '<strong>' + longWhen(new Date(slot.start)) + '</strong> · ' + lenLabel + ' (' + tzShort + ')';
         show(form);
         hide(msgEl);
         nameI.focus();
@@ -298,7 +311,7 @@
           });
           const data = await r.json().catch(() => ({}));
           if (!r.ok) throw new Error(data.error || r.statusText);
-          successWhen.textContent = longWhen(new Date(pickedSlot.start)) + ' (' + browserTz + ')';
+          successWhen.textContent = longWhen(new Date(pickedSlot.start)) + ' (' + tzShort + ')';
           if (data.meetUrl) {
             meetLink.href = data.meetUrl;
             meetLink.style.display = '';

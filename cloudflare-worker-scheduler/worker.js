@@ -46,6 +46,9 @@ function cfg(env) {
     tz: env.TIMEZONE || 'America/Denver',
     dayStartH: parseInt(env.DAILY_START_HOUR || '9', 10),
     dayEndH:   parseInt(env.DAILY_END_HOUR   || '17', 10),
+    // Days of week the scheduler operates on, in the owner's TZ.
+    // 0=Sun, 1=Mon, ..., 6=Sat. Default Mon–Fri.
+    allowedDows: (env.ALLOWED_WEEKDAYS || '1,2,3,4,5').split(',').map(n => parseInt(n.trim(), 10)).filter(n => n >= 0 && n <= 6),
     // Default slot length when client doesn't specify
     defaultSlotMin: parseInt(env.SLOT_MINUTES || '30', 10),
     // Allowed slot lengths the client can request
@@ -58,6 +61,12 @@ function cfg(env) {
     ownerEmail: env.OWNER_EMAIL,
     ownerName:  env.OWNER_NAME || 'Rudy Parra',
   };
+}
+
+/** Day of week (0=Sun..6=Sat) of `date` in the given IANA TZ. */
+function localWeekday(date, tz) {
+  const name = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'short' }).format(date);
+  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(name);
 }
 
 function corsHeaders(env) {
@@ -184,6 +193,7 @@ async function computeAvailability(env, days, slotMin) {
 
   for (let i = 0; i < days; i++) {
     const dayStart = dateInTZ(ty, tm, td + i, conf.dayStartH, 0, conf.tz);
+    if (!conf.allowedDows.includes(localWeekday(dayStart, conf.tz))) continue;
     const dayEnd =   dateInTZ(ty, tm, td + i, conf.dayEndH,   0, conf.tz);
     for (let t = dayStart.getTime(); t + slotMs <= dayEnd.getTime(); t += stepMs) {
       if (t < earliest) continue;
