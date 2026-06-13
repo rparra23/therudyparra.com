@@ -328,6 +328,57 @@ a.item-org:hover { text-decoration: underline; color: var(--text); }
 .item ul li { margin-bottom: 6px; }
 .item ul li::marker { color: var(--accent); }
 
+/* Per-entry photo gallery — horizontal scroll-snap row of photos */
+.item-gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Bleed to the inner edges of the .card padding so tiles touch them */
+  margin: 20px -22px 0;
+  padding: 0 22px 4px;
+  scroll-padding-left: 22px;
+}
+.item-gallery::-webkit-scrollbar { display: none; }
+.item-gallery .gallery-tile {
+  position: relative;
+  flex: 0 0 240px;
+  aspect-ratio: 4 / 3;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  display: block;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.item-gallery .gallery-tile:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.item-gallery .gallery-tile img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.item-gallery .gallery-tile .gallery-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 26px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.78), transparent);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+@media (min-width: 720px) {
+  .item-gallery .gallery-tile { flex: 0 0 280px; }
+}
+
 /* Collapsible item via <details>/<summary> */
 details.item summary {
   list-style: none;
