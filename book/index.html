@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a meeting — Rudy Parra</title>
+  <meta name="description" content="Book a 30-minute meeting with Rudy Parra. Pick a time that works for you and a Google Meet link will be generated automatically." />
+  <meta name="theme-color" content="#0b0b10" />
+  <meta property="og:title" content="Book a meeting with Rudy Parra" />
+  <meta property="og:description" content="Pick a 30-minute slot. A Google Meet link is auto-generated." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://therudyparra.com/book" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b10'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== NAV ===== -->
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/book" class="active">Book</a>
+        <a href="/eats">Eats</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <a class="back-link" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to home
+      </a>
+      <h1>Book a meeting</h1>
+      <p class="sched-intro">
+        Pick a 30-minute slot. A Google Meet link is generated automatically when
+        you confirm, and we'll both get a calendar invite. Times shown in
+        <strong id="sched-tz">your timezone</strong>.
+      </p>
+    </div>
+
+    <div id="sched-loading" class="sched-state">Loading availability…</div>
+    <div id="sched-pending" class="sched-state" style="display:none">
+      The scheduler isn't deployed yet. Once Rudy finishes Google Cloud + Cloudflare setup
+      (see <code>cloudflare-worker-scheduler/README.md</code>), this page will list real availability.
+      Until then, please email <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
+      with a few times that work for you.
+    </div>
+    <div id="sched-error" class="sched-state" style="display:none;color:#fb7185">
+      Something's wrong with the scheduler right now. Please email
+      <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a> with a few times that work.
+    </div>
+
+    <div id="sched-ui" style="display:none">
+      <h2 class="section-title">Pick a day</h2>
+      <div class="day-strip" id="day-strip" role="tablist" aria-label="Days with availability"></div>
+
+      <div class="slot-section">
+        <h3 id="slot-section-title">Pick a time</h3>
+        <div class="slot-grid" id="slot-grid"></div>
+      </div>
+
+      <form class="book-form" id="book-form" style="display:none" novalidate>
+        <input type="text" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="book-summary" id="book-summary"></div>
+
+        <div class="field">
+          <label for="bk-name">Your name</label>
+          <input id="bk-name" type="text" name="name" required autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="bk-email">Your email</label>
+          <input id="bk-email" type="email" name="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="bk-note">What's this about? <span style="color:var(--muted-2);font-weight:400">(optional)</span></label>
+          <textarea id="bk-note" name="note" placeholder="A sentence or two so we can hit the ground running."></textarea>
+        </div>
+
+        <div class="book-actions">
+          <button class="btn primary" type="submit" id="bk-submit">Confirm booking</button>
+          <button class="btn" type="button" id="bk-cancel">Cancel</button>
+        </div>
+        <div class="book-msg error" id="book-msg" style="display:none"></div>
+      </form>
+    </div>
+
+    <div id="book-success" class="book-success" style="display:none">
+      <h2>You're booked.</h2>
+      <p id="book-success-when"></p>
+      <p>Calendar invites went out. See you then.</p>
+      <a class="meet-link" id="meet-link" href="#" target="_blank" rel="noopener" style="display:none">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="#00897B" d="M17 11l-3 2.5L17 16z"/>
+          <path fill="#1E88E5" d="M3 6.5v11a1.5 1.5 0 0 0 1.5 1.5H14V5H4.5A1.5 1.5 0 0 0 3 6.5z"/>
+          <path fill="#FBC02D" d="M14 5v14h6.5a1.5 1.5 0 0 0 1.5-1.5V8L17 11l-3-2.5V5z"/>
+        </svg>
+        Open Google Meet
+      </a>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+
+    /* ===== Scheduler ===== */
+    (function () {
+      const loadingEl = document.getElementById('sched-loading');
+      const pendingEl = document.getElementById('sched-pending');
+      const errorEl   = document.getElementById('sched-error');
+      const uiEl      = document.getElementById('sched-ui');
+      const tzLabel   = document.getElementById('sched-tz');
+      const dayStrip  = document.getElementById('day-strip');
+      const slotGrid  = document.getElementById('slot-grid');
+      const slotTitle = document.getElementById('slot-section-title');
+      const form      = document.getElementById('book-form');
+      const summary   = document.getElementById('book-summary');
+      const nameI     = document.getElementById('bk-name');
+      const emailI    = document.getElementById('bk-email');
+      const noteI     = document.getElementById('bk-note');
+      const cancelBtn = document.getElementById('bk-cancel');
+      const submitBtn = document.getElementById('bk-submit');
+      const msgEl     = document.getElementById('book-msg');
+      const successEl = document.getElementById('book-success');
+      const successWhen = document.getElementById('book-success-when');
+      const meetLink  = document.getElementById('meet-link');
+
+      const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      tzLabel.textContent = browserTz;
+
+      let workerUrl = null;
+      let allSlots = []; // [{start, end}]
+      let byDay = new Map(); // 'YYYY-MM-DD' -> slots[]
+      let activeDayKey = null;
+      let pickedSlot = null;
+
+      function show(el) { el.style.display = ''; }
+      function hide(el) { el.style.display = 'none'; }
+
+      function localDateKey(d) {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: browserTz, year:'numeric', month:'2-digit', day:'2-digit' }).format(d);
+      }
+      function shortDow(d) { return new Intl.DateTimeFormat(undefined, { weekday: 'short', timeZone: browserTz }).format(d); }
+      function shortMon(d) { return new Intl.DateTimeFormat(undefined, { month: 'short',  timeZone: browserTz }).format(d); }
+      function dayOfMonth(d) { return new Intl.DateTimeFormat(undefined, { day: 'numeric', timeZone: browserTz }).format(d); }
+      function shortTime(d) {
+        return new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', timeZone: browserTz }).format(d);
+      }
+      function longWhen(d) {
+        return new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: browserTz }).format(d);
+      }
+
+      function renderDayStrip() {
+        dayStrip.innerHTML = '';
+        const keys = [...byDay.keys()].sort();
+        keys.forEach((key, i) => {
+          const slots = byDay.get(key) || [];
+          const sample = new Date(slots[0]?.start || key + 'T12:00:00');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'day-pill' + (slots.length ? '' : ' empty');
+          btn.disabled = !slots.length;
+          btn.setAttribute('role', 'tab');
+          btn.dataset.key = key;
+          btn.innerHTML =
+            '<span class="dp-dow">' + shortDow(sample) + '</span>' +
+            '<span class="dp-d">'   + dayOfMonth(sample) + '</span>' +
+            '<span class="dp-mon">' + shortMon(sample) + '</span>' +
+            (slots.length ? ('<span class="dp-count">' + slots.length + ' open</span>') : '');
+          btn.addEventListener('click', () => selectDay(key));
+          dayStrip.appendChild(btn);
+        });
+        // Auto-select first day with slots
+        const firstWithSlots = keys.find(k => (byDay.get(k) || []).length);
+        if (firstWithSlots) selectDay(firstWithSlots);
+        else {
+          slotGrid.innerHTML = '<div class="slot-empty">No openings in the next 14 days. Try again next week.</div>';
+        }
+      }
+
+      function selectDay(key) {
+        activeDayKey = key;
+        for (const el of dayStrip.querySelectorAll('.day-pill')) {
+          el.classList.toggle('active', el.dataset.key === key);
+        }
+        renderSlots(byDay.get(key) || []);
+        hide(form);
+        pickedSlot = null;
+      }
+
+      function renderSlots(slots) {
+        slotGrid.innerHTML = '';
+        if (!slots.length) {
+          slotGrid.innerHTML = '<div class="slot-empty">No openings this day.</div>';
+          return;
+        }
+        slots.forEach(s => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'slot-btn';
+          b.textContent = shortTime(new Date(s.start));
+          b.addEventListener('click', () => pickSlot(s, b));
+          slotGrid.appendChild(b);
+        });
+      }
+
+      function pickSlot(slot, btn) {
+        for (const el of slotGrid.querySelectorAll('.slot-btn')) el.classList.remove('active');
+        btn.classList.add('active');
+        pickedSlot = slot;
+        summary.innerHTML = '<strong>' + longWhen(new Date(slot.start)) + '</strong> · 30 minutes (' + browserTz + ')';
+        show(form);
+        hide(msgEl);
+        nameI.focus();
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      cancelBtn.addEventListener('click', () => {
+        hide(form);
+        for (const el of slotGrid.querySelectorAll('.slot-btn')) el.classList.remove('active');
+        pickedSlot = null;
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!pickedSlot) return;
+        if (form.querySelector('input[name="website"]').value) return; // honeypot
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Booking…';
+        hide(msgEl);
+        try {
+          const body = {
+            start: pickedSlot.start,
+            end:   pickedSlot.end,
+            name:  nameI.value.trim(),
+            email: emailI.value.trim(),
+            note:  noteI.value.trim(),
+          };
+          const r = await fetch(workerUrl.replace(/\/+$/, '') + '/book', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(data.error || r.statusText);
+          successWhen.textContent = longWhen(new Date(pickedSlot.start)) + ' (' + browserTz + ')';
+          if (data.meetUrl) {
+            meetLink.href = data.meetUrl;
+            meetLink.style.display = '';
+          }
+          hide(uiEl);
+          show(successEl);
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+          msgEl.textContent = String(err.message || err);
+          show(msgEl);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Confirm booking';
+        }
+      });
+
+      // Load config + slots
+      fetch('/assets/scheduler-config.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+          if (!cfg || !cfg.workerUrl || cfg.workerUrl === 'TO_BE_CONFIGURED') {
+            hide(loadingEl); show(pendingEl);
+            return null;
+          }
+          workerUrl = cfg.workerUrl.replace(/\/+$/, '');
+          return fetch(workerUrl + '/availability?days=14', { cache: 'no-cache' });
+        })
+        .then(r => r ? r.json() : null)
+        .then(data => {
+          if (!data) return;
+          allSlots = data.slots || [];
+          byDay = new Map();
+          for (const s of allSlots) {
+            const k = localDateKey(new Date(s.start));
+            (byDay.get(k) || byDay.set(k, []).get(k)).push(s);
+          }
+          // Also ensure 14 days appear even if some have zero slots
+          const today = new Date();
+          for (let i = 0; i < 14; i++) {
+            const d = new Date(today.getTime() + i * 86400000);
+            const k = localDateKey(d);
+            if (!byDay.has(k)) byDay.set(k, []);
+          }
+          hide(loadingEl); show(uiEl);
+          renderDayStrip();
+        })
+        .catch(() => { hide(loadingEl); show(errorEl); });
+    })();
+  </script>
+</body>
+</html>
