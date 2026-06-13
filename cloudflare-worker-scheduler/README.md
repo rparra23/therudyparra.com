@@ -144,6 +144,42 @@ git push
 5. Check your Google Calendar — the event should appear with the Meet link
 6. Both you and the test email should get calendar invites
 
+## Owner email notification (optional, ~3 min)
+
+Whenever someone successfully books, the Worker can send a styled HTML
+notification to a single inbox you control. Uses [Resend](https://resend.com)
+because their free tier (3,000/mo) is plenty and they reach iCloud reliably.
+
+1. **Sign up at <https://resend.com>** using the SAME address you want to be
+   notified at (e.g. `parrarudy3@icloud.com`). Resend's free tier lets you
+   send to your own address without any domain verification.
+2. **Resend → API Keys → Create API Key** → permissions `Sending access` → copy
+   the `re_...` key.
+3. Wire it into the Worker:
+
+   ```bash
+   cd cloudflare-worker-scheduler
+   wrangler secret put RESEND_API_KEY    # paste the re_... key
+   wrangler secret put NOTIFY_EMAIL      # paste parrarudy3@icloud.com
+   # Optional — only set if you've verified a sending domain in Resend later:
+   # wrangler secret put RESEND_FROM     # e.g. "therudyparra.com bookings <hi@therudyparra.com>"
+   wrangler deploy
+   ```
+
+4. Place a real test booking on <https://therudyparra.com/book>. Within a few
+   seconds you should see a "*Name* booked you" email arrive at
+   `parrarudy3@icloud.com`. The Google Calendar invite continues to fire
+   independently — this is purely an extra heads-up.
+
+If `RESEND_API_KEY` or `NOTIFY_EMAIL` isn't set, the email step is skipped
+silently and the rest of the scheduler keeps working.
+
+**Note on the From address.** Out of the box the email comes from
+`therudyparra.com bookings <onboarding@resend.dev>`. Resend's free tier
+allows that sender to deliver only to the address you signed up with —
+perfect for owner notifications. To send to other addresses (e.g. cc'ing a
+teammate), verify a domain in Resend (2 DNS records) and set `RESEND_FROM`.
+
 ## When you want to tune behavior
 
 | Knob | How to change |

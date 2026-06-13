@@ -30,6 +30,11 @@
  *   BUFFER_MINUTES        int, default 15
  *   MIN_NOTICE_HOURS      int, default 2
  *   OWNER_NAME            default "Rudy Parra"
+ *
+ * Optional email-notification secrets (skipped if unset):
+ *   RESEND_API_KEY        Resend API key for sending owner notifications
+ *   NOTIFY_EMAIL          address to notify on each booking (e.g. parrarudy3@icloud.com)
+ *   RESEND_FROM           override From, default "therudyparra.com bookings <onboarding@resend.dev>"
  */
 
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -258,6 +263,166 @@ async function createBooking(env, payload) {
 }
 
 // ---------------------------------------------------------------------------
+// Owner email notification (Resend)
+// ---------------------------------------------------------------------------
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
+function fmtWhen(dt, tz) {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: tz,
+    weekday: 'long', month: 'short', day: 'numeric', year: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true,
+    timeZoneName: 'short',
+  }).format(dt);
+}
+
+function fmtTimeOnly(dt, tz) {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true,
+  }).format(dt);
+}
+
+function renderBookingEmail({ ownerName, name, email, note, whenLine, durationLine, meetUrl, htmlLink }) {
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeWhen = escapeHtml(whenLine);
+  const safeDur = escapeHtml(durationLine);
+  const safeOwner = escapeHtml(ownerName);
+  const noteBlock = note ? `
+              <tr>
+                <td style="padding:14px 0;border-top:1px solid #f0f0f4">
+                  <p style="margin:0;font-size:11px;font-weight:700;color:#6b6b76;text-transform:uppercase;letter-spacing:0.08em">Note from ${safeName}</p>
+                  <p style="margin:6px 0 0;font-size:14px;color:#0b0b10;line-height:1.55;white-space:pre-wrap">${escapeHtml(note)}</p>
+                </td>
+              </tr>` : '';
+  const meetBtn = meetUrl ? `<a href="${escapeHtml(meetUrl)}" style="display:inline-block;padding:11px 18px;background:#0b0b10;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;margin:0 8px 8px 0">Open Google Meet</a>` : '';
+  const calBtn = htmlLink ? `<a href="${escapeHtml(htmlLink)}" style="display:inline-block;padding:11px 18px;background:#ffffff;color:#0b0b10;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;border:1px solid #d0d0d8;margin:0 0 8px">View in Calendar</a>` : '';
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <title>New booking on therudyparra.com</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0b0b10">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f5f7;padding:32px 16px">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:16px;border:1px solid #e4e4ea;overflow:hidden">
+          <tr>
+            <td style="background:linear-gradient(90deg,#22d3ee,#2dd4bf);height:4px;font-size:0;line-height:0">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="padding:28px 32px 6px">
+              <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#0891b2">therudyparra.com · /book</p>
+              <h1 style="margin:8px 0 0;font-size:22px;line-height:1.25;color:#0b0b10;letter-spacing:-0.01em">${safeName} booked you</h1>
+              <p style="margin:6px 0 0;font-size:14px;color:#6b6b76">A new meeting just landed on ${safeOwner}'s calendar.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:18px 32px 8px">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding:14px 0;border-top:1px solid #f0f0f4">
+                    <p style="margin:0;font-size:11px;font-weight:700;color:#6b6b76;text-transform:uppercase;letter-spacing:0.08em">When</p>
+                    <p style="margin:6px 0 0;font-size:16px;color:#0b0b10;font-weight:600;line-height:1.4">${safeWhen}</p>
+                    <p style="margin:2px 0 0;font-size:13px;color:#6b6b76">${safeDur}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0;border-top:1px solid #f0f0f4">
+                    <p style="margin:0;font-size:11px;font-weight:700;color:#6b6b76;text-transform:uppercase;letter-spacing:0.08em">Guest</p>
+                    <p style="margin:6px 0 0;font-size:16px;color:#0b0b10;font-weight:600">${safeName}</p>
+                    <p style="margin:2px 0 0;font-size:13px"><a href="mailto:${safeEmail}" style="color:#0891b2;text-decoration:none">${safeEmail}</a></p>
+                  </td>
+                </tr>${noteBlock}
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:18px 32px 28px">
+              ${meetBtn}${calBtn}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:16px 32px;background:#fafafc;border-top:1px solid #f0f0f4">
+              <p style="margin:0;font-size:11px;color:#9b9ba2;line-height:1.5">Sent by therudyparra.com scheduler · Reply to this email to message ${safeName} directly.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendBookingEmail(env, payload, result) {
+  const conf = cfg(env);
+  const notifyTo = env.NOTIFY_EMAIL;
+  const apiKey = env.RESEND_API_KEY;
+  if (!notifyTo || !apiKey) return;   // silently skip if unconfigured
+
+  const { start, end, name, email, note } = payload;
+  const { meetUrl, htmlLink } = result;
+  const startD = new Date(start);
+  const endD = new Date(end);
+  const whenLine = fmtWhen(startD, conf.tz);
+  const durMin = Math.round((endD.getTime() - startD.getTime()) / 60000);
+  const durationLine = `${durMin}-minute meeting · ends ${fmtTimeOnly(endD, conf.tz)}`;
+
+  const html = renderBookingEmail({
+    ownerName: conf.ownerName,
+    name, email, note,
+    whenLine, durationLine,
+    meetUrl, htmlLink,
+  });
+  const text = [
+    `New booking on therudyparra.com`,
+    ``,
+    `When:     ${whenLine}`,
+    `Duration: ${durationLine}`,
+    `Guest:    ${name} <${email}>`,
+    note ? `Note:     ${note}` : null,
+    meetUrl ? `Meet:     ${meetUrl}` : null,
+    htmlLink ? `Calendar: ${htmlLink}` : null,
+  ].filter(Boolean).join('\n');
+
+  const from = env.RESEND_FROM || 'therudyparra.com bookings <onboarding@resend.dev>';
+
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: [notifyTo],
+        reply_to: email,
+        subject: `New booking from ${name} — ${whenLine}`,
+        html,
+        text,
+      }),
+    });
+    if (!r.ok) {
+      // Log but don't fail the booking
+      console.warn('resend send failed', r.status, await r.text());
+    }
+  } catch (err) {
+    console.warn('resend send threw', err);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Validation
 // ---------------------------------------------------------------------------
 
@@ -286,7 +451,7 @@ function validateBooking(payload, env) {
 // ---------------------------------------------------------------------------
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders(env) });
     }
@@ -321,6 +486,13 @@ export default {
           });
         }
         const result = await createBooking(env, payload);
+        // Owner notification email — fire-and-forget so booking latency is unchanged
+        if (ctx && typeof ctx.waitUntil === 'function') {
+          ctx.waitUntil(sendBookingEmail(env, payload, result));
+        } else {
+          // Test/dev fallback: still send, but await
+          await sendBookingEmail(env, payload, result);
+        }
         return new Response(JSON.stringify(result), {
           headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
         });
