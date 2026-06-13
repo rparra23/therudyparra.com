@@ -995,6 +995,67 @@ details.item > ul {
   display: flex; flex-wrap: wrap; gap: 8px;
 }
 
+/* ===== Featured stack (Mayor + Video + Podcast) ===== */
+.featured-stack { display: grid; gap: 18px; }
+
+/* ===== Featured: Mayor card ===== */
+.mayor-feature {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.mayor-feature:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.mayor-feature::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #2dd4bf);
+  opacity: 0.85;
+}
+@media (min-width: 720px) {
+  .mayor-feature { grid-template-columns: auto 1fr; gap: 28px; }
+}
+.mayor-photo-wrap {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3 / 2;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+.mayor-photo-wrap:hover { transform: translateY(-2px); }
+.mayor-photo-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.mayor-meta .mayor-pub {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #22d3ee;
+  margin: 0 0 10px;
+}
+.mayor-meta h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.mayor-meta p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 /* ===== Press / Featured In ===== */
 .press-stack { display: grid; gap: 14px; }
 .press-group {
