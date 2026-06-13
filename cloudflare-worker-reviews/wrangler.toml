@@ -1,0 +1,12 @@
+name = "reviews"
+main = "worker.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+# KV namespace holding the reviews.
+# Run once during setup (see README):
+#   npx wrangler kv namespace create REVIEWS
+# Then paste the printed id below and run `wrangler deploy`.
+[[kv_namespaces]]
+binding = "REVIEWS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

@@ -1352,6 +1352,18 @@ details.item > ul {
   font-size: 0.95rem;
 }
 .review-success.shown { display: block; }
+.review-form-error {
+  display: none;
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 10px;
+  color: #fca5a5;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.review-form-error.shown { display: block; }
 /* Honeypot — hidden from humans, bots fill it */
 .review-form .hp {
   position: absolute; left: -9999px; width: 1px; height: 1px;
