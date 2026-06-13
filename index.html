@@ -309,17 +309,18 @@
         </div>
 
         <div class="review-form-actions">
-          <button class="btn primary" type="submit">Post review</button>
+          <button class="btn primary" type="submit">Send for review</button>
           <button class="btn" type="button" id="review-cancel">Cancel</button>
         </div>
         <p class="review-form-note">
-          <strong>Heads up:</strong> Your review posts live to this page the moment you click
-          <em>Post review</em>. Be kind, be honest, no links or spam.
+          <strong>Heads up:</strong> When you click <em>Send for review</em>, your default email app
+          will open with everything pre-filled — just hit Send. Rudy reviews submissions before
+          publishing them here.
         </p>
-        <p class="review-form-error" id="review-error" role="alert"></p>
       </form>
       <div class="review-success" id="review-success">
-        Thanks — your review is live. Scroll up to see it.
+        Thanks — your email app should have opened. If not, email
+        <a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a> directly with your review.
       </div>
     </div>
 
@@ -450,37 +451,9 @@
         });
       }
 
-      const errorEl = document.getElementById('review-error');
-      function showError(msg) {
-        if (!errorEl) return;
-        errorEl.textContent = msg || '';
-        errorEl.classList.toggle('shown', !!msg);
-      }
-
-      // Resolve the Worker URL from /assets/reviews-config.json. If the file
-      // is missing, malformed, or still pointing at the YOUR-WORKER placeholder
-      // we silently fall back to the static reviews.json.
-      let workerReady = null;
-      const workerUrlPromise = fetch('/assets/reviews-config.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : null)
-        .then(cfg => {
-          const u = cfg && cfg.workerUrl;
-          workerReady = !!(u && !u.includes('YOUR-WORKER'));
-          return workerReady ? u.replace(/\/$/, '') : null;
-        })
-        .catch(() => { workerReady = false; return null; });
-
-      // Load reviews: prefer the Worker, fall back to the static file.
-      workerUrlPromise.then(workerUrl => {
-        const url = workerUrl ? workerUrl + '/reviews' : '/assets/reviews.json';
-        return fetch(url, { cache: 'no-cache' })
-          .then(r => r.ok ? r.json() : { reviews: [] })
-          .catch(() => {
-            // Worker reachable test failed — try the static file as a last resort
-            if (workerUrl) return fetch('/assets/reviews.json').then(r => r.ok ? r.json() : { reviews: [] }).catch(() => ({ reviews: [] }));
-            return { reviews: [] };
-          });
-      })
+      // Load reviews
+      fetch('/assets/reviews.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : { reviews: [] })
         .then(data => renderReviews(Array.isArray(data.reviews) ? data.reviews : []))
         .catch(() => renderReviews([]));
 
@@ -488,7 +461,6 @@
       toggleBtn.addEventListener('click', () => {
         const isOpen = form.classList.toggle('open');
         toggleBtn.textContent = isOpen ? 'Hide form' : 'Write a review';
-        showError('');
         if (isOpen) {
           success.classList.remove('shown');
           form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -497,7 +469,6 @@
       cancelBtn.addEventListener('click', () => {
         form.classList.remove('open');
         toggleBtn.textContent = 'Write a review';
-        showError('');
       });
 
       // Show/hide name fields based on radio
@@ -510,19 +481,16 @@
       whoRadios.forEach(r => r.addEventListener('change', syncNameFields));
       syncNameFields();
 
-      // Submit: POST to the reviews Worker; on success, prepend the new
-      // review to the list and reset the form. On failure (Worker down,
-      // 4xx, 429), surface a friendly inline error and keep the form open.
-      form.addEventListener('submit', async (e) => {
+      // Submit: build mailto + open
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        showError('');
 
         // Honeypot — silently drop if bot filled it
         if (form.querySelector('input[name="website"]').value) return;
 
         const fd = new FormData(form);
         const isAnon = fd.get('who') === 'anonymous';
-        const name = isAnon ? '' : (fd.get('name') || '').toString().trim();
+        const name = isAnon ? 'Anonymous' : (fd.get('name') || '').toString().trim();
         const title = (fd.get('title') || '').toString().trim();
         const company = (fd.get('company') || '').toString().trim();
         const connection = (fd.get('connection') || '').toString().trim();
@@ -533,80 +501,45 @@
           return;
         }
 
-        const workerUrl = await workerUrlPromise;
-        if (!workerUrl) {
-          showError("Reviews aren't accepting submissions right now — the backend isn't configured. Please try again later.");
-          return;
+        const subject = '[therudyparra.com] New review from ' + (name || 'Anonymous');
+        const lines = [
+          'Name:        ' + (name || 'Anonymous'),
+        ];
+        if (!isAnon) {
+          if (title) lines.push('Title:       ' + title);
+          if (company) lines.push('Company:     ' + company);
         }
+        lines.push('Connection:  ' + connection);
+        lines.push('');
+        lines.push('Review:');
+        lines.push('--------');
+        lines.push(review);
+        lines.push('');
+        lines.push('---');
+        lines.push('Submitted via therudyparra.com');
+        lines.push('');
+        lines.push('To publish, add to assets/reviews.json:');
+        lines.push(JSON.stringify({
+          anonymous: isAnon,
+          name: isAnon ? undefined : name,
+          title: isAnon ? undefined : (title || undefined),
+          company: isAnon ? undefined : (company || undefined),
+          connection: connection,
+          review: review
+        }, null, 2));
 
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const prevLabel = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Posting…';
+        const mailto = 'mailto:parrarudy1media@gmail.com'
+          + '?subject=' + encodeURIComponent(subject)
+          + '&body=' + encodeURIComponent(lines.join('\n'));
 
-        try {
-          const r = await fetch(workerUrl + '/review', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              anonymous: isAnon,
-              name: isAnon ? undefined : name,
-              title: isAnon ? undefined : (title || undefined),
-              company: isAnon ? undefined : (company || undefined),
-              connection,
-              review,
-            }),
-          });
-          const data = await r.json().catch(() => ({}));
-          if (!r.ok) {
-            const msg = (data && data.error) || (r.status === 429
-              ? 'Too many reviews from your network this hour — try again later.'
-              : 'Sorry, that did not post — please try again in a minute.');
-            showError(msg);
-            return;
-          }
+        window.location.href = mailto;
 
-          // Prepend the new review to the list so the user sees their post immediately.
-          const next = data.review || {
-            anonymous: isAnon,
-            name: isAnon ? undefined : name,
-            title: isAnon ? undefined : (title || undefined),
-            company: isAnon ? undefined : (company || undefined),
-            connection,
-            review,
-          };
-          const card = document.createElement('div');
-          card.className = 'review';
-          const author = next.anonymous ? 'Anonymous' : (next.name || 'Unnamed');
-          const metaParts = [];
-          if (!next.anonymous) {
-            if (next.title) metaParts.push(next.title);
-            if (next.company) metaParts.push(next.company);
-          }
-          const meta = metaParts.join(' · ');
-          card.innerHTML =
-            '<span class="review-quote" aria-hidden="true">&ldquo;</span>' +
-            '<p class="review-body">' + esc(next.review) + '</p>' +
-            '<div class="review-attr">' +
-              '<span class="review-name">' + esc(author) + '</span>' +
-              (meta ? '<span class="review-meta">' + esc(meta) + '</span>' : '') +
-              (next.connection ? '<span class="review-connection">' + esc(next.connection) + '</span>' : '') +
-            '</div>';
-          empty.style.display = 'none';
-          list.insertBefore(card, list.firstChild);
-
-          form.classList.remove('open');
-          toggleBtn.textContent = 'Write a review';
-          success.classList.add('shown');
-          form.reset();
-          syncNameFields();
-          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } catch (err) {
-          showError("Couldn't reach the server — please check your connection and try again.");
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = prevLabel;
-        }
+        form.classList.remove('open');
+        toggleBtn.textContent = 'Write a review';
+        success.classList.add('shown');
+        form.reset();
+        syncNameFields();
+        success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     })();
   </script>

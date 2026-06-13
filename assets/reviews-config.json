@@ -1,4 +1,4 @@
 {
-  "_comment": "URL of the deployed reviews Cloudflare Worker. Once set, the homepage posts new reviews to {workerUrl}/review and reads the list from {workerUrl}/reviews. If unreachable, the page falls back to the static /assets/reviews.json. See cloudflare-worker-reviews/README.md.",
-  "workerUrl": "https://reviews.rparra.workers.dev"
+  "_comment": "Reviews Worker is on hold. While this points at YOUR-WORKER (or anything containing that string) the homepage falls back to mailto + manual approve via the Claude routine. To re-enable live auto-publish, change workerUrl to the deployed Worker URL (https://reviews.rparra.workers.dev) and restore the live-submit JS in index.html.",
+  "workerUrl": "https://reviews.YOUR-WORKER.workers.dev"
 }
