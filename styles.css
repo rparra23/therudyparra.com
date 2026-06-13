@@ -1153,32 +1153,97 @@ details.item > ul {
 }
 
 .duration-toggle {
-  display: inline-flex;
-  background: var(--bg-2);
-  border: 1px solid var(--border-strong);
-  border-radius: 12px;
-  padding: 4px;
-  gap: 4px;
-  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 480px;
+  margin-bottom: 26px;
 }
 .duration-toggle button {
+  position: relative;
   appearance: none;
-  background: transparent;
-  border: none;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
   color: var(--muted);
   font: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 14px;
+  padding: 18px 14px 16px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease,
+              color 0.15s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  overflow: hidden;
 }
-.duration-toggle button:hover { color: var(--text); }
+.duration-toggle button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.14), rgba(34, 211, 238, 0.08));
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+.duration-toggle button:hover {
+  color: var(--text);
+  background: var(--card-hover);
+  transform: translateY(-1px);
+}
 .duration-toggle button.active {
-  background: linear-gradient(135deg, var(--accent), #5a3df0);
-  color: #fff;
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 8px 28px rgba(124, 92, 255, 0.28),
+              0 0 0 2px rgba(124, 92, 255, 0.18);
+  transform: translateY(-1px);
 }
+.duration-toggle button.active::before { opacity: 1; }
+.duration-toggle .dt-icon {
+  width: 26px; height: 26px;
+  color: var(--muted-2);
+  transition: color 0.15s ease, transform 0.2s ease;
+  position: relative;
+}
+.duration-toggle button:hover .dt-icon { color: var(--text); }
+.duration-toggle button.active .dt-icon {
+  color: var(--accent-2);
+  transform: scale(1.06);
+}
+.duration-toggle .dt-label {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+.duration-toggle .dt-sub {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--muted-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+}
+.duration-toggle button.active .dt-sub { color: var(--accent-2); }
+.duration-toggle .dt-check {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #0b0b10;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.duration-toggle button.active .dt-check {
+  opacity: 1;
+  transform: scale(1);
+}
+.duration-toggle .dt-check svg { width: 12px; height: 12px; }
 
 .day-strip {
   display: flex; flex-direction: row;
