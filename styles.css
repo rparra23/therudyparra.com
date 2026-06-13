@@ -306,6 +306,11 @@ h2.section-title::before {
 .stack { display: grid; gap: 14px; }
 .grid-2 { display: grid; gap: 14px; }
 @media (min-width: 640px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+/* Grid children default to min-width:auto, which lets them grow to fit the
+   widest content (e.g. the horizontal .item-gallery rows inside work,
+   research, and leadership cards). Force min-width:0 so cards respect the
+   track width and inner galleries scroll instead of stretching the card. */
+.stack > *, .grid-2 > * { min-width: 0; }
 
 /* ===== Experience / Research items ===== */
 .item-head {
