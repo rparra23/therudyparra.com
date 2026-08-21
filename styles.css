@@ -2173,7 +2173,9 @@ h2.section-title,
   border: 1px solid var(--border);
   border-radius: 12px;
   text-decoration: none;
-  min-width: 150px;
+  box-sizing: border-box;
+  width: 196px;
+  height: 106px;
   transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
 }
 .affil-link:hover {
@@ -2222,12 +2224,12 @@ h2.section-title,
 /* ===== Affiliation tile logos ===== */
 .affil-link img {
   display: block;
-  height: 32px;
-  width: auto;
-  max-width: 150px;
+  /* Fixed box + object-fit: Safari mis-sizes width:auto images (especially
+     SVG) from their intrinsic dimensions, blowing up the tile. */
+  width: 140px;
+  height: 40px;
   object-fit: contain;
   object-position: left center;
   margin-bottom: 4px;
 }
-.affil-link img[src*="techqueria"] { height: 44px; }
 .affil-link { justify-content: flex-end; }
