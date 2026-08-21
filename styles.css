@@ -2156,3 +2156,40 @@ h2.section-title,
   flex-direction: column;
 }
 .reviews-stack .review .review-body { flex: 1; }
+
+/* ===== Hero affiliation tabs — big tappable org links ===== */
+.affil-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.affil-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  min-width: 150px;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+.affil-link:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.affil-link strong {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.affil-link span {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.affil-link:hover span { color: var(--accent); }
