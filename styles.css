@@ -2160,10 +2160,27 @@ h2.section-title,
 /* ===== Hero affiliation tabs — big tappable org links ===== */
 .affil-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   margin-top: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+  padding-bottom: 10px;
 }
+.affil-row::-webkit-scrollbar { height: 6px; }
+.affil-row::-webkit-scrollbar-track { background: transparent; }
+.affil-row::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+.affil-row .affil-link {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+/* The hero is a grid; its text cell must be allowed to shrink or the
+   nowrap affiliation row widens the cell and the whole page scrolls. */
+section.hero .hero-text { min-width: 0; }
 .affil-link {
   display: flex;
   flex-direction: column;
