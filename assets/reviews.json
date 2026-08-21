@@ -1,5 +1,5 @@
 {
-  "_comment": "Approved reviews appear on the homepage in the Testimonials section. Newest first (top of array = top of page). When you receive a submission email and want to publish it, add a new object to the START of the `reviews` array, copy the fields from the email, and push.",
+  "_comment": "Approved reviews appear on the homepage in the Testimonials section. Newest first (top of array = top of page). The three letter excerpts are real quotes from the recommendation letters published in full at /recommendations — do not edit their wording. When you receive a submission email and want to publish it, add a new object to the START of the `reviews` array, copy the fields from the email, and push.",
   "_schema": {
     "anonymous": "boolean — true to hide name/title/company",
     "name": "Full name with optional title/suffix, e.g. 'Dr. Jane Smith, PhD'",
@@ -9,6 +9,30 @@
     "review": "The review text — newlines preserved"
   },
   "reviews": [
+    {
+      "anonymous": false,
+      "name": "Nora Mendoza",
+      "title": "Academic Affairs Program Manager, School of Math, Science & Engineering",
+      "company": "Central New Mexico Community College",
+      "connection": "Academic advisor · from her letter of recommendation",
+      "review": "Rudy Parra is an exceptional individual with a passion for learning and a strong commitment to his academic and research pursuits. His adaptability, technical skills, and dedication make him a valuable candidate for any professional opportunity."
+    },
+    {
+      "anonymous": false,
+      "name": "Dr. Steven A. Feller",
+      "title": "BD Silliman Professor of Physics",
+      "company": "Coe College",
+      "connection": "NSF REU research mentor · from his letter of recommendation",
+      "review": "He has my strongest recommendation to you for technical employment or for further schooling. He is really good and I would gladly rehire him, if I was given the chance to."
+    },
+    {
+      "anonymous": false,
+      "name": "Richard W. Pacheco",
+      "title": "Full Stack Engineer (HPC)",
+      "company": "Lockheed Martin",
+      "connection": "Internship mentor · from his letter of recommendation",
+      "review": "During the time I worked with Rodolfo, his networking and computer skill set knowledge grew at an exponential rate. I am highly confident that Rodolfo will be a great asset for any team, project or company."
+    },
     {
       "anonymous": false,
       "name": "Hannah Cruz",

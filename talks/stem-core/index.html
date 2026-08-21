@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STEM Core Talk — Rudy Parra</title>
+  <meta name="description" content="Rudy Parra's STEM Core alumni luncheon presentation — view the slides in your browser." />
+  <meta name="theme-color" content="#F3ECE0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B15F37'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%23F3ECE0'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .deck-stage-wrap { margin-top: 6px; }
+    .deck-stage {
+      position: relative;
+      background: #23201A;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: pointer;
+      box-shadow: 0 14px 40px rgba(35,32,26,0.25);
+    }
+    .deck-stage img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .deck-stage:fullscreen { border-radius: 0; aspect-ratio: auto; }
+    .deck-stage:fullscreen img { object-fit: contain; }
+    .deck-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .deck-btns { display: flex; gap: 8px; align-items: center; }
+    .deck-counter {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+    .deck-hint { color: var(--muted-2); font-size: 0.8rem; }
+    @media (max-width: 600px) { .deck-hint { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== NAV ===== -->
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/press">Press</a>
+        <a href="/talks/stem-core/" class="active">Slides</a>
+        <a href="/book">Book</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <h1>STEM Core Talk</h1>
+      <p style="color:var(--muted);font-size:1rem;line-height:1.6;max-width:60ch">
+        My presentation for the STEM Core alumni luncheon. Use the arrow keys,
+        tap the slide, or use the buttons below — F or the button for fullscreen.
+      </p>
+    </div>
+
+    <div class="deck-stage-wrap">
+      <div class="deck-stage" id="stage" aria-label="Slide viewer" tabindex="0">
+        <img id="slide" src="/talks/stem-core/slides/slide-01.jpg" alt="Slide 1" />
+      </div>
+      <div class="deck-controls">
+        <div class="deck-btns">
+          <button class="btn" type="button" id="prev" aria-label="Previous slide">← Prev</button>
+          <button class="btn" type="button" id="next" aria-label="Next slide">Next →</button>
+        </div>
+        <span class="deck-counter"><span id="cur">1</span> / <span id="total">35</span></span>
+        <div class="deck-btns">
+          <span class="deck-hint">← → keys · click slide to advance</span>
+          <button class="btn primary" type="button" id="fs">Fullscreen</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rodolfo González Parra · Albuquerque, NM</span>
+      <span>U.S. Citizen · Eligible for Security Clearance</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+
+    /* ===== Slide deck viewer ===== */
+    (function () {
+      const TOTAL = 35;
+      const pad = n => String(n).padStart(2, '0');
+      const src = n => '/talks/stem-core/slides/slide-' + pad(n) + '.jpg';
+
+      const stage = document.getElementById('stage');
+      const img = document.getElementById('slide');
+      const cur = document.getElementById('cur');
+      document.getElementById('total').textContent = TOTAL;
+
+      let n = Math.min(Math.max(parseInt(location.hash.slice(1), 10) || 1, 1), TOTAL);
+
+      const cache = {};
+      function preload(k) {
+        if (k < 1 || k > TOTAL || cache[k]) return;
+        const im = new Image(); im.src = src(k); cache[k] = im;
+      }
+      function show(k, pushHash = true) {
+        n = Math.min(Math.max(k, 1), TOTAL);
+        img.src = src(n);
+        img.alt = 'Slide ' + n;
+        cur.textContent = n;
+        if (pushHash) history.replaceState(null, '', '#' + n);
+        preload(n + 1); preload(n - 1); preload(n + 2);
+      }
+
+      document.getElementById('prev').addEventListener('click', () => show(n - 1));
+      document.getElementById('next').addEventListener('click', () => show(n + 1));
+
+      // Click on the slide: left quarter = back, rest = forward
+      stage.addEventListener('click', e => {
+        const rect = stage.getBoundingClientRect();
+        (e.clientX - rect.left) < rect.width * 0.25 ? show(n - 1) : show(n + 1);
+      });
+
+      // Keyboard
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        switch (e.key) {
+          case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); show(n + 1); break;
+          case 'ArrowLeft': case 'PageUp': e.preventDefault(); show(n - 1); break;
+          case 'Home': e.preventDefault(); show(1); break;
+          case 'End': e.preventDefault(); show(TOTAL); break;
+          case 'f': case 'F': toggleFs(); break;
+        }
+      });
+
+      // Touch swipe
+      let tx = null;
+      stage.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', e => {
+        if (tx === null) return;
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) { dx < 0 ? show(n + 1) : show(n - 1); }
+        tx = null;
+      }, { passive: true });
+
+      // Fullscreen
+      function toggleFs() {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else (stage.requestFullscreen || stage.webkitRequestFullscreen).call(stage);
+      }
+      document.getElementById('fs').addEventListener('click', toggleFs);
+
+      window.addEventListener('hashchange', () => {
+        const k = parseInt(location.hash.slice(1), 10);
+        if (k && k !== n) show(k, false);
+      });
+
+      show(n, false);
+    })();
+  </script>
+</body>
+</html>
