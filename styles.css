@@ -2218,3 +2218,16 @@ h2.section-title,
   transform: translateY(-1px) !important;
   text-decoration: none !important;
 }
+
+/* ===== Affiliation tile logos ===== */
+.affil-link img {
+  display: block;
+  height: 32px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 4px;
+}
+.affil-link img[src*="techqueria"] { height: 44px; }
+.affil-link { justify-content: flex-end; }
