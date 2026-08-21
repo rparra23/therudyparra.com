@@ -2132,3 +2132,27 @@ h2.section-title,
 /* Light text on the terracotta primary button/gradients (was light-on-purple) */
 .btn.primary { color: #FBF7EF; }
 .brand-mark { color: #FBF7EF; }
+
+/* ===== Testimonials — horizontal scroll-snap carousel ===== */
+.reviews-stack {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+  padding: 4px 0 12px;
+}
+.reviews-stack::-webkit-scrollbar { height: 8px; }
+.reviews-stack::-webkit-scrollbar-track { background: transparent; }
+.reviews-stack::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+.reviews-stack .review {
+  flex: 0 0 min(85%, 400px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.reviews-stack .review .review-body { flex: 1; }

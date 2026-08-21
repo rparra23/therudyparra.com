@@ -147,25 +147,25 @@
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
       Where to find me next — RSVP below, and mark your calendar for TechFest.
     </p>
-    <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:18px">
-      <iframe
-        src="https://luma.com/embed/event/evt-3SXOvKyWCKFM30j/simple"
-        title="Upcoming event RSVP"
-        style="width:100%;max-width:640px;height:450px;border:1px solid var(--border);border-radius:12px;background:var(--card)"
-        frameborder="0"
-        allow="fullscreen; payment"
-        aria-hidden="false"
-        tabindex="0"
-      ></iframe>
-    </div>
-    <a class="card" href="/assets/events/techfest-2026-promo.png" target="_blank" rel="noopener"
-       style="display:block;margin-top:14px;padding:14px;text-decoration:none">
+    <iframe
+      src="https://luma.com/embed/event/evt-3SXOvKyWCKFM30j/simple"
+      title="Upcoming event RSVP"
+      style="display:block;width:100%;max-width:720px;margin:0 auto;height:850px;border:0;border-radius:12px;background:transparent"
+      frameborder="0"
+      allow="fullscreen; payment"
+      aria-hidden="false"
+      tabindex="0"
+      scrolling="no"
+    ></iframe>
+    <a href="https://newmexicotechweek.com/events" target="_blank" rel="noopener"
+       style="display:block;margin-top:20px;text-decoration:none"
+       aria-label="TechFest 2026 — details and tickets on the NM Tech Week site">
       <img src="/assets/events/techfest-2026-promo.png"
            alt="TechFest 2026 promotional flyer — October 29–30 during New Mexico Tech Week"
            loading="lazy"
-           style="display:block;width:100%;max-width:640px;margin:0 auto;border-radius:10px" />
-      <span style="display:block;text-align:center;margin-top:10px;color:var(--muted);font-size:0.85rem">
-        TechFest 2026 · part of NM Tech Week · tap to view full size
+           style="display:block;width:100%;max-width:640px;margin:0 auto;border-radius:14px;box-shadow:0 10px 30px rgba(35,32,26,0.18)" />
+      <span style="display:block;text-align:center;margin-top:10px;color:var(--accent);font-weight:600;font-size:0.9rem">
+        TechFest 2026 · part of NM Tech Week — tap for details &amp; tickets ↗
       </span>
     </a>
 
@@ -221,18 +221,17 @@
         </div>
 
         <div class="review-form-actions">
-          <button class="btn primary" type="submit">Send for review</button>
+          <button class="btn primary" type="submit">Post review</button>
           <button class="btn" type="button" id="review-cancel">Cancel</button>
         </div>
         <p class="review-form-note">
-          <strong>Heads up:</strong> When you click <em>Send for review</em>, your default email app
-          will open with everything pre-filled — just hit Send. Rudy reviews submissions before
-          publishing them here.
+          <strong>Heads up:</strong> Your review posts live to this page the moment you click
+          <em>Post review</em> — anonymous is totally fine. Be kind, be honest, no links or spam.
         </p>
+        <p class="review-form-error" id="review-error" role="alert"></p>
       </form>
       <div class="review-success" id="review-success">
-        Thanks — your email app should have opened. If not, email
-        <a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a> directly with your review.
+        Thanks — your review is live. Scroll up to see it.
       </div>
     </div>
 
@@ -363,9 +362,30 @@
         });
       }
 
-      // Load reviews
-      fetch('/assets/reviews.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : { reviews: [] })
+      const errorEl = document.getElementById('review-error');
+      function showError(msg) {
+        if (!errorEl) return;
+        errorEl.textContent = msg || '';
+        errorEl.classList.toggle('shown', !!msg);
+      }
+
+      // Resolve the Worker URL from /assets/reviews-config.json. If missing or
+      // still a placeholder, fall back to the static reviews.json (read-only).
+      const workerUrlPromise = fetch('/assets/reviews-config.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+          const u = cfg && cfg.workerUrl;
+          return (u && !u.includes('YOUR-WORKER')) ? u.replace(/\/$/, '') : null;
+        })
+        .catch(() => null);
+
+      // Load reviews: prefer the Worker, fall back to the static file.
+      workerUrlPromise.then(workerUrl => {
+        const url = workerUrl ? workerUrl + '/reviews' : '/assets/reviews.json';
+        return fetch(url, { cache: 'no-cache' })
+          .then(r => r.ok ? r.json() : Promise.reject())
+          .catch(() => fetch('/assets/reviews.json').then(r => r.ok ? r.json() : { reviews: [] }).catch(() => ({ reviews: [] })));
+      })
         .then(data => renderReviews(Array.isArray(data.reviews) ? data.reviews : []))
         .catch(() => renderReviews([]));
 
@@ -373,6 +393,7 @@
       toggleBtn.addEventListener('click', () => {
         const isOpen = form.classList.toggle('open');
         toggleBtn.textContent = isOpen ? 'Hide form' : 'Write a review';
+        showError('');
         if (isOpen) {
           success.classList.remove('shown');
           form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -381,6 +402,7 @@
       cancelBtn.addEventListener('click', () => {
         form.classList.remove('open');
         toggleBtn.textContent = 'Write a review';
+        showError('');
       });
 
       // Show/hide name fields based on radio
@@ -393,16 +415,17 @@
       whoRadios.forEach(r => r.addEventListener('change', syncNameFields));
       syncNameFields();
 
-      // Submit: build mailto + open
-      form.addEventListener('submit', (e) => {
+      // Submit: POST to the reviews Worker; the new review appears instantly.
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        showError('');
 
         // Honeypot — silently drop if bot filled it
         if (form.querySelector('input[name="website"]').value) return;
 
         const fd = new FormData(form);
         const isAnon = fd.get('who') === 'anonymous';
-        const name = isAnon ? 'Anonymous' : (fd.get('name') || '').toString().trim();
+        const name = isAnon ? '' : (fd.get('name') || '').toString().trim();
         const title = (fd.get('title') || '').toString().trim();
         const company = (fd.get('company') || '').toString().trim();
         const connection = (fd.get('connection') || '').toString().trim();
@@ -413,45 +436,73 @@
           return;
         }
 
-        const subject = '[therudyparra.com] New review from ' + (name || 'Anonymous');
-        const lines = [
-          'Name:        ' + (name || 'Anonymous'),
-        ];
-        if (!isAnon) {
-          if (title) lines.push('Title:       ' + title);
-          if (company) lines.push('Company:     ' + company);
+        const workerUrl = await workerUrlPromise;
+        if (!workerUrl) {
+          showError("Reviews aren't accepting submissions right now — please try again later.");
+          return;
         }
-        lines.push('Connection:  ' + connection);
-        lines.push('');
-        lines.push('Review:');
-        lines.push('--------');
-        lines.push(review);
-        lines.push('');
-        lines.push('---');
-        lines.push('Submitted via therudyparra.com');
-        lines.push('');
-        lines.push('To publish, add to assets/reviews.json:');
-        lines.push(JSON.stringify({
-          anonymous: isAnon,
-          name: isAnon ? undefined : name,
-          title: isAnon ? undefined : (title || undefined),
-          company: isAnon ? undefined : (company || undefined),
-          connection: connection,
-          review: review
-        }, null, 2));
 
-        const mailto = 'mailto:parrarudy1media@gmail.com'
-          + '?subject=' + encodeURIComponent(subject)
-          + '&body=' + encodeURIComponent(lines.join('\n'));
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const prevLabel = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Posting…';
 
-        window.location.href = mailto;
+        try {
+          const r = await fetch(workerUrl + '/review', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              anonymous: isAnon,
+              name: isAnon ? undefined : name,
+              title: isAnon ? undefined : (title || undefined),
+              company: isAnon ? undefined : (company || undefined),
+              connection,
+              review,
+            }),
+          });
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok) {
+            showError((data && data.error) || (r.status === 429
+              ? 'Too many reviews from your network this hour — try again later.'
+              : 'Sorry, that did not post — please try again in a minute.'));
+            return;
+          }
 
-        form.classList.remove('open');
-        toggleBtn.textContent = 'Write a review';
-        success.classList.add('shown');
-        form.reset();
-        syncNameFields();
-        success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          // Prepend the new review card so the submitter sees it immediately.
+          const next = data.review || { anonymous: isAnon, name, title, company, connection, review };
+          const card = document.createElement('div');
+          card.className = 'review';
+          const author = next.anonymous ? 'Anonymous' : (next.name || 'Unnamed');
+          const metaParts = [];
+          if (!next.anonymous) {
+            if (next.title) metaParts.push(next.title);
+            if (next.company) metaParts.push(next.company);
+          }
+          const meta = metaParts.join(' · ');
+          card.innerHTML =
+            '<span class="review-quote" aria-hidden="true">&ldquo;</span>' +
+            '<p class="review-body">' + esc(next.review) + '</p>' +
+            '<div class="review-attr">' +
+              '<span class="review-name">' + esc(author) + '</span>' +
+              (meta ? '<span class="review-meta">' + esc(meta) + '</span>' : '') +
+              (next.connection ? '<span class="review-connection">' + esc(next.connection) + '</span>' : '') +
+            '</div>';
+          empty.style.display = 'none';
+          list.insertBefore(card, list.firstChild);
+          list.scrollTo({ left: 0, behavior: 'smooth' });
+
+          form.classList.remove('open');
+          toggleBtn.textContent = 'Write a review';
+          success.classList.add('shown');
+          form.reset();
+          syncNameFields();
+          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (err) {
+          showError("Couldn't reach the server — please check your connection and try again.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = prevLabel;
+        }
       });
     })();
   </script>
