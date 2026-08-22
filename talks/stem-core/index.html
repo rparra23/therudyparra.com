@@ -170,22 +170,25 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
     })();
 
-    /* ===== PIN gate =====
-       Note: this is a client-side gate on a static host — it deters casual
-       visitors, it is not real access control. */
+    /* ===== PIN gate — server-side =====
+       The PIN is verified by the deck Worker (rate-limited per IP); slides
+       are served by the Worker only with the signed token it returns. */
+    const DECK_API = 'https://deck.rparra.workers.dev';
     const deckUnlock = (function () {
-      const SALT = 'therudyparra-deck-v1';
-      const HASH = '4f4a388183d0bc101476c96b45c466306c70ae1bace7d2d8e5943bfba6c7dad1';
-      const KEY = 'deck-unlocked-v1';
+      const KEY = 'deck-token-v2';
       const gate = document.getElementById('pin-gate');
       const form = document.getElementById('pin-form');
       const input = document.getElementById('pin-input');
       const errEl = document.getElementById('pin-error');
+      const submitBtn = form.querySelector('button[type="submit"]');
       let onUnlock = null;
+      let token = null;
 
-      async function sha256Hex(s) {
-        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-        return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+      function showErr(msg) {
+        errEl.textContent = msg;
+        errEl.classList.add('shown');
+        gate.classList.remove('shake'); void gate.offsetWidth; gate.classList.add('shake');
+        input.select();
       }
       function reveal() {
         gate.hidden = true;
@@ -193,29 +196,61 @@
         document.getElementById('deck-intro').hidden = false;
         if (onUnlock) onUnlock();
       }
+      function relock() {
+        token = null;
+        try { sessionStorage.removeItem(KEY); } catch {}
+        gate.hidden = false;
+        document.getElementById('deck-ui').hidden = true;
+        showErr('Session expired — enter the PIN again.');
+      }
       form.addEventListener('submit', async e => {
         e.preventDefault();
-        const ok = (await sha256Hex(SALT + input.value.trim())) === HASH;
-        if (ok) {
-          try { sessionStorage.setItem(KEY, '1'); } catch {}
-          reveal();
-        } else {
-          errEl.classList.add('shown');
-          gate.classList.remove('shake'); void gate.offsetWidth; gate.classList.add('shake');
-          input.select();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Checking…';
+        try {
+          const r = await fetch(DECK_API + '/unlock', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin: input.value.trim() }),
+          });
+          const data = await r.json().catch(() => ({}));
+          if (r.ok && data.token) {
+            token = data.token;
+            try { sessionStorage.setItem(KEY, JSON.stringify({ token: data.token, exp: data.exp })); } catch {}
+            reveal();
+          } else {
+            showErr(data.error || 'Wrong PIN — try again.');
+          }
+        } catch {
+          showErr("Can't reach the unlock server — check your connection.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Unlock';
         }
       });
-      let already = false;
-      try { already = sessionStorage.getItem(KEY) === '1'; } catch {}
-      if (already) { queueMicrotask(reveal); } else { input.focus(); }
-      return { unlocked: () => gate.hidden, setOnUnlock: fn => { onUnlock = fn; if (gate.hidden) fn(); } };
+      // Resume a still-valid session token
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (saved && saved.token && saved.exp > Date.now()) {
+          token = saved.token;
+          queueMicrotask(reveal);
+        } else {
+          input.focus();
+        }
+      } catch { input.focus(); }
+      return {
+        unlocked: () => gate.hidden,
+        token: () => token,
+        relock,
+        setOnUnlock: fn => { onUnlock = fn; if (gate.hidden) fn(); },
+      };
     })();
 
     /* ===== Slide deck viewer ===== */
     (function () {
       const TOTAL = 35;
       const pad = n => String(n).padStart(2, '0');
-      const src = n => '/talks/stem-core/slides/slide-' + pad(n) + '.jpg';
+      const src = n => DECK_API + '/slide/' + pad(n) + '?t=' + encodeURIComponent(deckUnlock.token() || '');
 
       const stage = document.getElementById('stage');
       const img = document.getElementById('slide');
@@ -237,6 +272,10 @@
         if (pushHash) history.replaceState(null, '', '#' + n);
         preload(n + 1); preload(n - 1); preload(n + 2);
       }
+      // If a slide fails (expired token), drop back to the PIN gate.
+      img.addEventListener('error', () => {
+        if (deckUnlock.unlocked() && img.getAttribute('src')) deckUnlock.relock();
+      });
 
       document.getElementById('prev').addEventListener('click', () => show(n - 1));
       document.getElementById('next').addEventListener('click', () => show(n + 1));
