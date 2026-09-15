@@ -3,11 +3,14 @@ VERSION:3.0
 N:Parra;Rudy;;;
 FN:Rudy Parra
 TITLE:Electrical Lab Technician & Embedded Systems Developer
-ORG:Parra Technologies LLC
 EMAIL;TYPE=INTERNET,PREF:parrarudy3@icloud.com
+EMAIL;TYPE=INTERNET,WORK:rudy@gridflow.tech
+EMAIL;TYPE=INTERNET,WORK:rudy@piienergy.com
+TEL;TYPE=CELL,VOICE:(575) 725-1290
 URL:https://therudyparra.com
 ADR;TYPE=WORK:;;;Albuquerque;NM;;USA
-X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/rudy-parra-329a2318a/
+X-SOCIALPROFILE;type=linkedin;x-user=rudy-parra-329a2318a:https://www.linkedin.com/in/rudy-parra-329a2318a/
+X-SOCIALPROFILE;type=instagram;x-user=therudyparra:https://www.instagram.com/therudyparra/
 PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAA
  AAA6ABAAMAAAABAAEAAKACAAQAAAABAAAA8KADAAQAAAABAAAA8AAAAAD/7QA4UGhvdG9zaG9w
  IDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8IAEQgA8ADwAw
