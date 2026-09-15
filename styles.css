@@ -2269,3 +2269,41 @@ section.hero .hero-text { min-width: 0; }
   /* Long centered paragraphs are hard to read on a narrow screen */
   .about-block, .about-centered { text-align: left; }
 }
+
+/* ===== Animated circuit-trace hero background ===== */
+section.hero { position: relative; }
+section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index: 1; }
+.circuit-bg {
+  position: absolute;
+  inset: -30px -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 60px);
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(115% 100% at 32% 45%, transparent 28%, #000 80%);
+  mask-image: radial-gradient(115% 100% at 32% 45%, transparent 28%, #000 80%);
+}
+.circuit-bg .traces path {
+  fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: 0.13;
+}
+.circuit-bg .vias circle {
+  fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; opacity: 0.3;
+}
+.circuit-bg .pulses path {
+  fill: none; stroke: var(--accent-2); stroke-width: 2; opacity: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 26 974;
+  stroke-dashoffset: 1000;
+  animation: circuit-pulse 8s linear infinite;
+}
+.circuit-bg .pulses path:nth-child(2) { animation-duration: 10s;  animation-delay: -3.1s; }
+.circuit-bg .pulses path:nth-child(3) { animation-duration: 9s;   animation-delay: -5.4s; }
+.circuit-bg .pulses path:nth-child(4) { animation-duration: 11s;  animation-delay: -1.8s; }
+.circuit-bg .pulses path:nth-child(5) { animation-duration: 7.5s; animation-delay: -4.2s; }
+.circuit-bg .pulses path:nth-child(6) { animation-duration: 10.5s;animation-delay: -6.7s; }
+.circuit-bg .pulses path:nth-child(7) { animation-duration: 8.5s; animation-delay: -2.6s; }
+.circuit-bg .pulses path:nth-child(8) { animation-duration: 12s;  animation-delay: -7.9s; }
+@keyframes circuit-pulse { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .circuit-bg .pulses path { animation: none; opacity: 0; }
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scan to meet Rudy — Rudy Parra</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C9A961'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%231F2733'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .qr-card { background: #FFFFFF; border-radius: 24px; padding: clamp(20px, 4vw, 36px); box-shadow: 0 18px 60px rgba(0,0,0,0.5); }
+    .qr-card svg { display: block; width: min(62vw, 56vh, 440px); height: auto; }
+    .qr-name { font-family: 'Newsreader', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 26px 0 4px; color: var(--text); }
+    .qr-sub { color: var(--muted); font-size: clamp(0.95rem, 2.5vw, 1.1rem); margin: 0 0 18px; }
+    .qr-hint { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .qr-toggle { display: inline-flex; gap: 8px; margin-top: 10px; }
+    .qr-toggle button { font: inherit; font-size: 0.9rem; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; }
+    .qr-toggle button.on { background: var(--accent); border-color: transparent; color: #1F2733; font-weight: 600; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="qr-hint" id="hint">Scan to meet Rudy</div>
+  <div class="qr-card">
+    <div id="qr-site"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" class="segno"><path class="qrline" stroke="#1f2733" d="M2 2.5h7m3 0h1m3 0h1m3 0h1m3 0h7m-29 1h1m5 0h1m1 0h1m1 0h1m2 0h1m1 0h2m2 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m3 0h2m1 0h1m1 0h6m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h4m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m1 0h1m2 0h1m4 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h2m1 0h3m2 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m3 0h1m1 0h2m1 0h2m-15 1h4m1 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h2m3 0h1m-28 1h1m4 0h1m1 0h2m3 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m-29 1h1m1 0h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h2m1 0h2m3 0h1m-29 1h1m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-29 1h1m2 0h1m2 0h2m2 0h11m2 0h1m4 0h1m-27 1h3m2 0h4m1 0h1m1 0h2m1 0h1m4 0h1m1 0h1m1 0h1m1 0h1m-29 1h4m2 0h1m3 0h2m1 0h1m1 0h1m1 0h2m2 0h2m1 0h1m3 0h1m-29 1h1m4 0h1m2 0h1m5 0h5m1 0h2m1 0h1m1 0h1m2 0h1m-27 1h1m1 0h4m1 0h1m1 0h4m3 0h4m1 0h1m3 0h1m-28 1h2m7 0h4m1 0h3m5 0h4m2 0h1m-27 1h6m1 0h4m12 0h1m2 0h1m-26 1h1m1 0h1m6 0h1m2 0h3m1 0h2m2 0h1m1 0h1m1 0h2m-29 1h2m1 0h1m1 0h2m1 0h2m2 0h2m1 0h3m2 0h5m3 0h1m-21 1h3m6 0h2m1 0h1m3 0h1m1 0h3m-29 1h7m1 0h1m5 0h2m3 0h2m1 0h1m1 0h1m3 0h1m-29 1h1m5 0h1m1 0h1m4 0h2m2 0h1m1 0h2m3 0h2m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h2m3 0h6m-25 1h1m1 0h3m1 0h1m2 0h1m3 0h1m1 0h2m1 0h1m4 0h1m1 0h3m-28 1h1m1 0h3m1 0h1m4 0h1m1 0h1m3 0h1m1 0h3m5 0h2m-29 1h1m5 0h1m8 0h1m1 0h2m1 0h4m1 0h1m1 0h2m-29 1h7m2 0h1m3 0h1m3 0h1m1 0h3m2 0h2m1 0h1"/></svg>
+</div>
+    <div id="qr-vcf" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" class="segno"><path class="qrline" stroke="#1f2733" d="M2 2.5h7m1 0h1m1 0h4m2 0h6m1 0h1m2 0h7m-33 1h1m5 0h1m4 0h1m3 0h3m4 0h1m3 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m3 0h1m2 0h2m2 0h5m4 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h2m4 0h1m2 0h2m1 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h4m1 0h1m2 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h2m2 0h3m2 0h2m1 0h3m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h3m4 0h1m4 0h1m1 0h1m-23 1h7m1 0h1m2 0h1m2 0h1m1 0h1m4 0h2m3 0h2m3 0h1m-33 1h2m1 0h1m3 0h1m2 0h1m2 0h1m4 0h2m1 0h3m2 0h2m1 0h4m-32 1h2m1 0h1m1 0h2m2 0h5m1 0h1m1 0h1m1 0h1m3 0h1m3 0h1m1 0h2m-32 1h1m1 0h2m1 0h1m7 0h1m7 0h4m3 0h5m-32 1h1m4 0h3m2 0h3m1 0h1m2 0h1m3 0h1m1 0h2m2 0h2m1 0h2m-31 1h1m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m3 0h1m2 0h2m1 0h1m3 0h3m-32 1h2m1 0h1m1 0h1m2 0h2m2 0h5m1 0h1m1 0h1m3 0h2m4 0h1m-32 1h2m1 0h2m2 0h1m2 0h3m1 0h1m1 0h7m1 0h3m1 0h3m-31 1h3m2 0h5m2 0h1m1 0h1m4 0h1m2 0h1m2 0h1m1 0h3m2 0h1m-33 1h2m1 0h1m1 0h1m1 0h5m1 0h2m1 0h2m1 0h5m1 0h3m1 0h2m1 0h1m-31 1h1m2 0h2m2 0h1m2 0h1m1 0h1m1 0h3m3 0h1m4 0h2m1 0h1m-31 1h2m2 0h1m5 0h1m3 0h1m1 0h2m1 0h1m1 0h1m3 0h1m1 0h5m-30 1h3m1 0h1m1 0h1m2 0h1m4 0h1m1 0h1m1 0h2m2 0h2m1 0h3m1 0h2m-33 1h2m3 0h1m1 0h1m2 0h2m1 0h2m6 0h1m1 0h1m1 0h3m1 0h2m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h1m4 0h2m2 0h2m3 0h3m-32 1h1m8 0h2m2 0h6m2 0h1m1 0h2m2 0h6m-33 1h1m1 0h5m1 0h2m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h5m2 0h1m-24 1h2m1 0h1m1 0h2m3 0h4m2 0h1m3 0h1m1 0h1m1 0h1m-33 1h7m1 0h2m1 0h1m6 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2m-32 1h1m5 0h1m1 0h1m2 0h2m3 0h2m1 0h1m1 0h1m1 0h2m3 0h5m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h1m10 0h1m2 0h6m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m2 0h2m2 0h2m2 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h4m1 0h2m1 0h1m4 0h2m2 0h1m-31 1h1m5 0h1m1 0h1m6 0h1m1 0h1m1 0h5m4 0h3m-31 1h7m2 0h6m2 0h1m1 0h2m1 0h3m1 0h2m1 0h1m1 0h1"/></svg>
+</div>
+  </div>
+  <h1 class="qr-name">Rudy Parra</h1>
+  <p class="qr-sub">Electrical lab technician &amp; embedded systems developer · Albuquerque, NM</p>
+  <div class="qr-toggle">
+    <button id="b-site" class="on">My website</button>
+    <button id="b-vcf">Save my contact</button>
+  </div>
+  <script>
+    const map = { site: 'Scan to meet Rudy', vcf: 'Scan to save my contact' };
+    function show(which) {
+      document.getElementById('qr-site').hidden = which !== 'site';
+      document.getElementById('qr-vcf').hidden = which !== 'vcf';
+      document.getElementById('b-site').classList.toggle('on', which === 'site');
+      document.getElementById('b-vcf').classList.toggle('on', which === 'vcf');
+      document.getElementById('hint').textContent = map[which];
+    }
+    document.getElementById('b-site').onclick = () => show('site');
+    document.getElementById('b-vcf').onclick = () => show('vcf');
+  </script>
+  <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
+</body>
+</html>

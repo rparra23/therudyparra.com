@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>We met? — Rudy Parra</title>
+  <meta name="description" content="Met Rudy at an event? Leave your name so he can follow up." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C9A961'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%231F2733'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .met-wrap { max-width: 480px; margin: 0 auto; }
+    .met-form label { display: block; font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 16px 0 6px; }
+    .met-form input, .met-form textarea {
+      width: 100%; box-sizing: border-box; font: inherit; color: var(--text);
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 11px 14px;
+    }
+    .met-form input:focus, .met-form textarea:focus { outline: none; border-color: var(--accent); }
+    .met-form textarea { min-height: 90px; resize: vertical; }
+    .met-status { margin-top: 14px; font-size: 0.95rem; }
+    .met-status.ok { color: #8FBF8A; }
+    .met-status.err { color: #D98080; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/press">Press</a>
+        <a href="/talks/stem-core/">Slides</a>
+        <a href="/book">Book</a>
+      </nav>
+    </header>
+
+    <div class="met-wrap">
+      <div class="page-header">
+        <a class="back-link" href="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          Back to home
+        </a>
+        <h1>We met? Say hi.</h1>
+      </div>
+      <p style="color:var(--muted);margin:-6px 0 10px">
+        Met Rudy at an event? Drop your name so he can follow up — a LinkedIn or
+        email helps him find you again.
+      </p>
+
+      <form class="met-form" id="met-form">
+        <label for="f-name">Your name *</label>
+        <input id="f-name" name="name" required maxlength="120" autocomplete="name" />
+        <label for="f-contact">LinkedIn / email / Instagram</label>
+        <input id="f-contact" name="contact" maxlength="200" placeholder="linkedin.com/in/you — or wherever to find you" />
+        <label for="f-event">Where did we meet?</label>
+        <input id="f-event" name="event" maxlength="120" placeholder="e.g. GMiS Career Fair, TechFest, trivia night" />
+        <label for="f-note">Anything else?</label>
+        <textarea id="f-note" name="note" maxlength="500" placeholder="What we talked about, what you're working on…"></textarea>
+        <button class="btn primary" type="submit" style="margin-top:18px">Send it to Rudy</button>
+        <div class="met-status" id="met-status" role="status"></div>
+      </form>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const API = 'https://rudy-site.rparra.workers.dev';
+    document.getElementById('met-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const s = document.getElementById('met-status');
+      const f = e.target;
+      s.className = 'met-status'; s.textContent = 'Sending…';
+      try {
+        const r = await fetch(API + '/met', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: f.name.value, contact: f.contact.value,
+            event: f.event.value, note: f.note.value,
+          }),
+        });
+        const data = await r.json();
+        if (r.ok && data.ok) {
+          s.className = 'met-status ok';
+          s.textContent = "Got it — Rudy will see this. Nice meeting you!";
+          f.reset();
+        } else {
+          throw new Error(data.error || 'failed');
+        }
+      } catch (err) {
+        s.className = 'met-status err';
+        s.innerHTML = 'Hmm, that didn\'t go through — email <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a> instead.';
+      }
+    });
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
+  <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
+</body>
+</html>

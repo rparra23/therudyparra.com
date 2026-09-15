@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Rudy Parra</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#1F2733" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .dash { max-width: 760px; margin: 40px auto; padding: 0 4px; }
+    .dash h2 { font-family: 'Newsreader', serif; margin: 28px 0 10px; }
+    .dash table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .dash th, .dash td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .dash th { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .dash td { color: var(--muted); }
+    .dash td strong { color: var(--text); }
+    #login input { font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; width: 280px; }
+    .muted { color: var(--muted-2); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container dash">
+    <h1 style="font-family:'Newsreader',serif">Site dashboard</h1>
+    <div id="login">
+      <p class="muted">Paste your admin key (stored only in this tab).</p>
+      <input id="key" type="password" placeholder="ADMIN_KEY" />
+      <button class="btn primary" id="go" style="margin-left:8px">Open</button>
+      <div id="login-err" class="muted" style="margin-top:8px"></div>
+    </div>
+    <div id="content" hidden>
+      <h2>People you met</h2>
+      <table id="leads"><thead><tr><th>When</th><th>Who</th><th>Where</th><th>Note</th></tr></thead><tbody></tbody></table>
+      <h2>Pageviews (last 30 days)</h2>
+      <table id="hits"><thead><tr><th>Day</th><th>Page</th><th>Views</th></tr></thead><tbody></tbody></table>
+      <h2>Short-link clicks</h2>
+      <table id="clicks"><thead><tr><th>Slug</th><th>Clicks</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+  <script>
+    const API = 'https://rudy-site.rparra.workers.dev';
+    const esc = (s) => { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; };
+    async function load(key) {
+      const h = { Authorization: 'Bearer ' + key };
+      const [leadsR, statsR] = await Promise.all([
+        fetch(API + '/met/list', { headers: h }),
+        fetch(API + '/stats', { headers: h }),
+      ]);
+      if (!leadsR.ok || !statsR.ok) throw new Error('unauthorized');
+      const leads = await leadsR.json();
+      const stats = await statsR.json();
+      document.querySelector('#leads tbody').innerHTML = (leads.leads || []).map(l =>
+        `<tr><td>${esc((l.at || '').slice(0, 16).replace('T', ' '))}</td>
+             <td><strong>${esc(l.name)}</strong><br>${esc(l.contact)}</td>
+             <td>${esc(l.event)}</td><td>${esc(l.note)}</td></tr>`).join('') ||
+        '<tr><td colspan="4" class="muted">Nobody yet — share therudyparra.com/met after events.</td></tr>';
+      const hitRows = [];
+      const days = Object.keys(stats.hits || {}).sort().reverse().slice(0, 30);
+      for (const day of days)
+        for (const [path, n] of Object.entries(stats.hits[day]).sort((a, b) => b[1] - a[1]))
+          hitRows.push(`<tr><td>${esc(day)}</td><td>${esc(path)}</td><td>${n}</td></tr>`);
+      document.querySelector('#hits tbody').innerHTML = hitRows.join('') ||
+        '<tr><td colspan="3" class="muted">No pageviews recorded yet.</td></tr>';
+      document.querySelector('#clicks tbody').innerHTML =
+        Object.entries(stats.clicks || {}).sort((a, b) => b[1] - a[1])
+          .map(([slug, n]) => `<tr><td>/go/${esc(slug)}</td><td>${n}</td></tr>`).join('') ||
+        '<tr><td colspan="2" class="muted">No short links yet.</td></tr>';
+      document.getElementById('login').hidden = true;
+      document.getElementById('content').hidden = false;
+    }
+    document.getElementById('go').addEventListener('click', async () => {
+      const key = document.getElementById('key').value.trim();
+      try { await load(key); sessionStorage.setItem('rudy-admin', key); }
+      catch { document.getElementById('login-err').textContent = 'That key didn\'t work.'; }
+    });
+    const saved = sessionStorage.getItem('rudy-admin');
+    if (saved) load(saved).catch(() => sessionStorage.removeItem('rudy-admin'));
+  </script>
+</body>
+</html>

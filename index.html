@@ -6,6 +6,7 @@
   <title>Rudy Parra — Electrical Lab Technician & Embedded Systems Developer</title>
   <meta name="description" content="Rodolfo (Rudy) González Parra — electrical lab technician and embedded systems developer building clean-energy hardware in Albuquerque. Former solar physics & glass physics researcher." />
   <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
   <meta property="og:title" content="Rudy Parra" />
   <meta property="og:description" content="Electrical lab technician & embedded systems developer. Clean energy, embedded firmware, and applied research." />
   <meta property="og:type" content="website" />
@@ -37,6 +38,36 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero">
+      <svg class="circuit-bg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g class="traces">
+          <path pathLength="1000" d="M -20 70 H 310 V 170 H 540 V 240" />
+          <path pathLength="1000" d="M 1220 50 H 950 V 150 H 800 V 250" />
+          <path pathLength="1000" d="M -20 560 H 210 V 430 H 430 V 350 H 580" />
+          <path pathLength="1000" d="M 1220 610 H 990 V 470 H 860 V 400" />
+          <path pathLength="1000" d="M 660 -20 V 80 H 780 V 160" />
+          <path pathLength="1000" d="M 420 660 V 560 H 640 V 470" />
+          <path pathLength="1000" d="M 1220 330 H 1060 V 220 H 940" />
+          <path pathLength="1000" d="M -20 300 H 120 V 480 H 300" />
+        </g>
+        <g class="pulses">
+          <path pathLength="1000" d="M -20 70 H 310 V 170 H 540 V 240" />
+          <path pathLength="1000" d="M 1220 50 H 950 V 150 H 800 V 250" />
+          <path pathLength="1000" d="M -20 560 H 210 V 430 H 430 V 350 H 580" />
+          <path pathLength="1000" d="M 1220 610 H 990 V 470 H 860 V 400" />
+          <path pathLength="1000" d="M 660 -20 V 80 H 780 V 160" />
+          <path pathLength="1000" d="M 420 660 V 560 H 640 V 470" />
+          <path pathLength="1000" d="M 1220 330 H 1060 V 220 H 940" />
+          <path pathLength="1000" d="M -20 300 H 120 V 480 H 300" />
+        </g>
+        <g class="vias">
+          <circle cx="540" cy="240" r="5" /><circle cx="800" cy="250" r="5" />
+          <circle cx="580" cy="350" r="5" /><circle cx="860" cy="400" r="5" />
+          <circle cx="780" cy="160" r="5" /><circle cx="640" cy="470" r="5" />
+          <circle cx="940" cy="220" r="5" /><circle cx="300" cy="480" r="5" />
+          <circle cx="310" cy="70" r="3.5" /><circle cx="950" cy="150" r="3.5" />
+          <circle cx="210" cy="430" r="3.5" /><circle cx="990" cy="470" r="3.5" />
+        </g>
+      </svg>
       <div class="hero-text">
       <a class="now-playing" id="now-playing" href="#" target="_blank" rel="noopener" aria-label="Currently playing on Spotify">
         <img class="np-art" id="np-art" alt="" loading="lazy" />
@@ -55,9 +86,11 @@
         clean-energy hardware.
       </p>
       <p class="lead">
-        I'm an R&amp;D lab technician at GridFlow working on lithium-sulfur and
-        flow batteries, the developer behind Pii Energy's Edge 2000 platform,
-        and a published physics researcher. Off the bench, I serve on the Board of
+        I'm a lab technician at GridFlow specializing in long-duration energy
+        storage for commercial use, and lead software developer at Pii Energy —
+        one of the first companies bringing plug-in solar to the U.S., with the
+        first affordable plug-in solar generation system designed to save
+        Americans thousands on energy. Off the bench, I serve on the Board of
         <a href="https://www.nmtechtalks.com" target="_blank" rel="noopener">NM Tech Talks</a>
         and direct the New Mexico chapter of
         <a href="https://techqueria.org" target="_blank" rel="noopener">Techqueria</a>.
@@ -131,7 +164,7 @@
         <span class="bcard-role">Clean Energy R&amp;D</span>
         <h3 class="bcard-org">GridFlow</h3>
         <p class="bcard-desc">
-          Senior Electrical Lab Technician — lithium-sulfur and vanadium redox flow battery systems, prototype hardware, embedded firmware.
+          Senior Electrical Lab Technician — vanadium redox flow battery systems for long-duration commercial energy storage, prototype hardware, embedded firmware.
         </p>
         <span class="bcard-cta">
           Open card
@@ -172,6 +205,7 @@
     <h2 id="events" class="section-title">Events Rudy's Going To</h2>
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
       Come say hi — grab tickets, and mark your calendar for NM Tech Week.
+      Did we meet at one of these? <a href="/met/">Say hi →</a>
     </p>
     <div id="events-grid" class="events-row">
       <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
@@ -514,6 +548,61 @@
         .catch(() => {});
     })();
 
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
+    /* ===== Live events from Rudy's calendars (rudy-site Worker) =====
+       Appends dark typographic cards for upcoming events that aren't already
+       curated above. Fails silently if the Worker isn't deployed yet. */
+    (function () {
+      const API = 'https://rudy-site.rparra.workers.dev';
+      const grid = document.getElementById('events-grid');
+      if (!grid) return;
+      fetch(API + '/events').then(r => r.json()).then(data => {
+        const have = grid.textContent.toLowerCase();
+        (data.events || []).forEach(ev => {
+          const title = (ev.title || '').trim();
+          if (!title) return;
+          const probe = title.toLowerCase().split(/\s+/).slice(0, 3).join(' ');
+          if (probe && have.includes(probe)) return;
+          const d = new Date(ev.start);
+          if (isNaN(d) || (Date.parse(ev.end || ev.start) || 0) < Date.now()) return;
+          const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+          const time = ev.allDay ? '' : ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+          const cell = document.createElement('div');
+          cell.style.textAlign = 'center';
+          cell.dataset.expires = ev.end || ev.start;
+          const a = document.createElement('a');
+          if (ev.url) { a.href = ev.url; a.target = '_blank'; a.rel = 'noopener'; }
+          a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#141A23;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
+          const eyebrow = document.createElement('span');
+          eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961";
+          eyebrow.textContent = 'From my calendar';
+          const t = document.createElement('span');
+          t.style.cssText = "font-family:'Newsreader',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2;color:#EEF1F4;letter-spacing:-0.01em";
+          t.textContent = title;
+          const meta = document.createElement('span');
+          meta.style.cssText = 'font-size:0.95rem;color:#B8C0CB;line-height:1.6';
+          meta.textContent = day + time + (ev.location ? ' · ' + ev.location : '');
+          a.append(eyebrow, t, meta);
+          cell.appendChild(a);
+          if (ev.url) {
+            const btn = document.createElement('a');
+            btn.className = 'btn primary';
+            btn.href = ev.url; btn.target = '_blank'; btn.rel = 'noopener';
+            btn.style.marginTop = '10px';
+            btn.textContent = 'Details ↗';
+            cell.appendChild(btn);
+          }
+          grid.appendChild(cell);
+        });
+      }).catch(() => {});
+    })();
+
+    /* First-party pageview beacon (no cookies, counts only) */
+    try { navigator.sendBeacon('https://rudy-site.rparra.workers.dev/hit', JSON.stringify({ p: location.pathname })); } catch (e) {}
   </script>
 </body>
 </html>

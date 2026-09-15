@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speaker & Press Kit — Rudy Parra</title>
+  <meta name="description" content="Speaker and press kit for Rudy Parra — approved bios, headshot, talk topics, and contact for event organizers and media." />
+  <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C9A961'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='ui-sans-serif,system-ui' font-size='34' font-weight='700' fill='%231F2733'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .kit-grid { display: grid; gap: 14px; }
+    @media (min-width: 720px) { .kit-grid { grid-template-columns: 220px 1fr; align-items: start; } }
+    .kit-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .kit-card h3 { font-family: 'Newsreader', serif; margin: 0 0 10px; font-size: 1.2rem; }
+    .kit-bio { color: var(--muted); line-height: 1.7; margin: 0 0 8px; }
+    .kit-label { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); display: block; margin: 18px 0 6px; }
+    .kit-label:first-child { margin-top: 0; }
+    .copy-btn { font: inherit; font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; margin-left: 8px; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .kit-headshot { width: 100%; border-radius: 14px; display: block; }
+    .kit-dl { display: block; margin-top: 10px; font-size: 0.9rem; }
+    .kit-topics li { color: var(--muted); line-height: 1.7; margin-bottom: 6px; }
+    .kit-facts { color: var(--muted); line-height: 1.9; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">R</span>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/press">Press</a>
+        <a href="/talks/stem-core/">Slides</a>
+        <a href="/book">Book</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <a class="back-link" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to home
+      </a>
+      <h1>Speaker &amp; Press Kit</h1>
+    </div>
+    <p style="color:var(--muted);margin:-6px 0 24px;max-width:62ch">
+      Booking Rudy for a panel, talk, or article? Everything you need is on this page —
+      approved bios in three lengths, a headshot, topics, and contact details.
+    </p>
+
+    <div class="kit-grid">
+      <div class="kit-card">
+        <img class="kit-headshot" src="/assets/profile.jpg" alt="Headshot of Rudy Parra" width="600" height="600" />
+        <a class="kit-dl" href="/assets/profile.jpg" download="Rudy-Parra-headshot.jpg">Download headshot (JPG, 600×600) ↓</a>
+        <a class="kit-dl" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Download contact card (vCard) ↓</a>
+        <span class="kit-label">Contact</span>
+        <div class="kit-facts">
+          <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a><br />
+          <a href="tel:+15757251290">(575) 725-1290</a><br />
+          <a href="https://therudyparra.com">therudyparra.com</a><br />
+          <a href="https://www.linkedin.com/in/rudy-parra-329a2318a/" target="_blank" rel="noopener">LinkedIn</a> ·
+          <a href="https://www.instagram.com/therudyparra/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <span class="kit-label">Name &amp; pronunciation</span>
+        <div class="kit-facts">Rodolfo "Rudy" González Parra<br />goes by <strong>Rudy Parra</strong></div>
+      </div>
+
+      <div>
+        <div class="kit-card" style="margin-bottom:14px">
+          <span class="kit-label">One-liner <button class="copy-btn" data-copy="bio-1">Copy</button></span>
+          <p class="kit-bio" id="bio-1">Rudy Parra is an electrical lab technician and embedded systems developer building clean-energy hardware in Albuquerque, New Mexico.</p>
+
+          <span class="kit-label">Short bio (~60 words) <button class="copy-btn" data-copy="bio-2">Copy</button></span>
+          <p class="kit-bio" id="bio-2">Rudy Parra is a lab technician at GridFlow specializing in long-duration energy storage for commercial use, and lead software developer at Pii Energy — one of the first companies bringing affordable plug-in solar to the U.S. A published physics researcher, he also serves on the Board of NM Tech Talks and directs the New Mexico chapter of Techqueria.</p>
+
+          <span class="kit-label">Long bio (~120 words) <button class="copy-btn" data-copy="bio-3">Copy</button></span>
+          <p class="kit-bio" id="bio-3">Rudy Parra is an electrical lab technician and embedded systems developer building clean-energy hardware in Albuquerque, New Mexico. At GridFlow he specializes in long-duration energy storage for commercial use, working on vanadium redox flow battery systems. As lead software developer at Pii Energy — one of the first companies bringing plug-in solar to the U.S. — he built the full-stack platform behind the Edge&nbsp;2000, the first affordable plug-in solar generation system for American homes. A former researcher at the National Solar Observatory and Lockheed Martin, he is first author on a NASA/NSF-funded solar spectroscopy poster and a co-author on published work in glass physics, X-ray absorption spectroscopy, and plasma science. Off the bench, Rudy serves on the Board of NM Tech Talks, co-organizes the Desert Dev Lab hackathon, and directs the New Mexico chapter of Techqueria.</p>
+        </div>
+
+        <div class="kit-card">
+          <span class="kit-label">Talks about</span>
+          <ul class="kit-topics">
+            <li>Clean-energy hardware — battery R&amp;D, home solar, and what it's like on the bench</li>
+            <li>Embedded systems and full-stack hardware products (sensors to cloud)</li>
+            <li>Building New Mexico's tech ecosystem — community organizing, TechFest, and Tech Week</li>
+            <li>Pathways into tech careers without a traditional route</li>
+            <li>LGBTQ+ visibility and community in STEM</li>
+          </ul>
+          <span class="kit-label">Logistics</span>
+          <p class="kit-bio" style="margin:0">Based in Albuquerque, NM (Mountain Time). Available for panels, talks, workshops, and podcasts — email is the fastest way to reach him.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const el = document.getElementById(btn.dataset.copy);
+        navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(() => { btn.textContent = old; }, 1200);
+        });
+      });
+    });
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
+  <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
+</body>
+</html>

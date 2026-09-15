@@ -6,6 +6,7 @@
   <title>Book a meeting — Rudy Parra</title>
   <meta name="description" content="Book a 30-minute meeting with Rudy Parra. Pick a time that works for you and a Google Meet link will be generated automatically." />
   <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
   <meta property="og:title" content="Book a meeting with Rudy Parra" />
   <meta property="og:description" content="Pick a 30-minute slot. A Google Meet link is auto-generated." />
   <meta property="og:type" content="website" />
@@ -384,5 +385,6 @@
         .catch(() => { hide(loadingEl); show(errorEl); });
     })();
   </script>
+  <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
 </body>
 </html>
