@@ -164,99 +164,16 @@
 
     </div>
 
-    <!-- ===== EVENTS ===== -->
+    <!-- ===== EVENTS =====
+         Each card carries data-expires (ISO timestamp, Mountain Time offset).
+         A script at the bottom of the page removes cards past their expiry
+         and hides the whole section when none remain. New cards must set it. -->
     <h2 id="events" class="section-title">Events Rudy's Going To</h2>
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
-      Come say hi — register for the meetup, and mark your calendar for TechFest.
+      Come say hi — mark your calendar for TechFest during NM Tech Week.
     </p>
-    <div class="grid-2" style="align-items:start">
-      <div style="text-align:center">
-        <a href="https://esccma.explora.us/performance.aspx?pid=98947" target="_blank" rel="noopener"
-           aria-label="Explora Adult Night: Food for Thought — get tickets">
-          <img src="/assets/events/explora-adult-night.jpg"
-               alt="Explora Adult Night flyer — Food for Thought"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(35,32,26,0.18)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Explora · Adult Night — Food for Thought · Tonight, Aug 21
-        </span>
-        <a class="btn primary" href="https://esccma.explora.us/performance.aspx?pid=98947" target="_blank" rel="noopener" style="margin-top:10px">
-          Get tickets ↗
-        </a>
-      </div>
-
-      <div style="text-align:center">
-        <a href="https://gdg.community.dev/events/details/google-gdg-albuquerque-presents-abq-ssc-monthly-tech-social-8/" target="_blank" rel="noopener"
-           aria-label="ABQ SSC Monthly Tech Social — RSVP on GDG Community"
-           style="display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#23201A;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(35,32,26,0.18)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#D98B5F">GDG Albuquerque</span>
-          <span style="font-family:'Newsreader',serif;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.15;color:#F3ECE0;letter-spacing:-0.01em">ABQ SSC Monthly<br/>Tech Social</span>
-          <span style="font-size:0.95rem;color:#CDBEA8;line-height:1.6">Tonight, Aug 21 · 6:30–8:30 PM<br/>Sawmill Market</span>
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          GDG Albuquerque · Tech social · Tonight, Aug 21
-        </span>
-        <a class="btn primary" href="https://gdg.community.dev/events/details/google-gdg-albuquerque-presents-abq-ssc-monthly-tech-social-8/" target="_blank" rel="noopener" style="margin-top:10px">
-          RSVP on GDG ↗
-        </a>
-      </div>
-
-      <div style="text-align:center">
-        <a href="https://www.eventbrite.com/e/1998256094771" target="_blank" rel="noopener"
-           aria-label="Deep Dive Alumni Event — RSVP on Eventbrite"
-           style="display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#23201A;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(35,32,26,0.18)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#D98B5F">Deep Dive Coding</span>
-          <span style="font-family:'Newsreader',serif;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.1;color:#F3ECE0;letter-spacing:-0.01em">Deep Dive<br/>Alumni Event</span>
-          <span style="font-size:0.95rem;color:#CDBEA8;line-height:1.6">Thu, Aug 27 · 4:30–6:30 PM<br/>Tractor Brewing · Wells Park</span>
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Deep Dive Coding · Alumni social · Aug 27
-        </span>
-        <a class="btn primary" href="https://www.eventbrite.com/e/1998256094771" target="_blank" rel="noopener" style="margin-top:10px">
-          RSVP on Eventbrite ↗
-        </a>
-      </div>
-
-      <div style="text-align:center">
-        <a href="https://luma.com/event/evt-3SXOvKyWCKFM30j" target="_blank" rel="noopener"
-           aria-label="August Techqueria Meetup — Cervezas y Cerebros trivia night on Luma">
-          <img src="/assets/events/techqueria-trivia.jpg"
-               alt="August Techqueria Meetup flyer — ¡Cervezas y Cerebros! trivia night, Green Jeans Food Hall, Albuquerque"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(35,32,26,0.18)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Techqueria NM · Aug 29 · Green Jeans Food Hall
-        </span>
-        <a
-          href="https://luma.com/event/evt-3SXOvKyWCKFM30j"
-          class="luma-checkout--button"
-          data-luma-action="checkout"
-          data-luma-event-id="evt-3SXOvKyWCKFM30j"
-          style="margin-top:10px"
-        >
-          Register for Event
-        </a>
-      </div>
-
-      <div style="text-align:center">
-        <a href="https://albuquerquecf.fcsuite.com/erp/donate/list/event?event_date_id=10075" target="_blank" rel="noopener"
-           aria-label="Neon Nights 2026 Appreciation Celebration — tickets">
-          <img src="/assets/events/neon-nights-2026.jpg"
-               alt="Neon Nights invitation — Albuquerque Community Foundation 2026 Appreciation Celebration, Thursday September 10, 6–8pm, National Hispanic Cultural Center Salón Ortega"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(35,32,26,0.18)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Albuquerque Community Foundation · Neon Nights · Sep 10
-        </span>
-        <a class="btn primary" href="https://albuquerquecf.fcsuite.com/erp/donate/list/event?event_date_id=10075" target="_blank" rel="noopener" style="margin-top:10px">
-          Tickets ↗
-        </a>
-      </div>
-
-      <div style="text-align:center">
+    <div id="events-grid" class="grid-2" style="align-items:start">
+      <div style="text-align:center" data-expires="2026-10-31T00:00:00-06:00">
         <a href="https://newmexicotechweek.com/events" target="_blank" rel="noopener"
            aria-label="TechFest 2026 — details and tickets on the NM Tech Week site">
           <img src="/assets/events/techfest-2026-promo.png"
@@ -278,9 +195,29 @@
     </footer>
   </div>
 
-  <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Auto-remove past events ===== */
+    (function () {
+      const grid = document.getElementById('events-grid');
+      if (!grid) return;
+      const now = Date.now();
+      grid.querySelectorAll('[data-expires]').forEach(card => {
+        const expires = Date.parse(card.dataset.expires);
+        if (!isNaN(expires) && expires <= now) card.remove();
+      });
+      if (!grid.children.length) {
+        const heading = document.getElementById('events');
+        if (heading) {
+          if (heading.nextElementSibling && heading.nextElementSibling.tagName === 'P') {
+            heading.nextElementSibling.remove();
+          }
+          heading.remove();
+        }
+        grid.remove();
+      }
+    })();
 
     /* ===== Nav toggle (hamburger) ===== */
     (function () {

@@ -7,4 +7,4 @@ workers_dev = true
 # setup.sh creates this and fills in the id automatically.
 [[kv_namespaces]]
 binding = "DECK"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "a004140cf52244af939cf92df1420a7b"
