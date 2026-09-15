@@ -2252,3 +2252,16 @@ section.hero .hero-text { min-width: 0; }
 /* Smaller slides for the Tech Week lineup tiles */
 .nmtw-row { gap: 14px; }
 .nmtw-row > * { width: min(200px, 62vw); }
+
+/* ===== Mobile polish ===== */
+/* Business cards: let each card size to its own content in the carousel
+   instead of stretching to match the tallest one */
+@media (max-width: 719px) {
+  .bcards { align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  /* Tighter gap between sections on small screens */
+  h2.section-title { margin-top: 44px; }
+  /* Long centered paragraphs are hard to read on a narrow screen */
+  .about-block, .about-centered { text-align: left; }
+}
