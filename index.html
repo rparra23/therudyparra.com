@@ -172,7 +172,7 @@
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
       Come say hi — grab tickets, and mark your calendar for NM Tech Week.
     </p>
-    <div id="events-grid" class="grid-2" style="align-items:start">
+    <div id="events-grid" class="events-row">
       <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
         <a href="https://gmisconference.org" target="_blank" rel="noopener"
            aria-label="GMiS Graduate and Career Fair — details on the GMiS Conference site"
@@ -284,16 +284,17 @@
           Details &amp; tickets ↗
         </a>
       </div>
+    </div>
 
-      <div data-expires="2026-10-31T00:00:00-06:00"
-           style="grid-column:1/-1;background:#FBF7EF;border:1px solid var(--border,#E3D8C6);border-radius:14px;padding:26px 28px;text-align:left">
+    <div data-expires="2026-10-31T00:00:00-06:00"
+         style="background:#FBF7EF;border:1px solid var(--border,#E3D8C6);border-radius:14px;padding:26px 28px;text-align:left">
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)">NM Tech Week · Oct 26–31</span>
         <h3 style="font-family:'Newsreader',serif;font-size:1.4rem;margin:8px 0 4px">The full Tech Week lineup</h3>
         <p style="color:var(--muted);font-size:0.9rem;margin:0 0 16px">
           Everything happening across the week — full details at
           <a href="https://newmexicotechweek.com/events" target="_blank" rel="noopener">newmexicotechweek.com/events</a>.
         </p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;align-items:start">
+        <div class="events-row nmtw-row">
           <a href="https://luma.com/aw67tsmf" target="_blank" rel="noopener" style="display:block;text-decoration:none">
             <img src="/assets/events/nmtw-kickoff-2026.jpg" alt="Tech Week Kickoff Party — event artwork" loading="lazy"
                  style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;box-shadow:0 6px 18px rgba(35,32,26,0.14)" />
@@ -393,7 +394,6 @@
             <span style="display:block;font-size:0.75rem;color:var(--muted);margin-top:2px">9 AM–5 PM</span>
           </a>
         </div>
-      </div>
     </div>
 
     <footer>
@@ -409,7 +409,7 @@
       const grid = document.getElementById('events-grid');
       if (!grid) return;
       const now = Date.now();
-      grid.querySelectorAll('[data-expires]').forEach(card => {
+      document.querySelectorAll('[data-expires]').forEach(card => {
         const expires = Date.parse(card.dataset.expires);
         if (!isNaN(expires) && expires <= now) card.remove();
       });
