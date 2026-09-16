@@ -323,17 +323,20 @@
       </div>
     </div>
 
-    <div data-expires="2026-10-31T00:00:00-06:00"
-         style="background:#28313F;border:1px solid var(--border,#3A4453);border-radius:14px;padding:26px 28px;text-align:left">
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)">NM Tech Week · Oct 26–31</span>
-        <h3 style="font-family:'Newsreader',serif;font-size:1.4rem;margin:8px 0 4px">The full Tech Week lineup</h3>
-        <p style="color:var(--muted);font-size:0.9rem;margin:0 0 16px">
-          Everything happening across the week — full details at
-          <a href="https://newmexicotechweek.com/events" target="_blank" rel="noopener">newmexicotechweek.com/events</a>.
+    <div class="nmtw-panel" data-expires="2026-10-31T00:00:00-06:00"
+         style="background:#020307;border:1.5px solid rgba(250,213,197,0.45);border-radius:14px;padding:26px 28px;text-align:left">
+        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#FAD5C5">NM Tech Week · Oct 26–31</span>
+        <h3 style="font-family:'Newsreader',serif;font-size:1.4rem;margin:8px 0 4px;color:#FFFFFF">The full Tech Week lineup</h3>
+        <p style="color:#B9C0CE;font-size:0.9rem;margin:0 0 14px">
+          Everything happening across the week, hosted by NM Tech Talks and friends.
         </p>
+        <div id="nmtw-countdown" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 18px" aria-label="Countdown to NM Tech Week"></div>
+        <a class="nmtw-btn" href="https://newmexicotechweek.com/events" target="_blank" rel="noopener">
+          See the full lineup on newmexicotechweek.com ↗
+        </a>
         <div style="display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px">
           <a href="https://michaelthomascoffee.com" target="_blank" rel="noopener"
-             style="display:flex;align-items:center;gap:14px;flex:1 1 260px;min-width:0;background:#1A212C;border:1px solid var(--border,#3A4453);border-radius:12px;padding:12px 16px;text-decoration:none">
+             style="display:flex;align-items:center;gap:14px;flex:1 1 260px;min-width:0;background:#0C1019;border:1px solid rgba(250,213,197,0.28);border-radius:12px;padding:12px 16px;text-decoration:none">
             <img src="/assets/logos/michael-thomas-coffee.png" alt="Michael Thomas Coffee Roasters logo"
                  width="52" height="55" loading="lazy" style="object-fit:contain;flex:0 0 auto;background:#EEF1F4;border-radius:10px;padding:6px" />
             <span style="font-size:0.88rem;line-height:1.5;color:var(--text)">
@@ -342,7 +345,7 @@
             </span>
           </a>
           <a href="https://505central.com" target="_blank" rel="noopener"
-             style="display:flex;align-items:center;gap:14px;flex:1 1 260px;min-width:0;background:#1A212C;border:1px solid var(--border,#3A4453);border-radius:12px;padding:12px 16px;text-decoration:none">
+             style="display:flex;align-items:center;gap:14px;flex:1 1 260px;min-width:0;background:#0C1019;border:1px solid rgba(250,213,197,0.28);border-radius:12px;padding:12px 16px;text-decoration:none">
             <img src="/assets/logos/505-central.png" alt="505 Central Food Hall logo"
                  width="53" height="55" loading="lazy" style="object-fit:contain;flex:0 0 auto;background:#EEF1F4;border-radius:10px;padding:6px" />
             <span style="font-size:0.88rem;line-height:1.5;color:var(--text)">
@@ -618,6 +621,50 @@
           grid.appendChild(cell);
         });
       }).catch(() => {});
+    })();
+
+    /* ===== Live countdown to NM Tech Week kickoff ===== */
+    (function () {
+      const wrap = document.getElementById('nmtw-countdown');
+      if (!wrap) return;
+      const target = Date.parse('2026-10-26T18:00:00-06:00'); // Kickoff Party, Oct 26 6 PM MT
+      const units = [['days', 86400000], ['hrs', 3600000], ['min', 60000], ['sec', 1000]];
+      const nums = units.map(([label]) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = 'background:#0C1019;border:1px solid rgba(250,213,197,0.28);border-radius:10px;padding:10px 0;width:64px;text-align:center';
+        const n = document.createElement('div');
+        n.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:1.3rem;font-weight:700;color:#FAD5C5;line-height:1.1";
+        n.textContent = '–';
+        const l = document.createElement('div');
+        l.style.cssText = 'font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:#B9C0CE;margin-top:2px';
+        l.textContent = label;
+        cell.append(n, l);
+        wrap.appendChild(cell);
+        return n;
+      });
+      const tag = document.createElement('div');
+      tag.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#B9C0CE";
+      tag.textContent = 'until kickoff';
+      wrap.appendChild(tag);
+      function tick() {
+        let d = target - Date.now();
+        if (d <= 0) {
+          clearInterval(iv);
+          wrap.innerHTML = '';
+          const live = document.createElement('div');
+          live.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:#FAD5C5";
+          live.textContent = '● Tech Week is happening now';
+          wrap.appendChild(live);
+          return;
+        }
+        for (let i = 0; i < units.length; i++) {
+          const v = Math.floor(d / units[i][1]);
+          d -= v * units[i][1];
+          nums[i].textContent = String(v).padStart(2, '0');
+        }
+      }
+      const iv = setInterval(tick, 1000);
+      tick();
     })();
 
     /* First-party pageview beacon (no cookies, counts only) */

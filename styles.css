@@ -2282,13 +2282,13 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
   mask-image: radial-gradient(115% 100% at 32% 45%, transparent 28%, #000 80%);
 }
 .circuit-bg .traces path {
-  fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: 0.13;
+  fill: none; stroke: var(--accent); stroke-width: 1.8; opacity: 0.22;
 }
 .circuit-bg .vias circle {
-  fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; opacity: 0.3;
+  fill: var(--bg); stroke: var(--accent); stroke-width: 1.8; opacity: 0.45;
 }
 .circuit-bg .pulses path {
-  fill: none; stroke: var(--accent-2); stroke-width: 2; opacity: 0.55;
+  fill: none; stroke: var(--accent-2); stroke-width: 2.5; opacity: 0.85;
   stroke-linecap: round;
   stroke-dasharray: 26 974;
   stroke-dashoffset: 1000;
@@ -2302,6 +2302,42 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
 .circuit-bg .pulses path:nth-child(7) { animation-duration: 8.5s; animation-delay: -2.6s; }
 .circuit-bg .pulses path:nth-child(8) { animation-duration: 12s;  animation-delay: -7.9s; }
 @keyframes circuit-pulse { to { stroke-dashoffset: 0; } }
+/* Mobile: single-column hero leaves more empty ground — let the circuit show */
+@media (max-width: 719px) {
+  .circuit-bg {
+    -webkit-mask-image: radial-gradient(130% 105% at 40% 40%, transparent 12%, #000 62%);
+    mask-image: radial-gradient(130% 105% at 40% 40%, transparent 12%, #000 62%);
+  }
+  .circuit-bg .traces path { opacity: 0.3; }
+  .circuit-bg .vias circle { opacity: 0.55; }
+}
 @media (prefers-reduced-motion: reduce) {
   .circuit-bg .pulses path { animation: none; opacity: 0; }
 }
+
+/* ===== NM Tech Week panel — NM Tech Talks brand island =====
+   Peach #FAD5C5 on near-black #020307, sampled from the TechFest artwork.
+   The custom-property overrides re-tint the lineup tiles' inline var() styles. */
+.nmtw-panel {
+  --accent: #FAD5C5;
+  --accent-2: #FFE4D6;
+  --text: #FFFFFF;
+  --muted: #B9C0CE;
+  --border-strong: rgba(250, 213, 197, 0.5);
+}
+.nmtw-panel a { color: #FAD5C5; }
+.nmtw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  background: #FAD5C5;
+  color: #020307 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+.nmtw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); text-decoration: none; }
