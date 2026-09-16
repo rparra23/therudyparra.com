@@ -2355,3 +2355,13 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
   align-self: center;
 }
 #events-grid > div > .btn + .btn { margin-top: 10px !important; }
+
+/* ===== Mobile: keep the "screenshot card" above the fold =====
+   Portrait + name + tagline + contact info must all fit in one phone
+   viewport (including Safari's bottom bar) so a single screenshot
+   captures everything needed to reach Rudy. */
+@media (max-width: 719px) {
+  section.hero { gap: 14px; }
+  .avatar-wrap { width: 128px; }
+  .nav { margin-bottom: 6px; }
+}
