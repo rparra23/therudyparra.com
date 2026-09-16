@@ -105,6 +105,13 @@
       <div class="cta-row">
         <a class="btn primary" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Save my contact</a>
         <a class="btn" href="/resume">See my work</a>
+        <button class="btn" id="a2hs" hidden type="button">Add to home screen</button>
+      </div>
+      <div id="a2hs-tip" hidden
+           style="margin:10px 0 0;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.9rem;color:var(--muted);max-width:46ch">
+        On iPhone: tap the <strong style="color:var(--text)">Share</strong> button
+        <svg viewBox="0 0 24 24" width="15" height="15" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+        in Safari, then <strong style="color:var(--text)">"Add to Home Screen"</strong>.
       </div>
       <div class="social-row" aria-label="Social media and contact links">
         <a class="social-btn" href="mailto:parrarudy3@icloud.com" aria-label="Email">
@@ -556,6 +563,36 @@
   </script>
   <script>
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
+    /* ===== Add to home screen button ===== */
+    (function () {
+      const btn = document.getElementById('a2hs');
+      const tip = document.getElementById('a2hs-tip');
+      if (!btn) return;
+      const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+      if (standalone) return; // already installed
+      let deferred = null;
+      // Chrome/Edge/Android: capture the native install prompt
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferred = e;
+        btn.hidden = false;
+      });
+      window.addEventListener('appinstalled', () => { btn.hidden = true; tip.hidden = true; });
+      // iOS Safari: no programmatic prompt — show instructions instead
+      const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIOS) btn.hidden = false;
+      btn.addEventListener('click', async () => {
+        if (deferred) {
+          deferred.prompt();
+          await deferred.userChoice;
+          deferred = null;
+          btn.hidden = true;
+        } else {
+          tip.hidden = !tip.hidden;
+        }
+      });
+    })();
 
     /* ===== Live events from Rudy's calendars (rudy-site Worker) =====
        Appends dark typographic cards for upcoming events that aren't already
