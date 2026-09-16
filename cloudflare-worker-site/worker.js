@@ -99,32 +99,104 @@ function parseICS(text) {
   return events;
 }
 
+function normTitle(t) {
+  return t.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+/** Privacy gate: only events that link to a public events platform are ever
+ *  published. Personal calendar items (appointments, flights, birthdays)
+ *  carry no such link, so they can never appear on the site. To publish an
+ *  event from a personal calendar, put its ticket/RSVP link in the event. */
+const PUBLIC_EVENT_HOSTS = [
+  'lu.ma', 'luma.com', 'eventbrite.com', 'partiful.com', 'meetup.com',
+  'gdg.community.dev', 'newmexicotechweek.com', 'nmtechfest.com',
+  'fcsuite.com', 'universe.com', 'startupworldcup.io', 'gmisconference.org',
+  'nmtechcouncil.org', 'techqueria.org', 'nmtechtalks.com',
+];
+function isPublicEvent(e) {
+  if (!e.url) return false;
+  try {
+    const host = new URL(e.url).hostname.toLowerCase();
+    return PUBLIC_EVENT_HOSTS.some(d => host === d || host.endsWith('.' + d));
+  } catch { return false; }
+}
+
+/** Pull the event's artwork from its page: the real Luma cover when there is
+ *  one (re-requested as a 720px square), else the page's og:image. */
+async function fetchEventImage(url) {
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (rudy-site-worker)' }, redirect: 'follow' });
+    if (!r.ok) return null;
+    const html = (await r.text()).slice(0, 400000);
+    let m = html.match(/https:\/\/images\.lumacdn\.com\/cdn-cgi\/image\/[^"'\\ ]*(?:event-covers|uploads)\/[^"'\\ ]+\.(?:png|jpg|jpeg|webp)/);
+    if (m) {
+      const path = m[0].match(/(?:event-covers|uploads)\/.*/)[0];
+      return `https://images.lumacdn.com/cdn-cgi/image/format=jpeg,fit=cover,dpr=1,anim=false,background=white,quality=80,width=720,height=720/${path}`;
+    }
+    m = html.match(/<meta[^>]+property=["']og:image["'][^>]*content=["']([^"']+)["']/) ||
+        html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*property=["']og:image["']/);
+    if (m) {
+      const img = m[1].replace(/&amp;/g, '&');
+      return /^https:\/\/[^"'\\ ]+$/.test(img) ? img : null;
+    }
+    return null;
+  } catch { return null; }
+}
+
 async function refreshEvents(env) {
-  const urls = (env.ICS_URLS || '').split(',').map(u => u.trim()).filter(Boolean);
+  const urls = (env.ICS_URLS || '').split(',')
+    .map(u => u.trim().replace(/^webcal:\/\//i, 'https://'))
+    .filter(Boolean);
   if (!urls.length) return { error: 'ICS_URLS not configured' };
   const all = [];
+  const feedErrors = [];
   for (const u of urls) {
     try {
       const r = await fetch(u, { headers: { 'User-Agent': 'rudy-site-worker' } });
       if (r.ok) all.push(...parseICS(await r.text()));
-    } catch (e) { /* skip broken feed */ }
+      else feedErrors.push(`${u.slice(0, 60)}… → ${r.status}`);
+    } catch (e) { feedErrors.push(`${u.slice(0, 60)}… → ${e.message}`); }
   }
   const now = Date.now();
   const horizon = now + 150 * 24 * 3600 * 1000;
-  const upcoming = all
-    .filter(e => (e.endTs || e.startTs) > now && e.startTs < horizon)
+  const inWindow = all.filter(e => (e.endTs || e.startTs) > now && e.startTs < horizon);
+  const publicOnly = inWindow.filter(isPublicEvent);
+  const upcoming = publicOnly
     .sort((a, b) => a.startTs - b.startTs)
     .slice(0, 24);
-  // de-dupe by title+date across feeds
-  const seen = new Set();
-  const deduped = upcoming.filter(e => {
-    const k = `${e.title.toLowerCase()}|${e.start.slice(0, 10)}`;
-    if (seen.has(k)) return false;
-    seen.add(k);
-    return true;
-  });
-  await env.SITE.put('events:json', JSON.stringify({ updated: new Date().toISOString(), events: deduped }));
-  return { count: deduped.length };
+  const filteredOut = inWindow.length - publicOnly.length;
+
+  // Fetch artwork before de-duping so we can keep the copy that has it.
+  await Promise.all(upcoming.map(async e => {
+    if (e.url) e.image = await fetchEventImage(e.url);
+  }));
+
+  // De-dupe across feeds: same day + same/contained/mostly-overlapping title.
+  // When two copies collide, prefer the one with artwork.
+  const kept = [];
+  for (const e of upcoming) {
+    const day = e.start.slice(0, 10);
+    const nt = normTitle(e.title);
+    const toks = new Set(nt.split(' ').filter(w => w.length > 3));
+    let dup = null;
+    for (const k of kept) {
+      if (k.start.slice(0, 10) !== day) continue;
+      const knt = normTitle(k.title);
+      if (knt === nt || knt.includes(nt) || nt.includes(knt)) { dup = k; break; }
+      const ktoks = knt.split(' ').filter(w => w.length > 3);
+      const inter = ktoks.filter(w => toks.has(w)).length;
+      const denom = Math.min(toks.size, ktoks.length) || 1;
+      if (inter >= 2 && inter / denom >= 0.6) { dup = k; break; }
+    }
+    if (dup) {
+      if (e.image && !dup.image) Object.assign(dup, e);
+      continue;
+    }
+    kept.push(e);
+  }
+
+  await env.SITE.put('events:json', JSON.stringify({ updated: new Date().toISOString(), events: kept }));
+  return { count: kept.length, keptPrivate: filteredOut, feedErrors };
 }
 
 /* ---------- handlers ---------- */

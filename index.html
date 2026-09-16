@@ -31,8 +31,10 @@
         <a href="/">Home</a>
         <a href="/resume">My work</a>
         <a href="/press">Press</a>
+        <a href="/kit">Press kit</a>
         <a href="/talks/stem-core/">Slides</a>
         <a href="/book">Book</a>
+        <a href="/met/">We met?</a>
       </nav>
     </header>
 
@@ -205,8 +207,8 @@
     <h2 id="events" class="section-title">Events Rudy's Going To</h2>
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
       Come say hi — grab tickets, and mark your calendar for NM Tech Week.
-      Did we meet at one of these? <a href="/met/">Say hi →</a>
     </p>
+    <a class="btn" href="/met/" style="margin:-6px 0 20px;display:inline-flex">Did we meet at an event? Say hi →</a>
     <div id="events-grid" class="events-row">
       <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
         <a href="https://gmisconference.org" target="_blank" rel="noopener"
@@ -576,18 +578,35 @@
           cell.dataset.expires = ev.end || ev.start;
           const a = document.createElement('a');
           if (ev.url) { a.href = ev.url; a.target = '_blank'; a.rel = 'noopener'; }
-          a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#141A23;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
-          const eyebrow = document.createElement('span');
-          eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961";
-          eyebrow.textContent = 'From my calendar';
-          const t = document.createElement('span');
-          t.style.cssText = "font-family:'Newsreader',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2;color:#EEF1F4;letter-spacing:-0.01em";
-          t.textContent = title;
-          const meta = document.createElement('span');
-          meta.style.cssText = 'font-size:0.95rem;color:#B8C0CB;line-height:1.6';
-          meta.textContent = day + time + (ev.location ? ' · ' + ev.location : '');
-          a.append(eyebrow, t, meta);
-          cell.appendChild(a);
+          const img = (typeof ev.image === 'string' && /^https:\/\/[^"'\\\s]+$/.test(ev.image)) ? ev.image : null;
+          const metaText = day + time + (ev.location ? ' · ' + ev.location : '');
+          if (img) {
+            // Artwork square with the info beneath it
+            a.style.cssText = 'display:block;aspect-ratio:1/1;border-radius:14px;background-color:#141A23;background-size:cover;background-position:center;box-shadow:0 10px 30px rgba(0,0,0,0.35);text-decoration:none';
+            a.style.backgroundImage = 'url("' + img + '")';
+            cell.appendChild(a);
+            const t = document.createElement('span');
+            t.style.cssText = "display:block;margin-top:10px;font-family:'Newsreader',serif;font-size:1.1rem;line-height:1.3;color:var(--text)";
+            t.textContent = title;
+            const meta = document.createElement('span');
+            meta.style.cssText = 'display:block;margin-top:2px;color:var(--muted);font-size:0.85rem';
+            meta.textContent = metaText;
+            cell.append(t, meta);
+          } else {
+            // Typographic ink tile
+            a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#141A23;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
+            const eyebrow = document.createElement('span');
+            eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961";
+            eyebrow.textContent = 'From my calendar';
+            const t = document.createElement('span');
+            t.style.cssText = "font-family:'Newsreader',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2;color:#EEF1F4;letter-spacing:-0.01em";
+            t.textContent = title;
+            const meta = document.createElement('span');
+            meta.style.cssText = 'font-size:0.95rem;color:#B8C0CB;line-height:1.6';
+            meta.textContent = metaText;
+            a.append(eyebrow, t, meta);
+            cell.appendChild(a);
+          }
           if (ev.url) {
             const btn = document.createElement('a');
             btn.className = 'btn primary';
