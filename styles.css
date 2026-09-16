@@ -2219,7 +2219,7 @@ section.hero .hero-text { min-width: 0; }
   width: 140px;
   height: 40px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
   margin-bottom: 4px;
   background: #EEF1F4;          /* light well: dark partner logos stay legible on the slate tile */
   padding: 6px 10px;
@@ -2341,3 +2341,17 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
   transition: transform 0.08s ease, filter 0.2s ease;
 }
 .nmtw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); text-decoration: none; }
+
+/* ===== Event cards: pin the Details buttons to one shared baseline =====
+   Cards' images have different aspect ratios, so cells stretch to the
+   tallest and each button rides the bottom edge. */
+#events-grid { align-items: stretch; }
+#events-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+#events-grid > div > .btn {
+  margin-top: auto !important;
+  align-self: center;
+}
+#events-grid > div > .btn + .btn { margin-top: 10px !important; }
