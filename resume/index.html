@@ -31,9 +31,7 @@
         <a href="/">Home</a>
         <a href="/resume" class="active">My work</a>
         <a href="/press">Press</a>
-        <a href="/kit">Press kit</a>
-        <a href="/talks/stem-core/">Slides</a>
-        <a href="/book">Book</a>
+        <a href="/talks/stem-core/">Presentations</a>
         <a href="/met/">We met?</a>
       </nav>
     </header>
@@ -54,14 +52,17 @@
         work across all three layers, from the bench to the publication.
       </p>
       <p class="about-body">
-        Hands-on electrical lab technician and embedded systems developer with 3+ years
-        of R&amp;D across clean energy, defense, and spectroscopic materials science.
-        First-author on a NASA/NSF-funded solar spectroscopy poster and NSF-funded
-        co-author on two more in glass physics, X-ray absorption spectroscopy, and
-        plasma science. Day-to-day I'm in the lab with high-spectral-resolution optical
-        instruments, custom electronics, Python automation, and hazardous-material
-        handling. Former researcher at the National Solar Observatory and Lockheed
-        Martin.
+        Electrical lab technician and embedded systems developer with 3+ years of
+        R&amp;D across clean energy, defense, and spectroscopic materials science —
+        and the product side to match: I take hardware from breadboard to shipped
+        product, including the full-stack mobile app and cloud platform behind
+        Pii Energy's Edge&nbsp;2000. First author on a NASA/NSF-funded solar
+        spectroscopy poster and NSF-funded co-author on two more spanning glass
+        physics, X-ray absorption spectroscopy, and plasma science. Day to day
+        I'm at the bench with high-spectral-resolution optical instruments,
+        custom electronics, and hazardous-material handling — or in the codebase
+        turning prototypes into products people actually use. Former researcher
+        at the National Solar Observatory and Lockheed Martin.
       </p>
       <ul class="about-facts" aria-label="At a glance">
         <li><strong>3+ yrs</strong>R&amp;D experience</li>
@@ -81,7 +82,7 @@
             <h3 class="item-title">Senior Electrical Lab Technician · <a class="item-org" href="https://gridflow.tech" target="_blank" rel="noopener">GridFlow</a></h3>
             <span class="item-meta">Sept 2024 – Present · Albuquerque, NM</span>
           </div>
-        <p class="item-context">Clean energy startup. Clean energy startup focused on vanadium redox flow battery (VRFB) systems for long-duration commercial energy storage.</p>
+        <p class="item-context">Clean energy startup focused on vanadium redox flow battery (VRFB) systems for long-duration commercial energy storage.</p>
         <ul>
           <li>Spearhead end-to-end R&amp;D lab operations — prototype build, electrical assembly, structured test execution, and real-time diagnostics.</li>
           <li>Fabricate and test battery system prototypes including peristaltic pump systems, custom PCBs, wiring harnesses, and IoT safety monitoring devices.</li>
@@ -177,7 +178,7 @@
           </div>
         <ul>
           <li>Developed and maintained Well Watcher telemetry code for real-time monitoring of industrial well controllers.</li>
-          <li>Built AI-driven anomaly detection and predictive maintenance systems; optimized energy consumption algorithms for field hardware.</li>
+          <li>Supported product development as an IoT technician — bench-testing Well Watcher field hardware, refining telemetry behavior, and helping push new controller features toward release.</li>
           <li>Implemented BLE features (Tx Power monitoring, battery life analysis); led software testing for new controller features.</li>
         </ul>
       </div>
@@ -903,5 +904,31 @@
     })();
   </script>
   <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
+  <script>
+    /* Collapse item descriptions (text stays hidden until toggled); photos,
+       galleries, and figures always stay visible. */
+    document.querySelectorAll('.card.item').forEach(card => {
+      const parts = Array.from(card.children).filter(el => el.matches('p.item-context, ul, details'));
+      if (!parts.length) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'item-desc';
+      wrap.hidden = true;
+      parts[0].before(wrap);
+      parts.forEach(el => wrap.appendChild(el));
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'desc-toggle';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Show details';
+      btn.addEventListener('click', () => {
+        const open = wrap.hidden;
+        wrap.hidden = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        btn.textContent = open ? 'Hide details' : 'Show details';
+      });
+      const head = card.querySelector('.item-head');
+      (head || card.firstElementChild).after(btn);
+    });
+  </script>
 </body>
 </html>
