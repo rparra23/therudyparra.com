@@ -2302,11 +2302,15 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
 .circuit-bg .pulses path:nth-child(7) { animation-duration: 8.5s; animation-delay: -2.6s; }
 .circuit-bg .pulses path:nth-child(8) { animation-duration: 12s;  animation-delay: -7.9s; }
 @keyframes circuit-pulse { to { stroke-dashoffset: 0; } }
-/* Mobile: single-column hero leaves more empty ground — let the circuit show */
+/* Mobile: confine the circuit to the portrait area at the top of the hero
+   so traces never cut through the text, buttons, or the affiliation row,
+   and fade it out before its edges so no clipped stubs show. */
 @media (max-width: 719px) {
   .circuit-bg {
-    -webkit-mask-image: radial-gradient(130% 105% at 40% 40%, transparent 12%, #000 62%);
-    mask-image: radial-gradient(130% 105% at 40% 40%, transparent 12%, #000 62%);
+    inset: -20px -10px auto;
+    height: 300px;
+    -webkit-mask-image: radial-gradient(115% 115% at 50% 48%, transparent 24%, #000 55%, transparent 84%);
+    mask-image: radial-gradient(115% 115% at 50% 48%, transparent 24%, #000 55%, transparent 84%);
   }
   .circuit-bg .traces path { opacity: 0.3; }
   .circuit-bg .vias circle { opacity: 0.55; }
