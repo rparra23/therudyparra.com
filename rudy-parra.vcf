@@ -2,10 +2,15 @@ BEGIN:VCARD
 VERSION:3.0
 N:Parra;Rudy;;;
 FN:Rudy Parra
-TITLE:Electrical Lab Technician & Embedded Systems Developer
-EMAIL;TYPE=INTERNET,PREF:parrarudy3@icloud.com
-EMAIL;TYPE=INTERNET,WORK:rudy@gridflow.tech
-EMAIL;TYPE=INTERNET,WORK:rudy@piienergy.com
+TITLE:Lab Technician (GridFlow) · Software Developer (Pii Energy) · Board Member (NM Tech Talks)
+item1.EMAIL;TYPE=INTERNET;TYPE=PREF:parrarudy3@icloud.com
+item1.X-ABLabel:personal
+item2.EMAIL;TYPE=INTERNET:rudy@gridflow.tech
+item2.X-ABLabel:GridFlow
+item3.EMAIL;TYPE=INTERNET:rudy@piienergy.com
+item3.X-ABLabel:Pii Energy
+item4.EMAIL;TYPE=INTERNET:parrarudy1media@gmail.com
+item4.X-ABLabel:NM Tech Talks
 TEL;TYPE=CELL,VOICE:(575) 725-1290
 URL:https://therudyparra.com
 ADR;TYPE=WORK:;;;Albuquerque;NM;;USA

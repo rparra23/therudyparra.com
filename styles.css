@@ -2406,3 +2406,13 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
   transform: translateY(-1px);
 }
 .item-desc { margin-top: 6px; }
+
+/* NM Tech Week panel: breathing room after the events carousel */
+.nmtw-panel { margin-top: 32px; }
+/* Outline variant of the peach button */
+.nmtw-btn.nmtw-ghost {
+  background: transparent;
+  color: #FAD5C5 !important;
+  border: 1px solid rgba(250, 213, 197, 0.55);
+}
+.nmtw-btn.nmtw-ghost:hover { background: rgba(250, 213, 197, 0.12); }
