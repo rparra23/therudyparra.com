@@ -1,6 +1,6 @@
 /* Conservative service worker: network-first for pages (so deploys show up
    immediately), cache-first for static assets, offline fallback to cache. */
-const CACHE = 'rudy-site-v1';
+const CACHE = 'rudy-site-v2';
 const PRECACHE = ['/', '/styles.css', '/assets/profile.jpg', '/rudy-parra.vcf'];
 
 self.addEventListener('install', e => {
@@ -15,7 +15,10 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
-  const isPage = e.request.mode === 'navigate' || url.pathname.endsWith('.html');
+  // Network-first for pages AND for CSS/JS/manifest/vCard — these change with
+  // every deploy, and serving them stale mixes old styles with new markup.
+  const isPage = e.request.mode === 'navigate' || url.pathname.endsWith('.html') ||
+    /\.(css|js|json|vcf)$/.test(url.pathname);
   if (isPage) {
     e.respondWith(
       fetch(e.request).then(r => {
