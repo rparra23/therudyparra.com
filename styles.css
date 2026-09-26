@@ -2416,3 +2416,14 @@ section.hero .hero-text, section.hero .avatar-wrap { position: relative; z-index
   border: 1px solid rgba(250, 213, 197, 0.55);
 }
 .nmtw-btn.nmtw-ghost:hover { background: rgba(250, 213, 197, 0.12); }
+
+/* Affiliation carousel spans the full hero width (below text + portrait).
+   min-width:0 keeps the overflowing row from widening the grid track. */
+section.hero .affil-block {
+  grid-column: 1 / -1;
+  order: 3;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+}
