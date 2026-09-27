@@ -23,6 +23,17 @@
     .kit-dl { display: block; margin-top: 10px; font-size: 0.9rem; }
     .kit-topics li { color: var(--muted); line-height: 1.7; margin-bottom: 6px; }
     .kit-facts { color: var(--muted); line-height: 1.9; font-size: 0.95rem; }
+    .dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .dl-tile { display: block; text-decoration: none; background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px; transition: border-color 0.2s, transform 0.08s; }
+    .dl-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .dl-prev { display: flex; align-items: center; justify-content: center; height: 96px; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+    .dl-prev.light { background: #EEF1F4; }
+    .dl-prev.dark { background: #0C1019; border: 1px solid var(--border); }
+    .dl-prev img { max-width: 82%; max-height: 78%; object-fit: contain; }
+    .dl-prev.photo { padding: 0; }
+    .dl-prev.photo img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; }
+    .dl-name { display: block; font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.35; }
+    .dl-meta { display: block; font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
   </style>
 </head>
 <body>
@@ -61,11 +72,6 @@
     <div class="kit-grid">
       <div class="kit-card">
         <img class="kit-headshot" src="/assets/profile.jpg" alt="Headshot of Rudy Parra" width="600" height="600" />
-        <a class="kit-dl" href="/assets/profile.jpg" download="Rudy-Parra-headshot.jpg">Download headshot (JPG, 600×600) ↓</a>
-        <a class="kit-dl" href="/assets/profile-cutout.png" download="Rudy-Parra-cutout.png">Download transparent cutout (PNG, 1400×1984) ↓</a>
-        <a class="kit-dl" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Download contact card (vCard) ↓</a>
-        <a class="kit-dl" href="/assets/logo.svg" download="Rudy-Parra-logo.svg">Download logo (SVG) ↓</a>
-        <a class="kit-dl" href="/assets/icon-512.png" download="Rudy-Parra-logo-512.png">Download logo (PNG, 512×512) ↓</a>
         <span class="kit-label">Contact</span>
         <div class="kit-facts">
           <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a> (personal)<br />
@@ -105,6 +111,73 @@
           <span class="kit-label">Logistics</span>
           <p class="kit-bio" style="margin:0">Based in Albuquerque, NM (Mountain Time). Available for panels, talks, workshops, and podcasts — email is the fastest way to reach him.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="kit-card" style="margin-top:14px">
+      <span class="kit-label">Downloads — headshots, logos &amp; marks</span>
+      <p class="kit-bio" style="margin:0 0 16px">Tap any tile to download. Company and org logos are included for event graphics and co-branding.</p>
+      <div class="dl-grid">
+        <a class="dl-tile" href="/assets/profile.jpg" download="Rudy-Parra-headshot.jpg">
+          <span class="dl-prev photo"><img src="/assets/profile.jpg" alt="" loading="lazy" /></span>
+          <span class="dl-name">Headshot</span>
+          <span class="dl-meta">JPG · 600×600</span>
+        </a>
+        <a class="dl-tile" href="/assets/profile-cutout.png" download="Rudy-Parra-cutout.png">
+          <span class="dl-prev light"><img src="/assets/profile-cutout.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">Transparent cutout</span>
+          <span class="dl-meta">PNG · 1400×1984</span>
+        </a>
+        <a class="dl-tile" href="/rudy-parra.vcf" download="Rudy Parra.vcf">
+          <span class="dl-prev dark"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#C9A961" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><circle cx="8.5" cy="11" r="2.2"/><path d="M5 17c.6-1.8 1.9-2.8 3.5-2.8S11.4 15.2 12 17M15 9.5h4M15 13h4"/></svg></span>
+          <span class="dl-name">Contact card</span>
+          <span class="dl-meta">vCard · with photo</span>
+        </a>
+        <a class="dl-tile" href="/assets/logo.svg" download="Rudy-Parra-logo.svg">
+          <span class="dl-prev dark"><img src="/assets/logo.svg" alt="" loading="lazy" /></span>
+          <span class="dl-name">RP logo</span>
+          <span class="dl-meta">SVG · vector</span>
+        </a>
+        <a class="dl-tile" href="/assets/icon-512.png" download="Rudy-Parra-logo-512.png">
+          <span class="dl-prev dark"><img src="/assets/icon-512.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">RP logo</span>
+          <span class="dl-meta">PNG · 512×512</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/gridflow.png" download="GridFlow-logo.png">
+          <span class="dl-prev light"><img src="/assets/logos/gridflow.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">GridFlow</span>
+          <span class="dl-meta">PNG · logo</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/pii-energy.svg" download="Pii-Energy-logo.svg">
+          <span class="dl-prev light"><img src="/assets/logos/pii-energy.svg" alt="" loading="lazy" /></span>
+          <span class="dl-name">Pii Energy</span>
+          <span class="dl-meta">SVG · logo</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/nmtechtalks.png" download="NM-Tech-Talks-logo-dark.png">
+          <span class="dl-prev light"><img src="/assets/logos/nmtechtalks.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">NM Tech Talks</span>
+          <span class="dl-meta">PNG · for light bg</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/nmtechtalks-white-tan.png" download="NM-Tech-Talks-logo-light.png">
+          <span class="dl-prev dark"><img src="/assets/logos/nmtechtalks-white-tan.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">NM Tech Talks</span>
+          <span class="dl-meta">PNG · for dark bg</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/nmtw.png" download="NM-Tech-Week-mark.png">
+          <span class="dl-prev dark"><img src="/assets/logos/nmtw.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">NM Tech Week</span>
+          <span class="dl-meta">PNG · for dark bg</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/techqueria.png" download="Techqueria-NM-logo.png">
+          <span class="dl-prev light"><img src="/assets/logos/techqueria.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">Techqueria NM</span>
+          <span class="dl-meta">PNG · logo</span>
+        </a>
+        <a class="dl-tile" href="/assets/logos/qstem.png" download="Q-STEM-logo.png">
+          <span class="dl-prev light"><img src="/assets/logos/qstem.png" alt="" loading="lazy" /></span>
+          <span class="dl-name">Q-STEM</span>
+          <span class="dl-meta">PNG · logo</span>
+        </a>
       </div>
     </div>
 
