@@ -1,6 +1,6 @@
 /* Conservative service worker: network-first for pages (so deploys show up
    immediately), cache-first for static assets, offline fallback to cache. */
-const CACHE = 'rudy-site-v2';
+const CACHE = 'rudy-site-v3';
 const PRECACHE = ['/', '/styles.css', '/assets/profile.jpg', '/rudy-parra.vcf'];
 
 self.addEventListener('install', e => {

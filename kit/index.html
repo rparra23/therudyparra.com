@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Speaker & Press Kit — Rudy Parra</title>
   <meta name="description" content="Speaker and press kit for Rudy Parra — approved bios, headshot, talk topics, and contact for event organizers and media." />
-  <meta name="theme-color" content="#1F2733" />
+  <meta name="theme-color" content="#FAFAF7" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/styles.css?v=n1" />
   <style>
     .kit-grid { display: grid; gap: 14px; }
     @media (min-width: 720px) { .kit-grid { grid-template-columns: 220px 1fr; align-items: start; } }
@@ -27,7 +28,7 @@
     .dl-tile { display: block; text-decoration: none; background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px; transition: border-color 0.2s, transform 0.08s; }
     .dl-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
     .dl-prev { display: flex; align-items: center; justify-content: center; height: 96px; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
-    .dl-prev.light { background: #EEF1F4; }
+    .dl-prev.light { background: var(--bg-2); }
     .dl-prev.dark { background: #0C1019; border: 1px solid var(--border); }
     .dl-prev img { max-width: 82%; max-height: 78%; object-fit: contain; }
     .dl-prev.photo { padding: 0; }
@@ -40,8 +41,7 @@
   <div class="container">
     <header class="nav">
       <a class="brand" href="/">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#28313F" stroke="#3A4453" stroke-width="1.5"/><text x="32" y="40" text-anchor="middle" font-family="'Newsreader',serif" font-size="29" font-weight="700" fill="#C9A961">RP</text><path d="M12 52 H30 V47 H49" stroke="#C9A961" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="52" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/><circle cx="52.5" cy="47" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/></svg>
-        <span>Rudy Parra</span>
+        PARRA
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
         <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -193,7 +193,7 @@
       <p class="kit-bio" style="margin:0 0 16px">Tap any tile to download. Company and org logos are included for event graphics and co-branding.</p>
       <div class="dl-grid">
         <a class="dl-tile" href="/assets/rudy-parra-press-kit.pdf" download="Rudy-Parra-press-kit.pdf">
-          <span class="dl-prev dark"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+          <span class="dl-prev dark"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#FAFAF7" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
           <span class="dl-name">One-pager</span>
           <span class="dl-meta">PDF · everything on one page</span>
         </a>
@@ -208,18 +208,18 @@
           <span class="dl-meta">PNG · 1400×1984</span>
         </a>
         <a class="dl-tile" href="/rudy-parra.vcf" download="Rudy Parra.vcf">
-          <span class="dl-prev dark"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#C9A961" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><circle cx="8.5" cy="11" r="2.2"/><path d="M5 17c.6-1.8 1.9-2.8 3.5-2.8S11.4 15.2 12 17M15 9.5h4M15 13h4"/></svg></span>
+          <span class="dl-prev dark"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#FAFAF7" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><circle cx="8.5" cy="11" r="2.2"/><path d="M5 17c.6-1.8 1.9-2.8 3.5-2.8S11.4 15.2 12 17M15 9.5h4M15 13h4"/></svg></span>
           <span class="dl-name">Contact card</span>
           <span class="dl-meta">vCard · with photo</span>
         </a>
-        <a class="dl-tile" href="/assets/logo.svg" download="Rudy-Parra-logo.svg">
+        <a class="dl-tile" href="/assets/logo.svg" download="PARRA-logo.svg">
           <span class="dl-prev dark"><img src="/assets/logo.svg" alt="" loading="lazy" /></span>
-          <span class="dl-name">RP logo</span>
+          <span class="dl-name">PARRA logo</span>
           <span class="dl-meta">SVG · vector</span>
         </a>
         <a class="dl-tile" href="/assets/icon-512.png" download="Rudy-Parra-logo-512.png">
           <span class="dl-prev dark"><img src="/assets/icon-512.png" alt="" loading="lazy" /></span>
-          <span class="dl-name">RP logo</span>
+          <span class="dl-name">PARRA logo</span>
           <span class="dl-meta">PNG · 512×512</span>
         </a>
         <a class="dl-tile" href="/assets/logos/gridflow.png" download="GridFlow-logo.png">

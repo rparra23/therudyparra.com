@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rudy Parra — Electrical Lab Technician & Embedded Systems Developer</title>
   <meta name="description" content="Rodolfo (Rudy) González Parra — electrical lab technician and embedded systems developer building clean-energy hardware in Albuquerque. Former solar physics & glass physics researcher." />
-  <meta name="theme-color" content="#1F2733" />
+  <meta name="theme-color" content="#FAFAF7" />
   <link rel="manifest" href="/manifest.json" />
+  <meta name="apple-mobile-web-app-title" content="PARRA" />
   <meta property="og:title" content="Rudy Parra" />
   <meta property="og:description" content="Electrical lab technician & embedded systems developer. Clean energy, embedded firmware, and applied research." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://therudyparra.com" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/styles.css?v=n1" />
 </head>
 <body>
   <div class="container">
@@ -20,8 +22,7 @@
     <!-- ===== NAV ===== -->
     <header class="nav">
       <a class="brand" href="/">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#28313F" stroke="#3A4453" stroke-width="1.5"/><text x="32" y="40" text-anchor="middle" font-family="'Newsreader',serif" font-size="29" font-weight="700" fill="#C9A961">RP</text><path d="M12 52 H30 V47 H49" stroke="#C9A961" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="52" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/><circle cx="52.5" cy="47" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/></svg>
-        <span>Rudy Parra</span>
+        PARRA
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
         <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -83,40 +84,25 @@
       <div class="eyebrow">Albuquerque, NM</div>
       <h1>Hi, I'm <span class="grad">Rudy</span> Parra.</h1>
       <p class="tagline" style="line-height:1.75">
-        <span style="display:block"><span style="color:var(--accent)">GridFlow</span> · Lab Technician</span>
-        <span style="display:block"><span style="color:var(--accent)">Pii Energy</span> · Software Developer</span>
-        <span style="display:block"><span style="color:var(--accent)">NM Tech Talks</span> · Board Member</span>
-        <span style="display:block"><span style="color:var(--accent)">Techqueria NM</span> · Chapter Director</span>
+        <span style="display:block"><span style="font-weight:700">GridFlow</span> · Lab Technician</span>
+        <span style="display:block"><span style="font-weight:700">Pii Energy</span> · Software Developer</span>
+        <span style="display:block"><span style="font-weight:700">NM Tech Talks</span> · Board Member</span>
+        <span style="display:block"><span style="font-weight:700">Techqueria NM</span> · Chapter Director</span>
       </p>
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 16px;margin:4px 0 16px;font-size:0.95rem;line-height:1.6">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 16px;width:fit-content;margin:4px auto 16px;text-align:left;font-size:0.95rem;line-height:1.6">
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">cell</span><a href="tel:+15757251290">(575) 725-1290</a>
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">personal</span><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">gridflow</span><a href="mailto:rudy@gridflow.tech">rudy@gridflow.tech</a>
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">pii energy</span><a href="mailto:rudy@piienergy.com">rudy@piienergy.com</a>
         <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">nm tech talks</span><a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a>
       </div>
-      <p class="lead">
-        I work in tech startups. At GridFlow I'm a lab technician specializing
-        in vanadium redox flow batteries — tackling long-duration energy
-        storage for commercial use and providing energy resiliency. At Pii
-        Energy I'm the lead software developer, building a plug-in solar
-        hybrid system sold direct to consumers for peak shifting and energy
-        cost savings. Off the bench, I serve on the Board of
-        <a href="https://www.nmtechtalks.com" target="_blank" rel="noopener">NM Tech Talks</a>,
-        direct the New Mexico chapter of
-        <a href="https://techqueria.org" target="_blank" rel="noopener">Techqueria</a>,
-        and founded
-        <a href="https://www.instagram.com/q.stem.nm/" target="_blank" rel="noopener">Q-STEM</a>,
-        a meetup for LGBTQ+ folks in STEM.
-        I build things that bridge electrons, atoms, and code.
-      </p>
       <div class="cta-row">
         <a class="btn primary" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Save my contact</a>
         <a class="btn" href="/resume">See my work</a>
         <button class="btn" id="a2hs" hidden type="button">Add to home screen</button>
       </div>
       <div id="a2hs-tip" hidden
-           style="margin:10px 0 0;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.9rem;color:var(--muted);max-width:46ch">
+           style="margin:10px auto 0;text-align:left;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.9rem;color:var(--muted);max-width:46ch">
         On iPhone: tap the <strong style="color:var(--text)">Share</strong> button
         <svg viewBox="0 0 24 24" width="15" height="15" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
         in Safari, then <strong style="color:var(--text)">"Add to Home Screen"</strong>.
@@ -141,6 +127,21 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.412c0-3.014 1.792-4.679 4.532-4.679 1.313 0 2.686.235 2.686.235v2.971h-1.513c-1.491 0-1.957.93-1.957 1.886v2.255h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
         </a>
       </div>
+      <p class="lead">
+        I work in tech startups. At GridFlow I'm a lab technician specializing
+        in vanadium redox flow batteries — tackling long-duration energy
+        storage for commercial use and providing energy resiliency. At Pii
+        Energy I'm the lead software developer, building a plug-in solar
+        hybrid system sold direct to consumers for peak shifting and energy
+        cost savings. Off the bench, I serve on the Board of
+        <a href="https://www.nmtechtalks.com" target="_blank" rel="noopener">NM Tech Talks</a>,
+        direct the New Mexico chapter of
+        <a href="https://techqueria.org" target="_blank" rel="noopener">Techqueria</a>,
+        and founded
+        <a href="https://www.instagram.com/q.stem.nm/" target="_blank" rel="noopener">Q-STEM</a>,
+        a meetup for LGBTQ+ folks in STEM.
+        I build things that bridge electrons, atoms, and code.
+      </p>
       </div>
       <div class="avatar-wrap">
         <img class="avatar" src="/assets/profile.jpg" alt="Portrait of Rudy Parra" width="600" height="600" />
@@ -180,15 +181,15 @@
     <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
       Come say hi — grab tickets, and mark your calendar for NM Tech Week.
     </p>
-    <a class="btn" href="/met/" style="margin:-6px 0 20px;display:inline-flex">Did we meet at an event? Say hi →</a>
+    <a class="btn" href="/met/" style="margin:-6px auto 20px;display:flex;width:fit-content">Did we meet at an event? Say hi →</a>
     <div id="events-grid" class="events-row">
       <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
         <a href="https://gmisconference.org" target="_blank" rel="noopener"
            aria-label="GMiS Graduate and Career Fair — details on the GMiS Conference site"
-           style="display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background-color:#141A23;background-image:linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.72)),url('/assets/events/gmis-balloons-2026.jpg');background-size:cover;background-position:center;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961">Great Minds in STEM</span>
+           style="display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background-color:#171716;background-image:linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.72)),url('/assets/events/gmis-balloons-2026.jpg');background-size:cover;background-position:center;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
+          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB">Great Minds in STEM</span>
           <span style="font-family:'Newsreader',serif;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.15;color:#EEF1F4;letter-spacing:-0.01em">GMiS Graduate<br/>&amp; Career Fair</span>
-          <span style="font-size:0.95rem;color:#B8C0CB;line-height:1.6">Sat, Sep 19 · 10:30 AM–4 PM<br/>Albuquerque Convention Center</span>
+          <span style="font-size:0.95rem;color:#B9B8B0;line-height:1.6">Sat, Sep 19 · 10:30 AM–4 PM<br/>Albuquerque Convention Center</span>
         </a>
         <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
           Rudy's running the NM Tech Talks booth — come say hi
@@ -250,9 +251,9 @@
         <a href="https://luma.com/fvxse8v8" target="_blank" rel="noopener"
            aria-label="Claude Code ABQ meetup — RSVP on Luma"
            style="display:flex;flex-direction:column;justify-content:flex-end;gap:14px;aspect-ratio:1/1;background-color:#000;background-image:url('/assets/events/claude-code-abq.jpg');background-size:cover;background-position:center;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961">ClaudeABQ.dev</span>
+          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB">ClaudeABQ.dev</span>
           <span style="font-family:'Newsreader',serif;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.1;color:#EEF1F4;letter-spacing:-0.01em">Claude Code<br/>ABQ</span>
-          <span style="font-size:0.95rem;color:#B8C0CB;line-height:1.6">Thu, Oct 8 · 6–8 PM<br/>CNM STEMulus Center</span>
+          <span style="font-size:0.95rem;color:#B9B8B0;line-height:1.6">Thu, Oct 8 · 6–8 PM<br/>CNM STEMulus Center</span>
         </a>
         <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
           Monthly AI-coding meetup — bring your laptop and what you're building
@@ -642,7 +643,7 @@
           const metaText = day + time + (ev.location ? ' · ' + ev.location : '');
           if (img) {
             // Artwork square with the info beneath it
-            a.style.cssText = 'display:block;aspect-ratio:1/1;border-radius:14px;background-color:#141A23;background-size:cover;background-position:center;box-shadow:0 10px 30px rgba(0,0,0,0.35);text-decoration:none';
+            a.style.cssText = 'display:block;aspect-ratio:1/1;border-radius:14px;background-color:#171716;background-size:cover;background-position:center;box-shadow:0 10px 30px rgba(0,0,0,0.35);text-decoration:none';
             a.style.backgroundImage = 'url("' + img + '")';
             cell.appendChild(a);
             const t = document.createElement('span');
@@ -654,15 +655,15 @@
             cell.append(t, meta);
           } else {
             // Typographic ink tile
-            a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#141A23;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
+            a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#171716;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
             const eyebrow = document.createElement('span');
-            eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A961";
+            eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB";
             eyebrow.textContent = 'From my calendar';
             const t = document.createElement('span');
             t.style.cssText = "font-family:'Newsreader',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2;color:#EEF1F4;letter-spacing:-0.01em";
             t.textContent = title;
             const meta = document.createElement('span');
-            meta.style.cssText = 'font-size:0.95rem;color:#B8C0CB;line-height:1.6';
+            meta.style.cssText = 'font-size:0.95rem;color:#B9B8B0;line-height:1.6';
             meta.textContent = metaText;
             a.append(eyebrow, t, meta);
             cell.appendChild(a);
