@@ -32,7 +32,7 @@
         <a href="/resume">My work</a>
         <a href="/press">Press</a>
         <a href="/kit">My Press Kit</a>
-        <a href="/talks/stem-core/">Presentations</a>
+        <a href="/talks/">Presentations</a>
         <a href="/met/">We met?</a>
       </nav>
     </header>
@@ -468,8 +468,23 @@
         </div>
     </div>
 
+
+    <h2 id="newsletter" class="section-title">Newsletter</h2>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 26px;max-width:560px">
+      <p style="color:var(--muted);margin:0 0 14px;font-size:0.95rem;line-height:1.6">
+        Occasional notes from me — what I'm building, NM tech events worth knowing about,
+        and the odd lab story. No spam, unsubscribe anytime.
+      </p>
+      <form id="nl-form" style="display:flex;flex-wrap:wrap;gap:10px">
+        <input id="nl-email" type="email" required placeholder="you@email.com" aria-label="Email address"
+               style="flex:1 1 220px;min-width:0;font:inherit;color:var(--text);background:var(--bg-2);border:1px solid var(--border-strong);border-radius:10px;padding:11px 14px" />
+        <button class="btn primary" type="submit">Subscribe</button>
+      </form>
+      <div id="nl-status" role="status" style="margin-top:10px;font-size:0.9rem;color:var(--muted)"></div>
+    </div>
+
     <footer>
-      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM</span>
+      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM · <a href="/privacy/">Privacy</a></span>
     </footer>
   </div>
 
@@ -707,6 +722,33 @@
       }
       const iv = setInterval(tick, 1000);
       tick();
+    })();
+
+    /* ===== Newsletter signup ===== */
+    (function () {
+      const form = document.getElementById('nl-form');
+      if (!form) return;
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const status = document.getElementById('nl-status');
+        status.textContent = 'Subscribing…';
+        try {
+          const r = await fetch('https://rudy-site.rparra.workers.dev/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: document.getElementById('nl-email').value }),
+          });
+          const data = await r.json();
+          if (r.ok && data.ok) {
+            status.style.color = '#8FBF8A';
+            status.textContent = "You're in — talk soon!";
+            form.reset();
+          } else { throw new Error(data.error || 'failed'); }
+        } catch (err) {
+          status.style.color = '#D98080';
+          status.textContent = "That didn't go through — email me instead: parrarudy3@icloud.com";
+        }
+      });
     })();
 
     /* First-party pageview beacon (no cookies, counts only) */

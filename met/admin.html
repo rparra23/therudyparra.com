@@ -31,6 +31,8 @@
     <div id="content" hidden>
       <h2>People you met</h2>
       <table id="leads"><thead><tr><th>When</th><th>Who</th><th>Where</th><th>Note</th></tr></thead><tbody></tbody></table>
+      <h2>Newsletter subscribers</h2>
+      <table id="subs"><thead><tr><th>When</th><th>Email</th></tr></thead><tbody></tbody></table>
       <h2>Pageviews (last 30 days)</h2>
       <table id="hits"><thead><tr><th>Day</th><th>Page</th><th>Views</th></tr></thead><tbody></tbody></table>
       <h2>Short-link clicks</h2>
@@ -42,13 +44,18 @@
     const esc = (s) => { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; };
     async function load(key) {
       const h = { Authorization: 'Bearer ' + key };
-      const [leadsR, statsR] = await Promise.all([
+      const [leadsR, statsR, subsR] = await Promise.all([
         fetch(API + '/met/list', { headers: h }),
         fetch(API + '/stats', { headers: h }),
+        fetch(API + '/subscribers', { headers: h }),
       ]);
       if (!leadsR.ok || !statsR.ok) throw new Error('unauthorized');
       const leads = await leadsR.json();
       const stats = await statsR.json();
+      const subs = subsR.ok ? await subsR.json() : { subscribers: [] };
+      document.querySelector('#subs tbody').innerHTML = (subs.subscribers || []).map(s2 =>
+        `<tr><td>${esc((s2.at || '').slice(0, 16).replace('T', ' '))}</td><td>${esc(s2.email)}</td></tr>`).join('') ||
+        '<tr><td colspan="2" class="muted">No subscribers yet.</td></tr>';
       document.querySelector('#leads tbody').innerHTML = (leads.leads || []).map(l =>
         `<tr><td>${esc((l.at || '').slice(0, 16).replace('T', ' '))}</td>
              <td><strong>${esc(l.name)}</strong><br>${esc(l.contact)}</td>

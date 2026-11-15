@@ -238,6 +238,25 @@ async function listPrefix(env, prefix) {
   return out;
 }
 
+async function handleSubscribe(request, env) {
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const rlKey = `rl:sub:${ip}`;
+  const count = parseInt((await env.SITE.get(rlKey)) || '0', 10);
+  if (count >= 10) return json({ error: 'Too many attempts - try again later.' }, request, 429);
+  await env.SITE.put(rlKey, String(count + 1), { expirationTtl: 3600 });
+
+  let body;
+  try { body = await request.json(); } catch { return json({ error: 'Bad request' }, request, 400); }
+  const email = (typeof body.email === 'string' ? body.email.trim().toLowerCase() : '').slice(0, 200);
+  const name = (typeof body.name === 'string' ? body.name.trim() : '').slice(0, 120);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    return json({ error: 'That email does not look right.' }, request, 400);
+  }
+  // Keyed by email, so repeat signups just refresh the record.
+  await env.SITE.put(`sub:${email}`, JSON.stringify({ email, name, at: new Date().toISOString() }));
+  return json({ ok: true }, request);
+}
+
 async function handleHit(request, env, ctx) {
   let path = '/';
   try { path = new URL((await request.json()).p || '/', 'https://x').pathname.slice(0, 80); } catch {}
@@ -315,6 +334,13 @@ export default {
       const rows = await listPrefix(env, 'met:');
       rows.sort((a, b) => (a.key < b.key ? 1 : -1));
       return json({ leads: rows.map(r => ({ id: r.key, ...r.value })) }, request);
+    }
+    if (path === '/subscribe' && request.method === 'POST') return handleSubscribe(request, env);
+    if (path === '/subscribers' && request.method === 'GET') {
+      if (!isAdmin(request, env)) return json({ error: 'Unauthorized' }, request, 401);
+      const rows = await listPrefix(env, 'sub:');
+      rows.sort((a, b) => ((a.value && a.value.at) < (b.value && b.value.at) ? 1 : -1));
+      return json({ subscribers: rows.map(r => r.value) }, request);
     }
     if (path === '/hit' && request.method === 'POST') return handleHit(request, env, ctx);
     if (path === '/stats' && request.method === 'GET') {

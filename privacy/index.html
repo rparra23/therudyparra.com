@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy — Rudy Parra</title>
+  <meta name="description" content="What therudyparra.com collects and why — in plain language." />
+  <meta name="theme-color" content="#1F2733" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="nav">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#28313F" stroke="#3A4453" stroke-width="1.5"/><text x="32" y="40" text-anchor="middle" font-family="'Newsreader',serif" font-size="29" font-weight="700" fill="#C9A961">RP</text><path d="M12 52 H30 V47 H49" stroke="#C9A961" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="52" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/><circle cx="52.5" cy="47" r="2.8" fill="none" stroke="#C9A961" stroke-width="2"/></svg>
+        <span>Rudy Parra</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/press">Press</a>
+        <a href="/kit">My Press Kit</a>
+        <a href="/talks/">Presentations</a>
+        <a href="/met/">We met?</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <a class="back-link" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to home
+      </a>
+      <h1>Privacy</h1>
+    </div>
+
+    <div style="max-width:62ch;color:var(--muted);line-height:1.75;font-size:0.98rem">
+      <p>This is my personal site — here's everything it does with your data, in plain language.</p>
+
+      <h3 style="font-family:'Newsreader',serif;color:var(--text);margin:26px 0 8px">No cookies, no trackers</h3>
+      <p>This site sets no advertising or tracking cookies and uses no third-party analytics.
+      I count page views with a first-party counter that stores only "this page got a visit" —
+      no IP addresses, no identifiers, no profiles. Fonts load from Google Fonts, which means
+      your browser requests the font files from Google's servers like on most of the web.</p>
+
+      <h3 style="font-family:'Newsreader',serif;color:var(--text);margin:26px 0 8px">What I collect — only if you give it</h3>
+      <p>If you fill out the <a href="/met/">"We met?" form</a> or sign up for my newsletter,
+      I store exactly what you type (name, contact, your note, or your email) so I can follow up
+      or send you the newsletter. That data lives in my own storage, is never sold or shared,
+      and I'll delete yours anytime — just ask.</p>
+
+      <h3 style="font-family:'Newsreader',serif;color:var(--text);margin:26px 0 8px">Newsletter</h3>
+      <p>You'll only get it if you signed up, and every email includes a way to unsubscribe.
+      Email me and I'll remove you immediately either way.</p>
+
+      <h3 style="font-family:'Newsreader',serif;color:var(--text);margin:26px 0 8px">Questions or deletions</h3>
+      <p><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a> — I'm the only person
+      who sees any of this, and I'm happy to show you or delete what's stored about you.</p>
+    </div>
+
+    <footer>
+      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM · <a href="/privacy/">Privacy</a></span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
+  <script>try{navigator.sendBeacon("https://rudy-site.rparra.workers.dev/hit",JSON.stringify({p:location.pathname}))}catch(e){}</script>
+</body>
+</html>
