@@ -6,42 +6,211 @@
   <title>Dashboard — Rudy Parra</title>
   <meta name="robots" content="noindex,nofollow" />
   <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="stylesheet" href="/styles.css?v=n1" />
   <style>
-    .dash { max-width: 760px; margin: 40px auto; padding: 0 4px; }
-    .dash h2 { font-family: 'Newsreader', serif; margin: 28px 0 10px; }
-    .dash table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    .dash th, .dash td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    .dash th { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .dash { max-width: 880px; margin: 24px auto 60px; }
+    .dash-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+    .dash-head h1 { font-family: 'Newsreader', serif; font-weight: 500; margin: 0; }
+    .dash-head .when { color: var(--muted-2); font-size: 0.82rem; font-family: 'Space Mono', ui-monospace, monospace; }
+
+    /* Stat tiles */
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
+    @media (min-width: 640px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stat {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .stat .ico {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: var(--text); color: var(--bg);
+      display: grid; place-items: center;
+    }
+    .stat .ico svg { width: 15px; height: 15px; }
+    .stat .n { font-family: 'Newsreader', serif; font-size: 1.9rem; line-height: 1.1; color: var(--text); font-variant-numeric: tabular-nums; }
+    .stat .l { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-family: 'Space Mono', ui-monospace, monospace; }
+    .stat .sub { font-size: 0.74rem; color: var(--muted-2); min-height: 1em; }
+
+    /* Cards */
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .panel h2 {
+      margin: 0 0 14px; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); font-family: 'Space Mono', ui-monospace, monospace; font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .panel h2 svg { width: 14px; height: 14px; color: var(--accent-2); flex: 0 0 auto; }
+    .two-col { display: grid; gap: 14px; }
+    @media (min-width: 680px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+    /* Bar chart */
+    #views-chart { width: 100%; height: auto; display: block; }
+    .chart-meta { display: flex; justify-content: space-between; color: var(--muted-2); font-size: 0.72rem; font-family: 'Space Mono', ui-monospace, monospace; margin-top: 6px; }
+
+    /* Horizontal bar lists */
+    .hbars { display: flex; flex-direction: column; gap: 10px; }
+    .hbar .row { display: flex; justify-content: space-between; gap: 10px; font-size: 0.84rem; margin-bottom: 4px; }
+    .hbar .row .path { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hbar .row .val { color: var(--muted); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+    .hbar .track { height: 7px; background: var(--bg-2); border-radius: 99px; overflow: hidden; }
+    .hbar .fill { height: 100%; background: var(--text); border-radius: 99px; }
+    .empty { color: var(--muted-2); font-size: 0.85rem; }
+
+    /* Tables */
+    .dash table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .dash th, .dash td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .dash tr:last-child td { border-bottom: none; }
+    .dash th { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); font-weight: 700; }
     .dash td { color: var(--muted); }
     .dash td strong { color: var(--text); }
-    #login input { font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; width: 280px; }
+
+    /* Login */
+    #login { max-width: 420px; margin: 60px auto; text-align: center; }
+    #login input[type="password"] {
+      font: inherit; color: var(--text); background: var(--card);
+      border: 1px solid var(--border-strong); border-radius: 10px; padding: 11px 14px; width: 100%;
+      margin-bottom: 10px; box-sizing: border-box;
+    }
+    #login .remember {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      color: var(--muted); font-size: 0.85rem; margin: 2px 0 14px; cursor: pointer;
+    }
     .muted { color: var(--muted-2); font-size: 0.85rem; }
+    .panel-actions { margin-top: 12px; }
   </style>
 </head>
 <body>
   <div class="container dash">
-    <h1 style="font-family:'Newsreader',serif">Site dashboard</h1>
+
     <div id="login">
-      <p class="muted">Paste your admin key (stored only in this tab).</p>
-      <input id="key" type="password" placeholder="ADMIN_KEY" />
-      <button class="btn primary" id="go" style="margin-left:8px">Open</button>
-      <div id="login-err" class="muted" style="margin-top:8px"></div>
+      <a class="brand" href="/" style="margin-bottom:28px;display:inline-flex">PARRA</a>
+      <h1 style="font-family:'Newsreader',serif;font-weight:500">Site dashboard</h1>
+      <p class="muted">Paste your admin key once.</p>
+      <input id="key" type="password" placeholder="ADMIN_KEY" autocomplete="current-password" />
+      <label class="remember"><input type="checkbox" id="remember" checked /> Remember on this device</label>
+      <button class="btn primary" id="go" style="width:100%;justify-content:center">Open dashboard</button>
+      <div id="login-err" class="muted" style="margin-top:10px"></div>
     </div>
+
     <div id="content" hidden>
-      <h2>People you met</h2>
-      <table id="leads"><thead><tr><th>When</th><th>Who</th><th>Where</th><th>Note</th></tr></thead><tbody></tbody></table>
-      <h2>Newsletter subscribers</h2>
-      <table id="subs"><thead><tr><th>When</th><th>Email</th></tr></thead><tbody></tbody></table>
-      <h2>Pageviews (last 30 days)</h2>
-      <table id="hits"><thead><tr><th>Day</th><th>Page</th><th>Views</th></tr></thead><tbody></tbody></table>
-      <h2>Short-link clicks</h2>
-      <table id="clicks"><thead><tr><th>Slug</th><th>Clicks</th></tr></thead><tbody></tbody></table>
+      <div class="dash-head">
+        <h1>Site dashboard</h1>
+        <span class="when" id="as-of"></span>
+      </div>
+
+      <!-- Stat tiles -->
+      <div class="stats">
+        <div class="stat">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span class="n" id="s-leads">–</span>
+          <span class="l">People met</span>
+          <span class="sub" id="s-leads-sub"></span>
+        </div>
+        <div class="stat">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg></span>
+          <span class="n" id="s-subs">–</span>
+          <span class="l">Subscribers</span>
+          <span class="sub" id="s-subs-sub"></span>
+        </div>
+        <div class="stat">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="n" id="s-views">–</span>
+          <span class="l">Views · 30d</span>
+          <span class="sub" id="s-views-sub"></span>
+        </div>
+        <div class="stat">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+          <span class="n" id="s-clicks">–</span>
+          <span class="l">Link clicks</span>
+          <span class="sub" id="s-clicks-sub"></span>
+        </div>
+      </div>
+
+      <!-- Daily views chart -->
+      <div class="panel">
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Daily pageviews · last 30 days</h2>
+        <svg id="views-chart" viewBox="0 0 600 150" preserveAspectRatio="none" aria-label="Daily pageviews bar chart"></svg>
+        <div class="chart-meta"><span id="chart-from"></span><span id="chart-peak"></span><span id="chart-to"></span></div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M9 21V9M3 21h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/></svg>Top pages · 30d</h2>
+          <div class="hbars" id="top-pages"></div>
+        </div>
+        <div class="panel">
+          <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Short-link clicks</h2>
+          <div class="hbars" id="click-bars"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>People you met</h2>
+        <table id="leads"><thead><tr><th>When</th><th>Who</th><th>Where</th><th>Note</th></tr></thead><tbody></tbody></table>
+      </div>
+
+      <div class="panel">
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>Newsletter subscribers</h2>
+        <table id="subs"><thead><tr><th>When</th><th>Email</th></tr></thead><tbody></tbody></table>
+        <div class="panel-actions">
+          <button class="btn" id="subs-csv" type="button" hidden>Download CSV (for Beehiiv import)</button>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:4px">
+        <a href="#" id="forget">Forget key on this device</a>
+      </p>
     </div>
   </div>
+
   <script>
     const API = 'https://rudy-site.rparra.workers.dev';
     const esc = (s) => { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; };
+    const fmt = (n) => n.toLocaleString('en-US');
+    let subsData = [];
+
+    function dayKey(d) { return d.toISOString().slice(0, 10); }
+
+    function drawChart(hits) {
+      const days = [];
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000);
+        const k = dayKey(d);
+        const total = Object.values(hits[k] || {}).reduce((a, b) => a + b, 0);
+        days.push({ k, total });
+      }
+      const max = Math.max(1, ...days.map(d => d.total));
+      const svg = document.getElementById('views-chart');
+      const W = 600, H = 150, PAD = 2;
+      const bw = (W - PAD * 2) / days.length;
+      let out = '';
+      days.forEach((d, i) => {
+        const h = Math.max(d.total > 0 ? 3 : 1.5, (d.total / max) * (H - 24));
+        const x = PAD + i * bw + bw * 0.18;
+        const y = H - h - 4;
+        const today = i === days.length - 1;
+        out += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw * 0.64).toFixed(1)}" height="${h.toFixed(1)}" rx="2"
+                 fill="${d.total === 0 ? 'var(--border)' : today ? 'var(--accent-2)' : 'var(--text)'}">
+                 <title>${d.k} · ${d.total} view${d.total === 1 ? '' : 's'}</title></rect>`;
+      });
+      svg.innerHTML = out;
+      const peak = days.reduce((a, b) => (b.total > a.total ? b : a));
+      document.getElementById('chart-from').textContent = days[0].k.slice(5);
+      document.getElementById('chart-to').textContent = days[days.length - 1].k.slice(5) + ' (today)';
+      document.getElementById('chart-peak').textContent = peak.total ? 'peak ' + peak.total + ' · ' + peak.k.slice(5) : '';
+      return days;
+    }
+
+    function hbars(el, entries, labelFn) {
+      const wrap = document.getElementById(el);
+      if (!entries.length) { wrap.innerHTML = '<div class="empty">Nothing yet.</div>'; return; }
+      const max = Math.max(...entries.map(e => e[1]));
+      wrap.innerHTML = entries.map(([k, n]) => `
+        <div class="hbar">
+          <div class="row"><span class="path">${esc(labelFn ? labelFn(k) : k)}</span><span class="val">${fmt(n)}</span></div>
+          <div class="track"><div class="fill" style="width:${Math.max(3, (n / max) * 100).toFixed(1)}%"></div></div>
+        </div>`).join('');
+    }
+
     async function load(key) {
       const h = { Authorization: 'Bearer ' + key };
       const [leadsR, statsR, subsR] = await Promise.all([
@@ -50,38 +219,86 @@
         fetch(API + '/subscribers', { headers: h }),
       ]);
       if (!leadsR.ok || !statsR.ok) throw new Error('unauthorized');
-      const leads = await leadsR.json();
+      const leads = (await leadsR.json()).leads || [];
       const stats = await statsR.json();
-      const subs = subsR.ok ? await subsR.json() : { subscribers: [] };
-      document.querySelector('#subs tbody').innerHTML = (subs.subscribers || []).map(s2 =>
-        `<tr><td>${esc((s2.at || '').slice(0, 16).replace('T', ' '))}</td><td>${esc(s2.email)}</td></tr>`).join('') ||
-        '<tr><td colspan="2" class="muted">No subscribers yet.</td></tr>';
-      document.querySelector('#leads tbody').innerHTML = (leads.leads || []).map(l =>
+      subsData = subsR.ok ? ((await subsR.json()).subscribers || []) : [];
+
+      const hits = stats.hits || {};
+      const days = drawChart(hits);
+      const views30 = days.reduce((a, d) => a + d.total, 0);
+      const views7 = days.slice(-7).reduce((a, d) => a + d.total, 0);
+      const clicks = Object.entries(stats.clicks || {}).sort((a, b) => b[1] - a[1]);
+      const clicksTotal = clicks.reduce((a, c) => a + c[1], 0);
+
+      document.getElementById('s-leads').textContent = fmt(leads.length);
+      const lead7 = leads.filter(l => Date.now() - Date.parse(l.at || 0) < 7 * 86400000).length;
+      document.getElementById('s-leads-sub').textContent = lead7 ? `+${lead7} this week` : '';
+      document.getElementById('s-subs').textContent = fmt(subsData.length);
+      const sub7 = subsData.filter(s2 => Date.now() - Date.parse(s2.at || 0) < 7 * 86400000).length;
+      document.getElementById('s-subs-sub').textContent = sub7 ? `+${sub7} this week` : '';
+      document.getElementById('s-views').textContent = fmt(views30);
+      document.getElementById('s-views-sub').textContent = `${fmt(views7)} in the last 7 days`;
+      document.getElementById('s-clicks').textContent = fmt(clicksTotal);
+      document.getElementById('s-clicks-sub').textContent = clicks.length ? `${clicks.length} short link${clicks.length === 1 ? '' : 's'}` : '';
+
+      const pageTotals = {};
+      for (const day of Object.keys(hits)) {
+        for (const [path, n] of Object.entries(hits[day])) pageTotals[path] = (pageTotals[path] || 0) + n;
+      }
+      hbars('top-pages', Object.entries(pageTotals).sort((a, b) => b[1] - a[1]).slice(0, 8));
+      hbars('click-bars', clicks.slice(0, 8), k => '/go/' + k);
+
+      document.querySelector('#leads tbody').innerHTML = leads.map(l =>
         `<tr><td>${esc((l.at || '').slice(0, 16).replace('T', ' '))}</td>
              <td><strong>${esc(l.name)}</strong><br>${esc(l.contact)}</td>
              <td>${esc(l.event)}</td><td>${esc(l.note)}</td></tr>`).join('') ||
-        '<tr><td colspan="4" class="muted">Nobody yet — share therudyparra.com/met after events.</td></tr>';
-      const hitRows = [];
-      const days = Object.keys(stats.hits || {}).sort().reverse().slice(0, 30);
-      for (const day of days)
-        for (const [path, n] of Object.entries(stats.hits[day]).sort((a, b) => b[1] - a[1]))
-          hitRows.push(`<tr><td>${esc(day)}</td><td>${esc(path)}</td><td>${n}</td></tr>`);
-      document.querySelector('#hits tbody').innerHTML = hitRows.join('') ||
-        '<tr><td colspan="3" class="muted">No pageviews recorded yet.</td></tr>';
-      document.querySelector('#clicks tbody').innerHTML =
-        Object.entries(stats.clicks || {}).sort((a, b) => b[1] - a[1])
-          .map(([slug, n]) => `<tr><td>/go/${esc(slug)}</td><td>${n}</td></tr>`).join('') ||
-        '<tr><td colspan="2" class="muted">No short links yet.</td></tr>';
+        '<tr><td colspan="4" class="empty">Nobody yet — share therudyparra.com/met after events.</td></tr>';
+      document.querySelector('#subs tbody').innerHTML = subsData.map(s2 =>
+        `<tr><td>${esc((s2.at || '').slice(0, 16).replace('T', ' '))}</td><td>${esc(s2.email)}</td></tr>`).join('') ||
+        '<tr><td colspan="2" class="empty">No subscribers yet.</td></tr>';
+      document.getElementById('subs-csv').hidden = !subsData.length;
+
+      document.getElementById('as-of').textContent = 'as of ' + new Date().toLocaleString();
       document.getElementById('login').hidden = true;
       document.getElementById('content').hidden = false;
     }
+
+    document.getElementById('subs-csv').addEventListener('click', () => {
+      const rows = [['email', 'subscribed_at'], ...subsData.map(s2 => [s2.email, s2.at || ''])];
+      const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+      a.download = 'parra-subscribers.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    function stash(key) {
+      try {
+        sessionStorage.setItem('rudy-admin', key);
+        if (document.getElementById('remember').checked) localStorage.setItem('rudy-admin', key);
+      } catch (e) {}
+    }
+    function unstash() {
+      try { return sessionStorage.getItem('rudy-admin') || localStorage.getItem('rudy-admin'); }
+      catch (e) { return null; }
+    }
+    function forget() {
+      try { sessionStorage.removeItem('rudy-admin'); localStorage.removeItem('rudy-admin'); } catch (e) {}
+      location.reload();
+    }
+    document.getElementById('forget').addEventListener('click', e => { e.preventDefault(); forget(); });
+
     document.getElementById('go').addEventListener('click', async () => {
       const key = document.getElementById('key').value.trim();
-      try { await load(key); sessionStorage.setItem('rudy-admin', key); }
+      try { await load(key); stash(key); }
       catch { document.getElementById('login-err').textContent = 'That key didn\'t work.'; }
     });
-    const saved = sessionStorage.getItem('rudy-admin');
-    if (saved) load(saved).catch(() => sessionStorage.removeItem('rudy-admin'));
+    document.getElementById('key').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('go').click();
+    });
+    const saved = unstash();
+    if (saved) load(saved).catch(() => forget());
   </script>
 </body>
 </html>
