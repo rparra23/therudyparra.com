@@ -16,7 +16,7 @@
     To set a new 4-digit PIN, run:
       python3 -c "import hashlib;print(hashlib.sha256('rudy-talks:YOURPIN'.encode()).hexdigest())"
     and replace the TALKS_HASH value below (or just ask Claude to change it).
-    Current PIN: 2026 (temporary — change me!)
+    The PIN itself is never written in this file — only its hash above.
   -->
   <style>
     .pin-gate {
@@ -137,7 +137,7 @@
 
     /* ===== PIN gate ===== */
     (function () {
-      const TALKS_HASH = '520000e79c379e1064655e94c12b74792df27388a894d7118d79ed05ef825f00';
+      const TALKS_HASH = '24e67536712eee1b2f92a5b8828437b3c3e9d587cffe2cba99a11f6d72f73df5';
       const KEY = 'talks-ok-v1';
       const gate = document.getElementById('pin-gate');
       const form = document.getElementById('pin-form');
