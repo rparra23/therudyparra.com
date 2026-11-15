@@ -2445,3 +2445,32 @@ section.hero .affil-block {
   margin-top: 6px;
 }
 section.hero .affil-block > .eyebrow { text-align: center; }
+
+/* ===== Desert Dev Lab panel — NM Tech Talks brand island (light) =====
+   Navy ink + peach, matching the DDL 2027 banner artwork. */
+.ddl-panel {
+  margin-top: 32px;
+  background: linear-gradient(180deg, #FDFDFE, #ECEEF5);
+  border: 1px solid #D8DBE6;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.ddl-body { padding: 20px 24px 24px; }
+.ddl-body p { color: #3A415A; font-size: 0.95rem; margin: 0 0 16px; max-width: 60ch; }
+.ddl-body p strong { color: #1A2238; }
+.ddl-countdown { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 16px; }
+.ddl-countdown .cell { background: #FFFFFF; border: 1px solid #D8DBE6; border-radius: 10px; padding: 10px 0; width: 64px; text-align: center; }
+.ddl-countdown .num { font-family: 'Space Mono', ui-monospace, monospace; font-size: 1.3rem; font-weight: 700; color: #1A2238; line-height: 1.1; }
+.ddl-countdown .lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8A90A8; margin-top: 2px; }
+.ddl-countdown .tag { font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: #8A90A8; }
+.ddl-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.ddl-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 10px;
+  background: #1A2238; color: #FFFFFF !important;
+  font-weight: 600; font-size: 0.95rem; text-decoration: none;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+.ddl-btn:hover { filter: brightness(1.15); transform: translateY(-1px); text-decoration: none; }
+.ddl-btn.ddl-ghost { background: transparent; color: #1A2238 !important; border: 1px solid #1A2238; }
+.ddl-btn.ddl-ghost:hover { background: rgba(26, 34, 56, 0.06); }
