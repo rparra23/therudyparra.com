@@ -2661,3 +2661,7 @@ body.lb-open { overflow: hidden; }
   font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--muted); align-self: center;
 }
+
+/* Keep faces in frame where these photos get cover-cropped */
+img[src*="mayor-rudy-vendor"] { object-position: center 22%; }
+img[src*="heinrich-tour"] { object-position: center 12%; }
