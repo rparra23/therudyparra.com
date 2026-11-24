@@ -52,6 +52,34 @@
   </style>
 </head>
 <body>
+<div id="pin-overlay" style="position:fixed;inset:0;z-index:9999;background:#101010;display:flex;align-items:center;justify-content:center;padding:20px">
+  <form id="pin-overlay-form" style="background:#1B1B1B;border:1px solid #333;border-radius:16px;padding:32px;max-width:340px;width:100%;text-align:center;font-family:system-ui,sans-serif">
+    <p style="color:#FAFAF7;font-size:1.05rem;margin:0 0 4px;letter-spacing:0.26em">P&#8202;A&#8202;R&#8202;R&#8202;A</p>
+    <p style="color:#999;font-size:0.85rem;margin:0 0 18px">This presentation is private. Enter the PIN.</p>
+    <input id="pin-overlay-input" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="PIN"
+           style="width:100%;box-sizing:border-box;font-size:1.5rem;letter-spacing:0.5em;text-align:center;padding:12px;border-radius:10px;border:1px solid #444;background:#111;color:#fff;margin-bottom:12px" />
+    <button style="width:100%;padding:11px;border-radius:10px;border:none;background:#FAFAF7;color:#111;font-weight:600;font-size:0.95rem;cursor:pointer">Unlock</button>
+    <p id="pin-overlay-err" style="display:none;color:#D98080;font-size:0.8rem;margin:10px 0 0">That&#8217;s not it.</p>
+  </form>
+</div>
+<script>
+(function(){
+  var HASH='24e67536712eee1b2f92a5b8828437b3c3e9d587cffe2cba99a11f6d72f73df5', KEY='talks-ok-v1';
+  var ov=document.getElementById('pin-overlay');
+  function open(){ ov.remove(); document.documentElement.style.overflow=''; }
+  try{ if(sessionStorage.getItem(KEY)==='1'){ open(); return; } }catch(e){}
+  document.documentElement.style.overflow='hidden';
+  document.getElementById('pin-overlay-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var v=document.getElementById('pin-overlay-input').value.trim();
+    var buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode('rudy-talks:'+v));
+    var h=[].map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,'0')}).join('');
+    if(h===HASH){ try{sessionStorage.setItem(KEY,'1')}catch(e2){} open(); }
+    else{ document.getElementById('pin-overlay-err').style.display='block'; }
+  });
+})();
+</script>
+
   <div class="container">
 
     <!-- ===== NAV ===== -->
@@ -67,7 +95,6 @@
         <a href="/">Home</a>
         <a href="/resume">My work</a>
         <a href="/press">Press</a>
-        <a href="/talks/" class="active">Presentations</a>
         <a href="/met/">We met?</a>
       </nav>
     </header>
@@ -106,7 +133,6 @@
         <nav class="sf-links" aria-label="Footer">
           <a href="/resume">My work</a>
           <a href="/press">Press</a>
-          <a href="/talks/">Presentations</a>
           <a href="/met/">We met?</a>
           <a href="/privacy/">Privacy</a>
         </nav>
