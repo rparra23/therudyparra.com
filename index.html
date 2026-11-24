@@ -18,7 +18,10 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/styles.css?v=n5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles.css?v=n6" />
 </head>
 <body>
   <div class="container">
@@ -93,11 +96,11 @@
         <span style="display:block"><span style="font-weight:700">Techqueria NM</span> · Chapter Director</span>
       </p>
       <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 16px;width:fit-content;margin:4px auto 16px;text-align:left;font-size:0.95rem;line-height:1.6">
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">cell</span><a href="tel:+15757251290">(575) 725-1290</a>
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">personal</span><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">gridflow</span><a href="mailto:rudy@gridflow.tech">rudy@gridflow.tech</a>
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">pii energy</span><a href="mailto:rudy@piienergy.com">rudy@piienergy.com</a>
-        <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);align-self:center">nm tech talks</span><a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a>
+        <span class="contact-label">cell</span><a href="tel:+15757251290">(575) 725-1290</a>
+        <span class="contact-label">personal</span><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
+        <span class="contact-label">gridflow</span><a href="mailto:rudy@gridflow.tech">rudy@gridflow.tech</a>
+        <span class="contact-label">pii energy</span><a href="mailto:rudy@piienergy.com">rudy@piienergy.com</a>
+        <span class="contact-label">nm tech talks</span><a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a>
       </div>
       <div class="cta-row">
         <a class="btn primary" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Save my contact</a>
@@ -299,6 +302,31 @@
       </div>
     </div>
 
+    <h2 class="section-title">Highlights</h2>
+    <div class="proof-strip">
+      <a class="proof-tile" href="/press">
+        <img src="/assets/gallery/nmtt/mayor-rudy-vendor.jpg" alt="Rudy walking Mayor Tim Keller through the Desert Dev Lab hackathon" loading="lazy" />
+        <span class="proof-tile-body">
+          <span class="proof-tile-eyebrow">Press</span>
+          <span class="proof-tile-title">Walking Mayor Keller through Desert Dev Lab</span>
+        </span>
+      </a>
+      <a class="proof-tile" href="/resume">
+        <img src="/assets/gallery/pii-energy/hub-product.jpg" alt="The Pii Energy hub" loading="lazy" />
+        <span class="proof-tile-body">
+          <span class="proof-tile-eyebrow">Now building</span>
+          <span class="proof-tile-title">The Pii Energy hub &amp; Edge 2000 platform</span>
+        </span>
+      </a>
+      <a class="proof-tile" href="/talks/">
+        <img src="/talks/iot-bootcamp/thumb.png" alt="IoT Bootcamp talk title slide" loading="lazy" />
+        <span class="proof-tile-body">
+          <span class="proof-tile-eyebrow">Latest talk</span>
+          <span class="proof-tile-title">IoT Bootcamp &mdash; back where I started</span>
+        </span>
+      </a>
+    </div>
+
     <!-- ===== DESERT DEV LAB 2027 — NM Tech Talks brand island ===== -->
     <div class="ddl-panel" data-expires="2027-04-26T00:00:00-06:00">
       <a href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener" style="display:block">
@@ -333,8 +361,21 @@
       <div id="nl-status" role="status" style="margin-top:10px;font-size:0.9rem;color:var(--muted)"></div>
     </div>
 
-    <footer>
-      <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM · <a href="/privacy/">Privacy</a></span>
+    <footer class="site-footer">
+      <div class="sf-top">
+        <a class="brand sf-brand" href="/">PARRA</a>
+        <nav class="sf-links" aria-label="Footer">
+          <a href="/resume">My work</a>
+          <a href="/press">Press</a>
+          <a href="/talks/">Presentations</a>
+          <a href="/met/">We met?</a>
+          <a href="/privacy/">Privacy</a>
+        </nav>
+      </div>
+      <div class="sf-bottom">
+        © <span id="year"></span> Rudy Parra · Albuquerque, NM ·
+        <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
+      </div>
     </footer>
   </div>
 
@@ -604,5 +645,6 @@
     /* First-party pageview beacon (no cookies, counts only) */
     try { navigator.sendBeacon('https://rudy-site.rparra.workers.dev/hit', JSON.stringify({ p: location.pathname })); } catch (e) {}
   </script>
+  <script src="/assets/reveal.js" defer></script>
 </body>
 </html>
