@@ -9,7 +9,7 @@
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/styles.css?v=n2" />
+  <link rel="stylesheet" href="/styles.css?v=n3" />
   <style>
     /* Vertical stack of feature cards on this dedicated page —
        overrides the homepage's horizontal carousel treatment. */
@@ -32,7 +32,6 @@
         <a href="/">Home</a>
         <a href="/resume">My work</a>
         <a href="/press" class="active">Press</a>
-        <a href="/kit">My Press Kit</a>
         <a href="/talks/">Presentations</a>
         <a href="/met/">We met?</a>
       </nav>
@@ -48,10 +47,21 @@
         High-profile moments and press coverage — interviews and elected-official
         visits up top, syndicated articles and write-ups grouped by project below.
       </p>
-      <a class="btn primary" href="/kit" style="margin-top:14px;display:inline-flex;align-items:center;gap:8px">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        Writing about Rudy? Get the press kit
-      </a>
+      <div class="kit-cta">
+        <img class="kit-cta-photo" src="/assets/profile.jpg" alt="Rudy Parra headshot" width="600" height="600" loading="lazy" />
+        <div class="kit-cta-body">
+          <span class="kit-cta-eyebrow">For journalists &amp; event organizers</span>
+          <p class="kit-cta-title">Everything you need to cover Rudy, in one place</p>
+          <p class="kit-cta-sub">
+            Approved bios in three lengths, print-ready headshots and action shots,
+            PARRA and partner logos, organization boilerplates, and a one-page PDF.
+          </p>
+          <div class="kit-cta-actions">
+            <a class="btn primary" href="/kit">Open the press kit</a>
+            <a class="btn" href="/assets/rudy-parra-press-kit.pdf" download="Rudy Parra - Press Kit.pdf">One-pager (PDF)</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ===== FEATURED (long-form spotlights) ===== -->
