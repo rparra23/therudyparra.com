@@ -2554,3 +2554,55 @@ body.lb-open { overflow: hidden; }
 .item-logo-row .item-logo { margin: 0; }
 .item-logo-tall { height: 44px; max-width: 200px; }
 .item-logo-chip { height: 34px; border-radius: 7px; }
+
+/* ===== Small preview carousels (letters, in memoriam) ===== */
+.preview-row {
+  display: flex; gap: 14px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  padding-bottom: 6px;
+}
+.preview-row > * { scroll-snap-align: start; flex: 0 0 auto; }
+.preview-row::-webkit-scrollbar { height: 8px; }
+.preview-row::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+
+.rec-tile {
+  width: 300px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 18px 14px;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.08s ease;
+}
+.rec-tile:hover { border-color: var(--border-strong); background: var(--card-hover); transform: translateY(-2px); }
+.rec-tile-mark {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 2rem; line-height: 0.6; color: var(--muted-2);
+  display: block; margin: 6px 0 2px;
+}
+.rec-tile-quote {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 0.98rem; line-height: 1.5; color: var(--text);
+  margin: 0 0 12px; flex-grow: 1;
+}
+.rec-tile-name { font-weight: 600; font-size: 0.88rem; color: var(--text); margin: 0; }
+.rec-tile-role { font-size: 0.78rem; color: var(--muted); margin: 1px 0 0; }
+
+.mem-tile {
+  width: 300px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.mem-tile:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.mem-tile img {
+  width: 100%; height: 190px;
+  object-fit: cover; object-position: center 25%;
+  display: block;
+}
+.mem-tile-body { display: block; padding: 13px 16px 15px; }
+.mem-tile-name { display: block; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--text); }
+.mem-tile-role { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+.mem-tile-more { display: block; font-size: 0.8rem; color: var(--accent-2); margin-top: 8px; }

@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/styles.css?v=n4" />
+  <link rel="stylesheet" href="/styles.css?v=n5" />
 </head>
 <body>
   <div class="container">
@@ -904,27 +904,53 @@
 
     <!-- ===== RECOMMENDATIONS ===== -->
     <h2 id="recommendations" class="section-title">Letters of Recommendation</h2>
-    <a class="pub-cta" href="/recommendations">
-      <div class="pub-cta-text">
-        <span class="pub-cta-title">Read what mentors and managers have said</span>
-        <span class="pub-cta-sub">3 letters · Dr. Steven Feller · Richard Pacheco (Lockheed Martin) · Nora Mendoza (CNM)</span>
-      </div>
-      <span class="pub-cta-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </span>
-    </a>
+    <p style="color:var(--muted);margin:-4px 0 16px;font-size:0.95rem">
+      Their words, not mine — tap any card for the full letters.
+    </p>
+    <div class="preview-row" aria-label="Recommendation letter previews">
+      <a class="rec-tile" href="/recommendations">
+        <span class="rec-tile-mark" aria-hidden="true">&ldquo;</span>
+        <p class="rec-tile-quote">He has my strongest recommendation&hellip; He is really good and I would gladly rehire him.</p>
+        <p class="rec-tile-name">Dr. Steven A. Feller</p>
+        <p class="rec-tile-role">Professor of Physics · Coe College</p>
+      </a>
+      <a class="rec-tile" href="/recommendations">
+        <span class="rec-tile-mark" aria-hidden="true">&ldquo;</span>
+        <p class="rec-tile-quote">His networking and computer skill set knowledge grew at an exponential rate&hellip; a great asset for any team.</p>
+        <p class="rec-tile-name">Richard W. Pacheco</p>
+        <p class="rec-tile-role">Full Stack Engineer · Lockheed Martin</p>
+      </a>
+      <a class="rec-tile" href="/recommendations">
+        <span class="rec-tile-mark" aria-hidden="true">&ldquo;</span>
+        <p class="rec-tile-quote">His adaptability, technical skills, and dedication make him a valuable candidate for any professional opportunity.</p>
+        <p class="rec-tile-name">Nora Mendoza</p>
+        <p class="rec-tile-role">Academic Affairs Program Manager · CNM</p>
+      </a>
+    </div>
 
     <!-- ===== IN MEMORIAM ===== -->
     <h2 id="memoriam" class="section-title">In Memoriam</h2>
-    <a class="pub-cta" href="/in-memoriam">
-      <div class="pub-cta-text">
-        <span class="pub-cta-title">People who shaped my path</span>
-        <span class="pub-cta-sub">Mentors and friends I carry with me — read about each one</span>
-      </div>
-      <span class="pub-cta-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </span>
-    </a>
+    <p style="color:var(--muted);margin:-4px 0 16px;font-size:0.95rem">
+      People who shaped my path — I carry them with me.
+    </p>
+    <div class="preview-row" aria-label="In memoriam previews">
+      <a class="mem-tile" href="/in-memoriam">
+        <img src="/assets/in-memoriam/feller.jpg" alt="Dr. Steven Feller in his signature Brooklyn Dodgers cap" loading="lazy" />
+        <span class="mem-tile-body">
+          <span class="mem-tile-name">Dr. Steven A. Feller</span>
+          <span class="mem-tile-role">Mentor · Coe College, Physics</span>
+          <span class="mem-tile-more">His story &rarr;</span>
+        </span>
+      </a>
+      <a class="mem-tile" href="/in-memoriam">
+        <img src="/assets/in-memoriam/asher.jpg" alt="Asher Garcia smiling, throwing a peace sign" loading="lazy" />
+        <span class="mem-tile-body">
+          <span class="mem-tile-name">Asher Garcia</span>
+          <span class="mem-tile-role">Best friend · STEM Core &amp; Deep Dive classmate</span>
+          <span class="mem-tile-more">Her story &rarr;</span>
+        </span>
+      </a>
+    </div>
 
     <footer>
       <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM · <a href="/privacy/">Privacy</a></span>
