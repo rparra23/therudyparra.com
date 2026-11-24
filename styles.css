@@ -2474,3 +2474,43 @@ section.hero .affil-block > .eyebrow { text-align: center; }
 .ddl-btn:hover { filter: brightness(1.15); transform: translateY(-1px); text-decoration: none; }
 .ddl-btn.ddl-ghost { background: transparent; color: #1A2238 !important; border: 1px solid #1A2238; }
 .ddl-btn.ddl-ghost:hover { background: rgba(26, 34, 56, 0.06); }
+
+/* Pii app screenshots: show the whole screen, letterboxed on a dark well */
+.item-gallery .gallery-tile img[src*="/pii-energy/sim-"] {
+  object-fit: contain;
+  background: #10141A;
+}
+
+/* Publications: poster thumbnail beside the text */
+.card.pub { display: flex; gap: 16px; align-items: flex-start; text-decoration: none; color: inherit; }
+.card.pub .pub-thumb {
+  width: 86px; flex: 0 0 auto;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: #FFFFFF; display: block;
+}
+.card.pub .pub-body { min-width: 0; display: block; }
+@media (max-width: 480px) { .card.pub .pub-thumb { width: 64px; } }
+
+/* ===== Gallery lightbox: tap an image to view in-page, back/close to return ===== */
+.lb-overlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(12, 12, 11, 0.93);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px; gap: 12px;
+}
+.lb-overlay[hidden] { display: none; }
+.lb-overlay img {
+  max-width: 94vw; max-height: 84vh;
+  object-fit: contain; border-radius: 10px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.5);
+}
+.lb-caption { color: #D8D8D2; font-size: 0.88rem; text-align: center; max-width: 80ch; }
+.lb-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.35); color: #FFFFFF;
+  font-size: 1.25rem; line-height: 1; cursor: pointer;
+}
+body.lb-open { overflow: hidden; }
