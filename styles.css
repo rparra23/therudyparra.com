@@ -2541,3 +2541,16 @@ body.lb-open { overflow: hidden; }
 @media (max-width: 560px) {
   .kit-cta { flex-direction: column; align-items: flex-start; }
 }
+
+/* Company logo atop each experience card */
+.item-logo {
+  display: block;
+  height: 30px; width: auto; max-width: 170px;
+  object-fit: contain; object-position: left;
+  margin: 0 0 12px;
+}
+
+.item-logo-row { display: flex; gap: 14px; align-items: center; margin: 0 0 12px; }
+.item-logo-row .item-logo { margin: 0; }
+.item-logo-tall { height: 44px; max-width: 200px; }
+.item-logo-chip { height: 34px; border-radius: 7px; }
