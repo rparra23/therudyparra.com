@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Mono:wght@400;700&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=n7" />
+  <link rel="stylesheet" href="/styles.css?v=n8" />
   <!--
     PIN gate: the page unlocks when sha256("rudy-talks:" + PIN) matches TALKS_HASH.
     To set a new 4-digit PIN, run:
@@ -61,7 +61,7 @@
     }
   </style>
 </head>
-<body>
+<body class="p2">
   <div class="container">
     <header class="nav">
       <a class="brand" href="/">
@@ -98,15 +98,15 @@
     </div>
 
     <div class="talk-list" id="talk-list" hidden>
-      <a class="talk-row" href="/talks/iot-bootcamp/">
-        <img class="talk-thumb" src="/talks/iot-bootcamp/thumb.png" alt="IoT Bootcamp Talk — title slide" loading="lazy" />
+      <div class="talk-row">
+        <a href="/talks/iot-bootcamp/"><img class="talk-thumb" src="/talks/iot-bootcamp/thumb.png" alt="IoT Bootcamp Talk — title slide" loading="lazy" /></a>
         <span>
           <span class="talk-meta">Oct 2026 · Deep Dive IoT Bootcamp</span>
-          <h3 class="talk-title">IoT Bootcamp Talk</h3>
+          <h3 class="talk-title"><a href="/talks/iot-bootcamp/">IoT Bootcamp Talk</a></h3>
           <p class="talk-desc">From bootcamp seat to the bench — hardware, firmware, and a career in IoT.
           Interactive deck; <a href="/talks/iot-bootcamp/rudy-parra-iot-bootcamp-talk.pptx" download>PowerPoint version ↓</a></p>
         </span>
-      </a>
+      </div>
       <a class="talk-row" href="/talks/stem-core/">
         <img class="talk-thumb" src="/talks/stem-core/slides/slide-01.jpg" alt="STEM Core talk — first slide" loading="lazy" />
         <span>
