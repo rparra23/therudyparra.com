@@ -21,9 +21,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Mono:wght@400;700&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=n7" />
+  <link rel="stylesheet" href="/styles.css?v=n8" />
 </head>
-<body>
+<body class="home">
   <div class="container">
 
     <!-- ===== NAV ===== -->
@@ -36,103 +36,90 @@
         Menu
       </button>
       <nav class="links" id="nav-panel">
-        <a href="/">Home</a>
+        <a class="active" href="/" aria-current="page">Home</a>
         <a href="/resume">My work</a>
         <a href="/press">Press</a>
         <a href="/met/">We met?</a>
       </nav>
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <svg class="circuit-bg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- ===== HERO — the calling card =====
+         Mobile: portrait + name + roles + contact + buttons must fit one
+         phone screen (people screenshot it as Rudy's card). -->
+    <section class="h-hero">
+      <svg class="circuit-bg h-circuit" viewBox="0 0 1104 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g class="traces">
-          <path pathLength="1000" d="M -20 70 H 310 V 170 H 540 V 240" />
-          <path pathLength="1000" d="M 1220 50 H 950 V 150 H 800 V 250" />
-          <path pathLength="1000" d="M -20 560 H 210 V 430 H 430 V 350 H 580" />
-          <path pathLength="1000" d="M 1220 610 H 990 V 470 H 860 V 400" />
-          <path pathLength="1000" d="M 660 -20 V 80 H 780 V 160" />
-          <path pathLength="1000" d="M 420 660 V 560 H 640 V 470" />
-          <path pathLength="1000" d="M 1220 330 H 1060 V 220 H 940" />
-          <path pathLength="1000" d="M -20 300 H 120 V 480 H 300" />
+          <path pathLength="1000" d="M -20 760 H 150 V 690 H 300" />
+          <path pathLength="1000" d="M 220 880 V 800 H 380 V 740" />
+          <path pathLength="1000" d="M -20 700 H 60 V 830 H 130" />
+          <path pathLength="1000" d="M 1124 46 H 900 V 20 H 760" />
+          <path pathLength="1000" d="M 466 -20 V 60" />
+          <path pathLength="1000" d="M 1124 640 H 1000 V 720 H 920" />
         </g>
         <g class="pulses">
-          <path pathLength="1000" d="M -20 70 H 310 V 170 H 540 V 240" />
-          <path pathLength="1000" d="M 1220 50 H 950 V 150 H 800 V 250" />
-          <path pathLength="1000" d="M -20 560 H 210 V 430 H 430 V 350 H 580" />
-          <path pathLength="1000" d="M 1220 610 H 990 V 470 H 860 V 400" />
-          <path pathLength="1000" d="M 660 -20 V 80 H 780 V 160" />
-          <path pathLength="1000" d="M 420 660 V 560 H 640 V 470" />
-          <path pathLength="1000" d="M 1220 330 H 1060 V 220 H 940" />
-          <path pathLength="1000" d="M -20 300 H 120 V 480 H 300" />
+          <path pathLength="1000" d="M -20 760 H 150 V 690 H 300" />
+          <path pathLength="1000" d="M 220 880 V 800 H 380 V 740" />
+          <path pathLength="1000" d="M -20 700 H 60 V 830 H 130" />
+          <path pathLength="1000" d="M 1124 46 H 900 V 20 H 760" />
+          <path pathLength="1000" d="M 466 -20 V 60" />
+          <path pathLength="1000" d="M 1124 640 H 1000 V 720 H 920" />
         </g>
         <g class="vias">
-          <circle cx="540" cy="240" r="5" /><circle cx="800" cy="250" r="5" />
-          <circle cx="580" cy="350" r="5" /><circle cx="860" cy="400" r="5" />
-          <circle cx="780" cy="160" r="5" /><circle cx="640" cy="470" r="5" />
-          <circle cx="940" cy="220" r="5" /><circle cx="300" cy="480" r="5" />
-          <circle cx="310" cy="70" r="3.5" /><circle cx="950" cy="150" r="3.5" />
-          <circle cx="210" cy="430" r="3.5" /><circle cx="990" cy="470" r="3.5" />
+          <circle cx="300" cy="690" r="5" /><circle cx="380" cy="740" r="5" /><circle cx="130" cy="830" r="5" /><circle cx="760" cy="20" r="5" /><circle cx="466" cy="60" r="5" /><circle cx="920" cy="720" r="5" /><circle cx="150" cy="760" r="3" /><circle cx="900" cy="46" r="3" />
         </g>
       </svg>
-      <div class="hero-text">
-      <a class="now-playing" id="now-playing" href="#" target="_blank" rel="noopener" aria-label="Currently playing on Spotify">
-        <img class="np-art" id="np-art" alt="" loading="lazy" />
-        <div class="np-text">
-          <span class="np-label">
-            <span class="np-bars" aria-hidden="true"><span></span><span></span><span></span></span>
-            Now playing
-          </span>
-          <span class="np-song" id="np-song"></span>
+
+      <figure class="h-portrait">
+        <div class="h-matte">
+          <img src="/assets/profile.jpg" alt="Portrait of Rudy Parra" width="1200" height="1200" />
         </div>
-      </a>
-      <div class="eyebrow">Albuquerque, NM</div>
-      <h1>Hi, I'm <span class="grad">Rudy</span> Parra.</h1>
-      <p class="tagline" style="line-height:1.75">
-        <span style="display:block"><span style="font-weight:700">GridFlow</span> · Lab Technician</span>
-        <span style="display:block"><span style="font-weight:700">Pii Energy</span> · Software Developer</span>
-        <span style="display:block"><span style="font-weight:700">NM Tech Talks</span> · Board Member</span>
-        <span style="display:block"><span style="font-weight:700">Techqueria NM</span> · Chapter Director</span>
-      </p>
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 16px;width:fit-content;margin:4px auto 16px;text-align:left;font-size:0.95rem;line-height:1.6">
-        <span class="contact-label">cell</span><a href="tel:+15757251290">(575) 725-1290</a>
-        <span class="contact-label">personal</span><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
-        <span class="contact-label">gridflow</span><a href="mailto:rudy@gridflow.tech">rudy@gridflow.tech</a>
-        <span class="contact-label">pii energy</span><a href="mailto:rudy@piienergy.com">rudy@piienergy.com</a>
-        <span class="contact-label">nm tech talks</span><a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a>
+        <figcaption><span>Rudy Parra</span><span>Albuquerque, N.M.</span></figcaption>
+      </figure>
+
+      <div class="h-id">
+        <div class="h-eyebrow">Albuquerque, NM</div>
+        <h1>Rudy <em>Parra</em></h1>
       </div>
-      <div class="cta-row">
-        <a class="btn primary" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Save my contact</a>
-        <a class="btn" href="/resume">See my work</a>
-        <button class="btn" id="a2hs" hidden type="button">Add to home screen</button>
+
+      <ul class="h-roles" aria-label="Roles">
+        <li><span class="h-n" aria-hidden="true">01</span><strong>GridFlow</strong><span>Lab Technician</span></li>
+        <li><span class="h-n" aria-hidden="true">02</span><strong>Pii Energy</strong><span>Software Developer</span></li>
+        <li><span class="h-n" aria-hidden="true">03</span><strong>NM Tech Talks</strong><span>Board Member</span></li>
+        <li><span class="h-n" aria-hidden="true">04</span><strong>Techqueria NM</strong><span>Chapter Director</span></li>
+      </ul>
+
+      <div class="h-contact">
+        <span class="h-label">Cell</span><a href="tel:+15757251290">(575) 725-1290</a>
+        <span class="h-label">Personal</span><a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
+        <span class="h-label">GridFlow</span><a href="mailto:rudy@gridflow.tech">rudy@gridflow.tech</a>
+        <span class="h-label">Pii Energy</span><a href="mailto:rudy@piienergy.com">rudy@piienergy.com</a>
+        <span class="h-label">NM Tech Talks</span><a href="mailto:parrarudy1media@gmail.com">parrarudy1media@gmail.com</a>
       </div>
-      <div id="a2hs-tip" hidden
-           style="margin:10px auto 0;text-align:left;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.9rem;color:var(--muted);max-width:46ch">
-        On iPhone: tap the <strong style="color:var(--text)">Share</strong> button
-        <svg viewBox="0 0 24 24" width="15" height="15" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
-        in Safari, then <strong style="color:var(--text)">"Add to Home Screen"</strong>.
+
+      <div class="h-cta">
+        <a class="h-btn h-btn-ink" href="/rudy-parra.vcf" download="Rudy Parra.vcf">Save my contact</a>
+        <a class="h-btn" href="/resume">See my work</a>
+        <button class="h-btn" id="a2hs" hidden type="button">Add to home screen</button>
+        <div id="a2hs-tip" class="h-tip" hidden>
+          On iPhone: tap the <strong>Share</strong> button
+          <svg viewBox="0 0 24 24" width="15" height="15" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+          in Safari, then <strong>"Add to Home Screen"</strong>.
+        </div>
       </div>
-      <div class="social-row" aria-label="Social media and contact links">
-        <a class="social-btn" href="mailto:parrarudy3@icloud.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
-        </a>
-        <a class="social-btn" href="https://www.linkedin.com/in/rudy-parra-329a2318a/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.34 17.34V10H6V17.34h2.34M7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72M18 17.34v-4.02c0-2.17-1.17-3.18-2.73-3.18a2.36 2.36 0 0 0-2.13 1.17V10h-2.34v7.34h2.34v-4.1c0-.92.17-1.81 1.31-1.81 1.13 0 1.14 1.06 1.14 1.87v4.04H18Z"/></svg>
-        </a>
-        <a class="social-btn" href="https://github.com/rparra23" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.64.71 1.03 1.61 1.03 2.71 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-        </a>
-        <a class="social-btn" href="https://www.instagram.com/therudyparra/" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.81.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.36 1.06.42 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.81-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.36-2.23.42-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.81-.25-2.23-.42-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.17-.42-.36-1.06-.42-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.81.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.36 2.23-.42C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.55-.79.31-1.46.72-2.13 1.38-.66.66-1.07 1.34-1.38 2.13-.3.76-.5 1.64-.55 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.55 2.91.31.79.72 1.46 1.38 2.13.66.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.55 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.55.79-.31 1.46-.72 2.13-1.38.66-.66 1.07-1.34 1.38-2.13.3-.76.5-1.64.55-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.91-.31-.79-.72-1.46-1.38-2.13-.66-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.55C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 0 0 5.84 12 6.16 6.16 0 0 0 12 18.16 6.16 6.16 0 0 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 12 8a4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-        </a>
-        <a class="social-btn" href="https://www.tiktok.com/@therudyparra" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.94a8.16 8.16 0 0 0 4.77 1.52V7.05a4.85 4.85 0 0 1-1.84-.36z"/></svg>
-        </a>
-        <a class="social-btn" href="https://www.facebook.com/share/18NRZVuYBF/" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.412c0-3.014 1.792-4.679 4.532-4.679 1.313 0 2.686.235 2.686.235v2.971h-1.513c-1.491 0-1.957.93-1.957 1.886v2.255h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-        </a>
-      </div>
-      <p class="lead">
+
+      <nav class="h-social" aria-label="Social media">
+        <a href="https://www.linkedin.com/in/rudy-parra-329a2318a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/rparra23" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.instagram.com/therudyparra/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@therudyparra" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/share/18NRZVuYBF/" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+    </section>
+
+    <!-- ===== I · PROFILE ===== -->
+    <section class="h-section h-split">
+      <header class="h-head"><span aria-hidden="true">I</span><h2>Profile</h2></header>
+      <p class="h-lede h-reveal">
         I work in tech startups. At GridFlow I'm a lab technician specializing
         in vanadium redox flow batteries — tackling long-duration energy
         storage for commercial use and providing energy resiliency. At Pii
@@ -145,242 +132,146 @@
         and founded
         <a href="https://www.instagram.com/q.stem.nm/" target="_blank" rel="noopener">Q-STEM</a>,
         a meetup for LGBTQ+ folks in STEM.
-        I build things that bridge electrons, atoms, and code.
+        <em>I build things that bridge electrons, atoms, and code.</em>
       </p>
-      </div>
-      <div class="avatar-wrap">
-        <img class="avatar" src="/assets/profile.jpg" alt="Portrait of Rudy Parra" width="600" height="600" />
-      </div>
-      <div class="affil-block">
-      <div class="eyebrow">Affiliated Companies &amp; Orgs</div>
-      <div class="affil-row" aria-label="Companies and organizations Rudy is part of" style="margin-top:10px">
-        <a class="affil-link" href="https://gridflow.tech" target="_blank" rel="noopener">
-          <img src="/assets/logos/gridflow.png" alt="GridFlow" width="140" height="40" loading="lazy" />
-          <span>Clean energy R&amp;D ↗</span>
+    </section>
+
+    <!-- ===== II · AFFILIATIONS ===== -->
+    <section class="h-section">
+      <header class="h-head"><span aria-hidden="true">II</span><h2>Companies &amp; organizations</h2></header>
+      <div class="h-affil h-reveal" aria-label="Companies and organizations Rudy is part of">
+        <a href="https://gridflow.tech" target="_blank" rel="noopener">
+          <img src="/assets/logos/gridflow.png" alt="GridFlow" width="140" height="44" loading="lazy" />
+          <span>Clean energy R&amp;D</span>
         </a>
-        <a class="affil-link" href="https://pii-energy.vercel.app" target="_blank" rel="noopener">
-          <img src="/assets/logos/pii-energy.svg" alt="Pii Energy" width="140" height="40" loading="lazy" />
-          <span>Plug-in solar + storage ↗</span>
+        <a href="https://pii-energy.vercel.app" target="_blank" rel="noopener">
+          <img src="/assets/logos/pii-energy.svg" alt="Pii Energy" width="140" height="44" loading="lazy" />
+          <span>Plug-in solar + storage</span>
         </a>
-        <a class="affil-link" href="https://www.nmtechtalks.com" target="_blank" rel="noopener">
-          <img src="/assets/logos/nmtechtalks.png" alt="NM Tech Talks" width="140" height="40" loading="lazy" />
-          <span>Board member ↗</span>
+        <a href="https://www.nmtechtalks.com" target="_blank" rel="noopener">
+          <img src="/assets/logos/nmtechtalks.png" alt="NM Tech Talks" width="140" height="44" loading="lazy" />
+          <span>Board member</span>
         </a>
-        <a class="affil-link" href="https://www.linkedin.com/company/techqueria-new-mexico" target="_blank" rel="noopener">
-          <img src="/assets/logos/techqueria.png" alt="Techqueria New Mexico" width="140" height="40" loading="lazy" />
-          <span>Chapter director · LinkedIn ↗</span>
+        <a href="https://www.linkedin.com/company/techqueria-new-mexico" target="_blank" rel="noopener">
+          <img src="/assets/logos/techqueria.png" alt="Techqueria New Mexico" width="140" height="44" loading="lazy" />
+          <span>Chapter director</span>
         </a>
-        <a class="affil-link" href="https://www.instagram.com/q.stem.nm/" target="_blank" rel="noopener">
-          <img src="/assets/logos/qstem.png" alt="Q-STEM" width="140" height="40" loading="lazy" />
-          <span>LGBTQ+ STEM community · Instagram ↗</span>
+        <a href="https://www.instagram.com/q.stem.nm/" target="_blank" rel="noopener">
+          <img src="/assets/logos/qstem.png" alt="Q-STEM" width="140" height="44" loading="lazy" />
+          <span>LGBTQ+ STEM community</span>
         </a>
-      </div>
       </div>
     </section>
 
-    <!-- ===== EVENTS =====
-         Each card carries data-expires (ISO timestamp, Mountain Time offset).
-         A script at the bottom of the page removes cards past their expiry
-         and hides the whole section when none remain. New cards must set it. -->
-    <h2 id="events" class="section-title">Events Rudy's Going To</h2>
-    <p style="color:var(--muted);margin:-4px 0 18px;font-size:0.95rem;max-width:62ch">
-      Come say hi — grab tickets, and mark your calendar for NM Tech Week.
-    </p>
-    <a class="pub-cta" href="/met/" style="margin:36px 0 0">
-      <div class="pub-cta-text">
-        <span class="pub-cta-title">Did we meet at an event?</span>
-        <span class="pub-cta-sub">Say hi — tell me where we crossed paths and how to reach you.</span>
-      </div>
-      <span class="pub-cta-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </span>
-    </a>
-    <div id="events-grid" class="events-row">
-      <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
-        <a href="https://gmisconference.org" target="_blank" rel="noopener"
-           aria-label="GMiS Graduate and Career Fair — details on the GMiS Conference site"
-           style="display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background-color:#171716;background-image:linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.72)),url('/assets/events/gmis-balloons-2026.jpg');background-size:cover;background-position:center;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB">Great Minds in STEM</span>
-          <span style="font-family:'Newsreader',serif;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.15;color:#EEF1F4;letter-spacing:-0.01em">GMiS Graduate<br/>&amp; Career Fair</span>
-          <span style="font-size:0.95rem;color:#B9B8B0;line-height:1.6">Sat, Sep 19 · 10:30 AM–4 PM<br/>Albuquerque Convention Center</span>
+    <!-- ===== III · HIGHLIGHTS ===== -->
+    <section class="h-section">
+      <header class="h-head"><span aria-hidden="true">III</span><h2>Highlights</h2></header>
+      <div class="h-highlights">
+        <a class="h-feature h-reveal" href="/press">
+          <img src="/assets/gallery/nmtt/mayor-rudy-vendor.jpg" alt="Rudy walking Mayor Tim Keller through the Desert Dev Lab hackathon" loading="lazy" />
+          <span class="h-kicker">Press</span>
+          <span class="h-feature-title">Walking Mayor Keller through Desert Dev Lab</span>
+          <span class="h-more">Read the coverage</span>
         </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Rudy's running the NM Tech Talks booth — come say hi
-        </span>
-        <a class="btn primary" href="https://gmisconference.org" target="_blank" rel="noopener" style="margin-top:10px">
-          Details ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-09-20T00:00:00-06:00">
-        <a href="https://abqtodo.com/event/burque-bytefest/" target="_blank" rel="noopener"
-           aria-label="Burque ByteFest computer showcase — event details">
-          <img src="/assets/events/burque-bytefest-2026.jpg"
-               alt="Burque ByteFest flyer — Power Up to Geek Out! Saturday September 19, 3–6pm, Q Station, free to attend, proceeds benefit Adelante DiverseIT"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.45)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          A car show for computers — vintage rigs, retro gaming, custom builds
-        </span>
-        <a class="btn primary" href="https://abqtodo.com/event/burque-bytefest/" target="_blank" rel="noopener" style="margin-top:10px">
-          Details ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-09-25T00:00:00-06:00">
-        <a href="https://luma.com/s2tfixue" target="_blank" rel="noopener"
-           aria-label="NMTC Tech Summit — tickets on Luma">
-          <img src="/assets/events/nmtc-summit-2026.jpg"
-               alt="NMTC Tech Summit cover — Tech Summit, September 24 2026, New Mexico Technology Council"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.45)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          The state's flagship tech conference — 800+ innovators and leaders
-        </span>
-        <a class="btn primary" href="https://luma.com/s2tfixue" target="_blank" rel="noopener" style="margin-top:10px">
-          Tickets on Luma ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-10-01T00:00:00-06:00">
-        <a href="https://luma.com/268ibkl4" target="_blank" rel="noopener"
-           aria-label="Techqueria NM Tech Trivia Night — RSVP on Luma">
-          <img src="/assets/events/techqueria-trivia-sep-2026.jpg"
-               alt="Techqueria New Mexico Tech Trivia Night flyer — Wednesday September 30 at 7pm, Ponderosa Brewing Company, hosted by Geeks Who Drink"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.45)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Networking that doesn't feel like networking — Geeks Who Drink trivia
-        </span>
-        <a class="btn primary" href="https://luma.com/268ibkl4" target="_blank" rel="noopener" style="margin-top:10px">
-          RSVP on Luma ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-10-09T00:00:00-06:00">
-        <a href="https://luma.com/fvxse8v8" target="_blank" rel="noopener"
-           aria-label="Claude Code ABQ meetup — RSVP on Luma"
-           style="display:flex;flex-direction:column;justify-content:flex-end;gap:14px;aspect-ratio:1/1;background-color:#000;background-image:url('/assets/events/claude-code-abq.jpg');background-size:cover;background-position:center;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
-          <span style="font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB">ClaudeABQ.dev</span>
-          <span style="font-family:'Newsreader',serif;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.1;color:#EEF1F4;letter-spacing:-0.01em">Claude Code<br/>ABQ</span>
-          <span style="font-size:0.95rem;color:#B9B8B0;line-height:1.6">Thu, Oct 8 · 6–8 PM<br/>CNM STEMulus Center</span>
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          Monthly AI-coding meetup — bring your laptop and what you're building
-        </span>
-        <a class="btn primary" href="https://luma.com/fvxse8v8" target="_blank" rel="noopener" style="margin-top:10px">
-          RSVP on Luma ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-10-27T00:00:00-06:00">
-        <a href="https://luma.com/aw67tsmf" target="_blank" rel="noopener"
-           aria-label="New Mexico Tech Week Kickoff Party — RSVP on Luma">
-          <img src="/assets/events/nmtw-kickoff-2026.jpg"
-               alt="New Mexico Tech Week Kickoff Party flyer — October 26 2026, 6–9pm, Hollow Spirits Distillery, in partnership with the NM Technology &amp; Innovation Office"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.45)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          NM Tech Talks &amp; the NM Technology &amp; Innovation Office open Tech Week
-        </span>
-        <a class="btn primary" href="https://luma.com/aw67tsmf" target="_blank" rel="noopener" style="margin-top:10px">
-          RSVP on Luma ↗
-        </a>
-      </div>
-
-      <div style="text-align:center" data-expires="2026-10-31T00:00:00-06:00">
-        <a href="https://newmexicotechweek.com/events" target="_blank" rel="noopener"
-           aria-label="TechFest 2026 — details and tickets on the NM Tech Week site">
-          <img src="/assets/events/techfest-2026-promo.png"
-               alt="TechFest 2026 promotional flyer — October 29–30 during New Mexico Tech Week"
-               loading="lazy"
-               style="display:block;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.45)" />
-        </a>
-        <span style="display:block;margin-top:10px;color:var(--muted);font-size:0.85rem">
-          NM Tech Talks · TechFest 2026 · Oct 29–30 · Find Rudy at the Tech Access Track (Thu)
-        </span>
-        <a class="btn primary" href="https://newmexicotechweek.com/events" target="_blank" rel="noopener" style="margin-top:10px">
-          Details &amp; tickets ↗
-        </a>
-      </div>
-    </div>
-
-    <h2 class="section-title">Highlights</h2>
-    <div class="proof-strip">
-      <a class="proof-tile" href="/press">
-        <img src="/assets/gallery/nmtt/mayor-rudy-vendor.jpg" alt="Rudy walking Mayor Tim Keller through the Desert Dev Lab hackathon" loading="lazy" />
-        <span class="proof-tile-body">
-          <span class="proof-tile-eyebrow">Press</span>
-          <span class="proof-tile-title">Walking Mayor Keller through Desert Dev Lab</span>
-        </span>
-      </a>
-      <a class="proof-tile" href="/resume">
-        <img src="/assets/gallery/pii-energy/hub-product.jpg" alt="The Pii Energy hub" loading="lazy" />
-        <span class="proof-tile-body">
-          <span class="proof-tile-eyebrow">Now building</span>
-          <span class="proof-tile-title">The Pii Energy hub &amp; Edge 2000 platform</span>
-        </span>
-      </a>
-      <a class="proof-tile" href="/assets/nmtw-2026-impact-report.pdf" target="_blank" rel="noopener">
-        <img src="/assets/events/techfest-2026-promo.png" alt="TechFest 2026 during NM Tech Week — promo artwork" loading="lazy" />
-        <span class="proof-tile-body">
-          <span class="proof-tile-eyebrow">NM Tech Week</span>
-          <span class="proof-tile-title">1,255 attendances in year one &mdash; the Impact Report</span>
-        </span>
-      </a>
-    </div>
-
-    <!-- ===== DESERT DEV LAB 2027 — NM Tech Talks brand island ===== -->
-    <div class="ddl-panel" data-expires="2027-04-26T00:00:00-06:00">
-      <a href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener" style="display:block">
-        <img src="/assets/events/ddl-2027-banner.png"
-             alt="NM Tech Talks presents the Desert Dev Lab Hackathon — April 24–25, 2027 · Theme: Health + Wellness"
-             width="1200" height="300" loading="lazy" style="display:block;width:100%;height:auto" />
-      </a>
-      <div class="ddl-body">
-        <div id="ddl-countdown" class="ddl-countdown" aria-label="Countdown to the Desert Dev Lab Hackathon"></div>
-        <p>
-          NM Tech Talks' flagship hackathon returns <strong>April 24&ndash;25, 2027</strong> &mdash;
-          this year's theme is <strong>Health + Wellness</strong>. Hacker and mentor signups are open now.
-        </p>
-        <div class="ddl-cta">
-          <a class="ddl-btn" href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener">Sign up &mdash; hackers &amp; mentors &#8599;</a>
-          <a class="ddl-btn ddl-ghost" href="https://www.nmtechtalks.com" target="_blank" rel="noopener">Visit NM Tech Talks &#8599;</a>
+        <div class="h-side">
+          <a class="h-tile h-reveal" href="/resume">
+            <img src="/assets/gallery/pii-energy/hub-product.jpg" alt="The Pii Energy hub" loading="lazy" />
+            <span class="h-kicker">Now building</span>
+            <span class="h-tile-title">The Pii Energy hub &amp; Edge 2000 platform</span>
+          </a>
+          <a class="h-stat h-reveal" href="/assets/nmtw-2026-impact-report.pdf" target="_blank" rel="noopener">
+            <span class="h-kicker">NM Tech Week · Impact Report</span>
+            <span class="h-stat-num">1,255</span>
+            <span class="h-stat-text">attendances in year one. <u>Open the report (PDF)</u></span>
+          </a>
         </div>
       </div>
-    </div>
+    </section>
 
-    <h2 id="newsletter" class="section-title">Newsletter</h2>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 26px;max-width:560px">
-      <p style="color:var(--muted);margin:0 0 14px;font-size:0.95rem;line-height:1.6">
-        Occasional notes from me — what I'm building, NM tech events worth knowing about,
-        and the odd lab story. No spam, unsubscribe anytime.
-      </p>
-      <form id="nl-form" style="display:flex;flex-wrap:wrap;gap:10px">
-        <input id="nl-email" type="email" required placeholder="you@email.com" aria-label="Email address"
-               style="flex:1 1 220px;min-width:0;font:inherit;color:var(--text);background:var(--bg-2);border:1px solid var(--border-strong);border-radius:10px;padding:11px 14px" />
-        <button class="btn primary" type="submit">Subscribe</button>
-      </form>
-      <div id="nl-status" role="status" style="margin-top:10px;font-size:0.9rem;color:var(--muted)"></div>
-    </div>
+    <!-- ===== WE MET — full-bleed ink band ===== -->
+    <section class="h-met">
+      <div>
+        <h2>Did we meet <em>at an event?</em></h2>
+        <p>Say hi — tell me where we crossed paths and how to reach you.</p>
+      </div>
+      <a class="h-btn h-btn-paper" href="/met/">
+        Say hi
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+      </a>
+    </section>
 
-    <footer class="site-footer">
-      <div class="sf-top">
-        <a class="brand sf-brand" href="/">PARRA</a>
-        <nav class="sf-links" aria-label="Footer">
+    <!-- ===== IV · ON THE CALENDAR =====
+         Anything carrying data-expires (ISO timestamp, Mountain Time offset)
+         is removed by the script below once it has passed. New rows must set it. -->
+    <section class="h-section" id="events">
+      <header class="h-head"><span aria-hidden="true">IV</span><h2>On the calendar</h2></header>
+
+      <!-- Desert Dev Lab 2027 — NM Tech Talks brand island, framed -->
+      <div class="h-island" data-expires="2027-04-26T00:00:00-06:00">
+        <a class="h-matte" href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener">
+          <img src="/assets/events/ddl-2027-banner.png"
+               alt="NM Tech Talks presents the Desert Dev Lab Hackathon — April 24–25, 2027 · Theme: Health + Wellness"
+               width="1200" height="300" loading="lazy" />
+        </a>
+        <div class="h-island-body">
+          <div id="ddl-countdown" class="h-countdown" aria-label="Countdown to the Desert Dev Lab Hackathon"></div>
+          <div class="h-island-text">
+            <p>
+              NM Tech Talks' flagship hackathon returns April 24&ndash;25, 2027 &mdash;
+              this year's theme is Health + Wellness. Hacker and mentor signups are open now.
+            </p>
+            <div class="h-cta">
+              <a class="h-btn h-btn-ink" href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener">Sign up &mdash; hackers &amp; mentors</a>
+              <a class="h-btn" href="https://www.nmtechtalks.com" target="_blank" rel="noopener">Visit NM Tech Talks</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="events-list" class="h-events" role="list" aria-label="Upcoming events">
+        <a class="h-ev" role="listitem" href="https://nmtechtalks.com/desert-dev-lab" target="_blank" rel="noopener" data-expires="2027-04-26T00:00:00-06:00">
+          <span class="h-ev-date">Apr 24&ndash;25, 2027</span>
+          <span class="h-ev-body">
+            <span class="h-ev-title">Desert Dev Lab Hackathon</span>
+            <span class="h-ev-sub">NM Tech Talks · Theme: Health + Wellness</span>
+          </span>
+          <span class="h-ev-go">Sign up</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== V · NEWSLETTER ===== -->
+    <section class="h-section h-split" id="newsletter">
+      <header class="h-head"><span aria-hidden="true">V</span><h2>Newsletter</h2></header>
+      <div>
+        <p class="h-lede">
+          Occasional notes from me — what I'm building, NM tech events worth knowing about,
+          and the odd lab story.
+        </p>
+        <form id="nl-form" class="h-form">
+          <div class="h-field">
+            <label for="nl-email">Email address</label>
+            <input id="nl-email" type="email" required placeholder="you@email.com" autocomplete="email" />
+          </div>
+          <button class="h-btn h-btn-ink" type="submit">Subscribe</button>
+        </form>
+        <p class="h-fine">No spam, unsubscribe anytime.</p>
+        <div id="nl-status" class="h-status" role="status"></div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="h-footer">
+      <div class="h-footer-mark"><span></span><a class="brand" href="/">PARRA</a><span></span></div>
+      <div class="h-footer-row">
+        <span>© <span id="year"></span> Rudy Parra · Albuquerque, NM ·
+          <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a></span>
+        <nav aria-label="Footer">
           <a href="/resume">My work</a>
           <a href="/press">Press</a>
           <a href="/met/">We met?</a>
           <a href="/privacy/">Privacy</a>
         </nav>
-      </div>
-      <div class="sf-bottom">
-        © <span id="year"></span> Rudy Parra · Albuquerque, NM ·
-        <a href="mailto:parrarudy3@icloud.com">parrarudy3@icloud.com</a>
       </div>
     </footer>
   </div>
@@ -388,25 +279,20 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* ===== Auto-remove past events ===== */
+    /* ===== Auto-remove past events =====
+       Removes anything past its data-expires, then hides the list (and the
+       whole section) when nothing is left to show. */
     (function () {
-      const grid = document.getElementById('events-grid');
-      if (!grid) return;
       const now = Date.now();
-      document.querySelectorAll('[data-expires]').forEach(card => {
-        const expires = Date.parse(card.dataset.expires);
-        if (!isNaN(expires) && expires <= now) card.remove();
+      document.querySelectorAll('[data-expires]').forEach(el => {
+        const expires = Date.parse(el.dataset.expires);
+        if (!isNaN(expires) && expires <= now) el.remove();
       });
-      if (!grid.children.length) {
-        const heading = document.getElementById('events');
-        if (heading) {
-          if (heading.nextElementSibling && heading.nextElementSibling.tagName === 'P') {
-            heading.nextElementSibling.remove();
-          }
-          heading.remove();
-        }
-        grid.remove();
-      }
+      const section = document.getElementById('events');
+      const list = document.getElementById('events-list');
+      if (!section || !list) return;
+      list.hidden = !list.children.length;
+      section.hidden = !section.querySelector('.h-island') && !list.children.length;
     })();
 
     /* ===== Nav toggle (hamburger) ===== */
@@ -429,54 +315,6 @@
         if (e.key === 'Escape') setOpen(false);
       });
     })();
-
-    /* ===== Spotify Now Playing pill =====
-       Polls a Cloudflare Worker every 30s. Hides the pill when nothing is playing
-       or when the Worker is unreachable. The Worker URL is loaded from
-       /assets/now-playing.json so it can be swapped without editing this page. */
-    (function () {
-      const pill = document.getElementById('now-playing');
-      const art = document.getElementById('np-art');
-      const song = document.getElementById('np-song');
-
-      function hide() { pill.classList.remove('visible'); }
-      function show(data) {
-        if (!data || !data.is_playing || !data.song) { hide(); return; }
-        song.innerHTML =
-          data.song.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])) +
-          (data.artist ? ' <span class="np-artist">— ' +
-            data.artist.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])) +
-          '</span>' : '');
-        if (data.album_art) { art.src = data.album_art; art.style.display = ''; }
-        else { art.style.display = 'none'; }
-        pill.href = data.song_url || 'https://open.spotify.com/user/rparra23';
-        pill.classList.add('visible');
-      }
-
-      let workerUrl = null;
-      async function poll() {
-        if (!workerUrl) return;
-        try {
-          const r = await fetch(workerUrl, { cache: 'no-cache' });
-          if (!r.ok) { hide(); return; }
-          show(await r.json());
-        } catch { hide(); }
-      }
-
-      // Read the Worker URL from a config JSON so the user can change it without
-      // touching this HTML. Until that file points at a real Worker, the pill
-      // simply stays hidden.
-      fetch('/assets/now-playing.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : null)
-        .then(cfg => {
-          if (!cfg || !cfg.workerUrl || cfg.workerUrl.includes('YOUR-WORKER')) return;
-          workerUrl = cfg.workerUrl;
-          poll();
-          setInterval(poll, 30000);
-        })
-        .catch(() => {});
-    })();
-
   </script>
   <script>
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
@@ -512,14 +350,14 @@
     })();
 
     /* ===== Live events from Rudy's calendars (rudy-site Worker) =====
-       Appends dark typographic cards for upcoming events that aren't already
-       curated above. Fails silently if the Worker isn't deployed yet. */
+       Appends ruled rows for upcoming events that aren't already listed.
+       Fails silently if the Worker isn't reachable. */
     (function () {
       const API = 'https://rudy-site.rparra.workers.dev';
-      const grid = document.getElementById('events-grid');
-      if (!grid) return;
+      const list = document.getElementById('events-list');
+      if (!list) return;
       fetch(API + '/events').then(r => r.json()).then(data => {
-        const have = grid.textContent.toLowerCase();
+        const have = list.textContent.toLowerCase();
         (data.events || []).forEach(ev => {
           const title = (ev.title || '').trim();
           if (!title) return;
@@ -529,51 +367,43 @@
           if (isNaN(d) || (Date.parse(ev.end || ev.start) || 0) < Date.now()) return;
           const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
           const time = ev.allDay ? '' : ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+          const safeUrl = (typeof ev.url === 'string' && /^https:\/\//.test(ev.url)) ? ev.url : null;
 
-          const cell = document.createElement('div');
-          cell.style.textAlign = 'center';
-          cell.dataset.expires = ev.end || ev.start;
-          const a = document.createElement('a');
-          if (ev.url) { a.href = ev.url; a.target = '_blank'; a.rel = 'noopener'; }
-          const img = (typeof ev.image === 'string' && /^https:\/\/[^"'\\\s]+$/.test(ev.image)) ? ev.image : null;
-          const metaText = day + time + (ev.location ? ' · ' + ev.location : '');
-          if (img) {
-            // Artwork square with the info beneath it
-            a.style.cssText = 'display:block;aspect-ratio:1/1;border-radius:14px;background-color:#171716;background-size:cover;background-position:center;box-shadow:0 10px 30px rgba(0,0,0,0.35);text-decoration:none';
-            a.style.backgroundImage = 'url("' + img + '")';
-            cell.appendChild(a);
-            const t = document.createElement('span');
-            t.style.cssText = "display:block;margin-top:10px;font-family:'Newsreader',serif;font-size:1.1rem;line-height:1.3;color:var(--text)";
-            t.textContent = title;
-            const meta = document.createElement('span');
-            meta.style.cssText = 'display:block;margin-top:2px;color:var(--muted);font-size:0.85rem';
-            meta.textContent = metaText;
-            cell.append(t, meta);
-          } else {
-            // Typographic ink tile
-            a.style.cssText = 'display:flex;flex-direction:column;justify-content:center;gap:14px;aspect-ratio:1/1;background:#171716;border-radius:14px;padding:32px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.35)';
-            const eyebrow = document.createElement('span');
-            eyebrow.style.cssText = "font-family:'Space Mono',ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#E7E5DB";
-            eyebrow.textContent = 'From my calendar';
-            const t = document.createElement('span');
-            t.style.cssText = "font-family:'Newsreader',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2;color:#EEF1F4;letter-spacing:-0.01em";
-            t.textContent = title;
-            const meta = document.createElement('span');
-            meta.style.cssText = 'font-size:0.95rem;color:#B9B8B0;line-height:1.6';
-            meta.textContent = metaText;
-            a.append(eyebrow, t, meta);
-            cell.appendChild(a);
+          const row = document.createElement(safeUrl ? 'a' : 'div');
+          row.className = 'h-ev';
+          row.setAttribute('role', 'listitem');
+          row.dataset.expires = ev.end || ev.start;
+          if (safeUrl) { row.href = safeUrl; row.target = '_blank'; row.rel = 'noopener'; }
+
+          const date = document.createElement('span');
+          date.className = 'h-ev-date';
+          date.textContent = day + time;
+          const body = document.createElement('span');
+          body.className = 'h-ev-body';
+          const t = document.createElement('span');
+          t.className = 'h-ev-title';
+          t.textContent = title;
+          body.appendChild(t);
+          if (ev.location) {
+            const sub = document.createElement('span');
+            sub.className = 'h-ev-sub';
+            sub.textContent = ev.location;
+            body.appendChild(sub);
           }
-          if (ev.url) {
-            const btn = document.createElement('a');
-            btn.className = 'btn primary';
-            btn.href = ev.url; btn.target = '_blank'; btn.rel = 'noopener';
-            btn.style.marginTop = '10px';
-            btn.textContent = 'Details ↗';
-            cell.appendChild(btn);
+          row.append(date, body);
+          if (safeUrl) {
+            const go = document.createElement('span');
+            go.className = 'h-ev-go';
+            go.textContent = 'Details';
+            row.appendChild(go);
           }
-          grid.appendChild(cell);
+          list.appendChild(row);
         });
+        if (list.children.length) {
+          list.hidden = false;
+          const section = document.getElementById('events');
+          if (section) section.hidden = false;
+        }
       }).catch(() => {});
     })();
 
@@ -588,7 +418,7 @@
         cell.className = 'cell';
         const n = document.createElement('div');
         n.className = 'num';
-        n.textContent = '\u2013';
+        n.textContent = '–';
         const l = document.createElement('div');
         l.className = 'lbl';
         l.textContent = label;
@@ -596,18 +426,14 @@
         wrap.appendChild(cell);
         return n;
       });
-      const tag = document.createElement('div');
-      tag.className = 'tag';
-      tag.textContent = 'until hack weekend';
-      wrap.appendChild(tag);
       function tick() {
         let d = target - Date.now();
         if (d <= 0) {
           clearInterval(iv);
           wrap.innerHTML = '';
           const live = document.createElement('div');
-          live.className = 'tag';
-          live.textContent = '\u25CF Desert Dev Lab is live';
+          live.className = 'lbl';
+          live.textContent = 'Desert Dev Lab is live';
           wrap.appendChild(live);
           return;
         }
@@ -637,12 +463,10 @@
           });
           const data = await r.json();
           if (r.ok && data.ok) {
-            status.style.color = '#8FBF8A';
             status.textContent = "You're in — talk soon!";
             form.reset();
           } else { throw new Error(data.error || 'failed'); }
         } catch (err) {
-          status.style.color = '#D98080';
           status.textContent = "That didn't go through — email me instead: parrarudy3@icloud.com";
         }
       });
