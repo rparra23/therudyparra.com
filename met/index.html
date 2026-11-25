@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Mono:wght@400;700&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=n7" />
+  <link rel="stylesheet" href="/styles.css?v=n8" />
   <style>
     .met-wrap { max-width: 480px; margin: 0 auto; }
     .met-form label { display: block; font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 16px 0 6px; }
@@ -29,7 +29,7 @@
     .met-status.err { color: #D98080; }
   </style>
 </head>
-<body>
+<body class="p2">
   <div class="container">
     <header class="nav">
       <a class="brand" href="/">
@@ -55,7 +55,7 @@
         </a>
         <h1>We met? Say hi.</h1>
       </div>
-      <p style="color:var(--muted);margin:-6px 0 10px">
+      <p class="met-intro">
         Met Rudy at an event? Drop your name so he can follow up — a LinkedIn or
         email helps him find you again.
       </p>
@@ -69,7 +69,7 @@
         <input id="f-event" name="event" maxlength="120" placeholder="e.g. GMiS Career Fair, TechFest, trivia night" />
         <label for="f-note">Anything else?</label>
         <textarea id="f-note" name="note" maxlength="500" placeholder="What we talked about, what you're working on…"></textarea>
-        <button class="btn primary" type="submit" style="margin-top:18px">Send it to Rudy</button>
+        <button class="btn primary" type="submit">Send it to Rudy</button>
         <div class="met-status" id="met-status" role="status"></div>
       </form>
     </div>
