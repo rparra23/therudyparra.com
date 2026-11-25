@@ -31,8 +31,21 @@ for f in "$SLIDES_DIR"/slide-*.jpg; do
   printf "    slide:%s\n" "$NN"
 done
 
+# 2b. Upload whole-file decks, if present in the local backup folder
+upload_file() { # <kv name> <local file>
+  if [ -f "$SLIDES_DIR/$2" ]; then
+    npx wrangler kv key put --remote --namespace-id "$ID" "file:$1" --path "$SLIDES_DIR/$2" >/dev/null
+    printf "    file:%s\n" "$1"
+  else
+    printf "    (skipped file:%s — %s not found)\n" "$1" "$SLIDES_DIR/$2"
+  fi
+}
+echo "==> Uploading whole-file decks to KV…"
+upload_file iot-bootcamp      iot-bootcamp.html
+upload_file iot-bootcamp-pptx rudy-parra-iot-bootcamp-talk.pptx
+
 # 3. Secrets — you'll be prompted for each value
-echo "==> Set DECK_PIN (enter your PIN, e.g. 7839):"
+echo "==> Set DECK_PIN (choose a NEW code — digits, 6 or more; not one used before):"
 npx wrangler secret put DECK_PIN
 echo "==> Set TOKEN_SECRET (paste the random string below):"
 openssl rand -base64 32
@@ -43,4 +56,4 @@ echo "==> Deploying…"
 npx wrangler deploy
 echo
 echo "Done. The deck gate is live at https://deck.rparra.workers.dev"
-echo "Test: open https://therudyparra.com/talks/stem-core/ and enter your PIN."
+echo "Test: open https://therudyparra.com/talks/ and enter your PIN."

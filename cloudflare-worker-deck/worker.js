@@ -13,6 +13,9 @@
  *   GET  /slide/<NN>?t=…    → image/jpeg if the token verifies and hasn't
  *                             expired; 401 otherwise. NN = 01..TOTAL.
  *
+ *   GET  /file/<name>?t=…   → a whole-file deck (see FILES below) under the
+ *                             same token check; 401 otherwise.
+ *
  * Required secrets (set via `npx wrangler secret put <NAME>`):
  *   DECK_PIN         the PIN (digits, any length)
  *   TOKEN_SECRET     random 32+ chars; signs unlock tokens
@@ -23,9 +26,19 @@
  *   MAX_TRIES_HOUR   default 5 (per IP)
  *   TOTAL_SLIDES     default 35
  *
- * KV binding: DECK — holds `slide:01`…`slide:NN` (raw JPEG bytes, uploaded
- * by setup.sh) and transient `rate:<ip>` counters.
+ * KV binding: DECK — holds `slide:01`…`slide:NN` (raw JPEG bytes) and
+ * `file:<name>` (whole-file decks), both uploaded by setup.sh, plus
+ * transient `rate:<ip>` counters.
  */
+
+// Whole-file decks served by GET /file/<name>. Only names listed here exist.
+const FILES = {
+  'iot-bootcamp': { type: 'text/html; charset=utf-8' },
+  'iot-bootcamp-pptx': {
+    type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    download: 'rudy-parra-iot-bootcamp-talk.pptx',
+  },
+};
 
 function corsHeaders(env) {
   return {
@@ -135,6 +148,27 @@ export default {
             ...corsHeaders(env),
           },
         });
+      }
+
+      // ---- GET /file/<name>?t=token ----
+      // Whole-file decks kept in KV under `file:<name>` (uploaded by setup.sh).
+      const fm = url.pathname.match(/\/file\/([a-z0-9-]+)$/);
+      if (request.method === 'GET' && fm) {
+        const ok = await tokenValid(env, url.searchParams.get('t'), now);
+        if (!ok) return json({ error: 'locked' }, 401, env);
+        const spec = FILES[fm[1]];
+        if (!spec) return json({ error: 'no such file' }, 404, env);
+        const bytes = await env.DECK.get('file:' + fm[1], 'arrayBuffer');
+        if (!bytes) return json({ error: 'file not uploaded' }, 404, env);
+        const headers = {
+          'Content-Type': spec.type,
+          'Cache-Control': 'private, no-store',
+          'X-Robots-Tag': 'noindex, nofollow',
+          'Referrer-Policy': 'no-referrer',
+          ...corsHeaders(env),
+        };
+        if (spec.download) headers['Content-Disposition'] = 'attachment; filename="' + spec.download + '"';
+        return new Response(bytes, { headers });
       }
 
       return new Response('Not found', { status: 404, headers: corsHeaders(env) });

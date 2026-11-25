@@ -2,7 +2,7 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (typeof IntersectionObserver === 'undefined') return;
-  var els = document.querySelectorAll('.card, .panel, .stat, .rec-tile, .mem-tile, .proof-tile, .kit-cta, .ddl-panel, .pub-cta, .talk-row, .dl-tile, .press-tile, .featured-list > *');
+  var els = document.querySelectorAll('.card, .panel, .stat, .rec-tile, .mem-tile, .proof-tile, .kit-cta, .ddl-panel, .pub-cta, .talk-row, .dl-tile, .press-tile, .featured-list > *, .h-reveal');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
