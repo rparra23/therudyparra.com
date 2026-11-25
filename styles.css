@@ -3414,39 +3414,6 @@ img[src*="heinrich-tour"] { object-position: center 12%; }
   .p2 .pv h3:first-of-type + p { border-top-color: var(--text); }
 }
 
-/* ----- Presentations (private, code-gated) ----- */
-.p2 .pin-gate {
-  max-width: 420px; margin: 24px 0 72px; padding: clamp(24px, 4vw, 40px); text-align: left;
-  border-radius: 0; border: 1px solid var(--border-strong);
-}
-.p2 .pin-gate h2 { font-weight: 400; font-size: 1.75rem; line-height: 1.15; }
-.p2 .pin-gate input {
-  border: 0; border-bottom: 1px solid var(--text); border-radius: 0; background: transparent;
-  text-align: left; padding: 12px 0;
-}
-.p2 .pin-gate input:focus { outline: 2px solid var(--text); outline-offset: 4px; border-color: var(--text); }
-.p2 .pin-error { color: var(--text); }
-.p2 #pin-overlay-form { border-radius: 2px !important; }
-.p2 #pin-overlay-input { border-radius: 0 !important; }
-.p2 #pin-overlay-err { color: #FAFAF7 !important; }
-.p2 .talk-list { gap: 0; border-top: 1px solid var(--text); }
-.p2 .talk-row, .p2 .talk-row:hover {
-  grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px);
-  padding: 32px 0; background: transparent; border: 0; border-bottom: 1px solid var(--border);
-  border-radius: 0; transform: none;
-}
-.p2 .talk-thumb { width: 100%; border-radius: 0; border: 1px solid var(--border-strong); padding: 6px; background: var(--card); }
-.p2 .talk-title { font-weight: 400; font-size: clamp(1.6rem, 2.7vw, 2.25rem); line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 10px; }
-.p2 .talk-row:hover .talk-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.p2 .talk-meta { font-size: 0.69rem; letter-spacing: 0.16em; color: var(--accent-2); margin-bottom: 10px; }
-.p2 .talk-desc { font-size: 1rem; color: var(--accent-2); max-width: 40em; }
-@media (max-width: 560px) { .p2 .talk-row, .p2 .talk-row:hover { grid-template-columns: minmax(0, 1fr); } }
-.p2 .deck-stage { border-radius: 0; box-shadow: none; border: 1px solid var(--text); }
-.p2 .deck-counter, .p2 .deck-hint {
-  font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-}
-.p2 .deck-hint { color: var(--muted); }
-
 /* ----- "Scan to meet Rudy" QR page ----- */
 .qr-page .qr-hint { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent-2); margin-bottom: 22px; }
 .qr-page .qr-card { border-radius: 0; box-shadow: none; border: 1px solid var(--border-strong); padding: clamp(14px, 3vw, 24px); }
@@ -3489,6 +3456,3 @@ img[src*="heinrich-tour"] { object-position: center 12%; }
   padding: 12px 0; min-height: 48px; margin: 16px 0 14px;
 }
 .p2 #login input[type="password"]:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
-.p2 .talk-title a { text-decoration: none; }
-.p2 .talk-title a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.p2 .talk-row > a { display: block; }
