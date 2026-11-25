@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Presentations — Rudy Parra</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles.css?v=n8" />
+  <!--
+    Private presentations. Nothing about the decks lives in this repository
+    or on this site: the code is checked by the deck Worker
+    (cloudflare-worker-deck/), and slides and files are served by that
+    Worker only with the signed, expiring token it returns. This page holds
+    no code, no hash of it, and no slide files.
+  -->
+</head>
+<body class="p2">
+  <div class="container">
+
+    <header class="nav">
+      <a class="brand" href="/">
+        PARRA
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="links" id="nav-panel">
+        <a href="/">Home</a>
+        <a href="/resume">My work</a>
+        <a href="/press">Press</a>
+        <a href="/met/">We met?</a>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <h1>Presentations</h1>
+    </div>
+
+    <!-- ===== Locked state ===== -->
+    <div class="pin-gate" id="pin-gate">
+      <h2>Presentations are locked</h2>
+      <p>Enter the code to open the decks.</p>
+      <form id="pin-form" novalidate>
+        <label class="pin-label" for="pin-input">Code</label>
+        <input id="pin-input" type="password" inputmode="numeric" autocomplete="off" maxlength="12" />
+        <button class="btn primary" type="submit">Unlock</button>
+        <p class="pin-error" id="pin-error" role="alert"></p>
+      </form>
+    </div>
+
+    <!-- ===== Unlocked state ===== -->
+    <div id="deck-ui" hidden>
+      <h2 class="section-title deck-title">STEM Core Talk</h2>
+      <div class="deck-stage" id="stage" aria-label="Slide viewer" tabindex="0">
+        <img id="slide" alt="Slide 1" />
+      </div>
+      <div class="deck-controls">
+        <div class="deck-btns">
+          <button class="btn" type="button" id="prev" aria-label="Previous slide">← Prev</button>
+          <button class="btn" type="button" id="next" aria-label="Next slide">Next →</button>
+        </div>
+        <span class="deck-counter"><span id="cur">1</span> / <span id="total">35</span></span>
+        <div class="deck-btns">
+          <span class="deck-hint">← → keys · click slide to advance</span>
+          <button class="btn primary" type="button" id="fs">Fullscreen</button>
+        </div>
+      </div>
+
+      <h2 class="section-title">Other decks</h2>
+      <div class="deck-list">
+        <div class="deck-row">
+          <span class="deck-row-meta">Oct 2026 · Deep Dive IoT Bootcamp</span>
+          <span class="deck-row-title">IoT Bootcamp Talk</span>
+          <span class="deck-row-links">
+            <a id="iot-open" href="#" target="_blank" rel="noopener">Open the deck</a>
+            <a id="iot-pptx" href="#">PowerPoint version</a>
+          </span>
+        </div>
+      </div>
+
+      <p class="deck-lock"><button class="btn" type="button" id="lock">Lock again</button></p>
+    </div>
+
+    <footer class="site-footer">
+      <div class="sf-top">
+        <a class="brand sf-brand" href="/">PARRA</a>
+        <nav class="sf-links" aria-label="Footer">
+          <a href="/resume">My work</a>
+          <a href="/press">Press</a>
+          <a href="/met/">We met?</a>
+          <a href="/privacy/">Privacy</a>
+        </nav>
+      </div>
+      <div class="sf-bottom">© <span id="year"></span> Rudy Parra · Albuquerque, NM</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ===== Nav toggle ===== */
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+      if (!btn || !panel) return;
+      function setOpen(open) { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('open', open); }
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!panel.classList.contains('open')); });
+      document.addEventListener('click', e => { if (!panel.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+
+    /* ===== Code gate — checked on the server =====
+       The code is verified by the deck Worker (rate-limited per IP). Slides
+       and files are served by the Worker only with the signed token it
+       returns; the token expires and is kept for this browser tab only. */
+    const DECK_API = 'https://deck.rparra.workers.dev';
+    const deckUnlock = (function () {
+      const KEY = 'deck-token-v3';
+      const gate = document.getElementById('pin-gate');
+      const ui = document.getElementById('deck-ui');
+      const form = document.getElementById('pin-form');
+      const input = document.getElementById('pin-input');
+      const errEl = document.getElementById('pin-error');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      let onUnlock = null;
+      let token = null;
+
+      function showErr(msg) { errEl.textContent = msg; input.select(); }
+      function reveal() {
+        errEl.textContent = '';
+        gate.hidden = true;
+        ui.hidden = false;
+        if (onUnlock) onUnlock();
+      }
+      function relock(msg) {
+        token = null;
+        try { sessionStorage.removeItem(KEY); } catch {}
+        input.value = '';
+        gate.hidden = false;
+        ui.hidden = true;
+        errEl.textContent = msg || '';
+        input.focus();
+      }
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Checking…';
+        try {
+          const r = await fetch(DECK_API + '/unlock', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin: input.value.trim() }),
+          });
+          const data = await r.json().catch(() => ({}));
+          if (r.ok && data.token) {
+            token = data.token;
+            try { sessionStorage.setItem(KEY, JSON.stringify({ token: data.token, exp: data.exp })); } catch {}
+            reveal();
+          } else if (r.status === 429) {
+            showErr(data.error || 'Too many attempts — try again in an hour.');
+          } else {
+            showErr('Wrong code — try again.');
+          }
+        } catch {
+          showErr("Can't reach the unlock server — check your connection.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Unlock';
+        }
+      });
+      document.getElementById('lock').addEventListener('click', () => relock(''));
+      // Resume a still-valid token from this tab
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (saved && saved.token && saved.exp > Date.now()) { token = saved.token; queueMicrotask(reveal); }
+        else input.focus();
+      } catch { input.focus(); }
+      return {
+        unlocked: () => gate.hidden,
+        token: () => token,
+        relock,
+        setOnUnlock: fn => { onUnlock = fn; if (gate.hidden) fn(); },
+      };
+    })();
+
+    /* ===== Slide viewer ===== */
+    (function () {
+      const TOTAL = 35;
+      const pad = n => String(n).padStart(2, '0');
+      const withToken = path => DECK_API + path + '?t=' + encodeURIComponent(deckUnlock.token() || '');
+      const src = n => withToken('/slide/' + pad(n));
+
+      const stage = document.getElementById('stage');
+      const img = document.getElementById('slide');
+      const cur = document.getElementById('cur');
+      document.getElementById('total').textContent = TOTAL;
+
+      let n = Math.min(Math.max(parseInt(location.hash.slice(1), 10) || 1, 1), TOTAL);
+
+      let cache = {};
+      function preload(k) {
+        if (k < 1 || k > TOTAL || cache[k]) return;
+        const im = new Image(); im.src = src(k); cache[k] = im;
+      }
+      function show(k, pushHash = true) {
+        n = Math.min(Math.max(k, 1), TOTAL);
+        img.src = src(n);
+        img.alt = 'Slide ' + n;
+        cur.textContent = n;
+        if (pushHash) history.replaceState(null, '', '#' + n);
+        preload(n + 1); preload(n - 1); preload(n + 2);
+      }
+      // If a slide fails to load (expired token), drop back to the gate.
+      img.addEventListener('error', () => {
+        if (deckUnlock.unlocked() && img.getAttribute('src')) deckUnlock.relock('Session expired — enter the code again.');
+      });
+
+      document.getElementById('prev').addEventListener('click', () => show(n - 1));
+      document.getElementById('next').addEventListener('click', () => show(n + 1));
+
+      // Click on the slide: left quarter = back, rest = forward
+      stage.addEventListener('click', e => {
+        const rect = stage.getBoundingClientRect();
+        (e.clientX - rect.left) < rect.width * 0.25 ? show(n - 1) : show(n + 1);
+      });
+
+      document.addEventListener('keydown', e => {
+        if (!deckUnlock.unlocked()) return;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        switch (e.key) {
+          case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); show(n + 1); break;
+          case 'ArrowLeft': case 'PageUp': e.preventDefault(); show(n - 1); break;
+          case 'Home': e.preventDefault(); show(1); break;
+          case 'End': e.preventDefault(); show(TOTAL); break;
+          case 'f': case 'F': toggleFs(); break;
+        }
+      });
+
+      // Touch swipe
+      let tx = null;
+      stage.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', e => {
+        if (tx === null) return;
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) { dx < 0 ? show(n + 1) : show(n - 1); }
+        tx = null;
+      }, { passive: true });
+
+      function toggleFs() {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else (stage.requestFullscreen || stage.webkitRequestFullscreen).call(stage);
+      }
+      document.getElementById('fs').addEventListener('click', toggleFs);
+
+      window.addEventListener('hashchange', () => {
+        const k = parseInt(location.hash.slice(1), 10);
+        if (k && k !== n) show(k, false);
+      });
+
+      // Nothing loads until the gate opens; links to the other decks get
+      // the token at the same moment.
+      deckUnlock.setOnUnlock(() => {
+        cache = {};
+        document.getElementById('iot-open').href = withToken('/file/iot-bootcamp');
+        document.getElementById('iot-pptx').href = withToken('/file/iot-bootcamp-pptx');
+        show(n, false);
+      });
+    })();
+  </script>
+</body>
+</html>
